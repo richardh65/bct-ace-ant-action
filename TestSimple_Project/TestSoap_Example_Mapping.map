@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="/calculator_InlineSchema1.xsd"/>
+    <output path="/calculator_InlineSchema1.xsd"/>
+    <imports>
+        <import kind="esql" namespace="/mapLogging/bctMapLog.esql"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="io" uri="http://www.parasoft.com/wsdl/calculator/"/>
+        <namespace kind="extension" prefix="bct_map_log" uri="/mapLogging/bctMapLog.esql"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="TestSoap_Example_Mapping">
+        <input namespace="http://www.parasoft.com/wsdl/calculator/" path="mb:msg(subtractResponse,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_subtractResponse"/>
+        <output namespace="http://www.parasoft.com/wsdl/calculator/" path="mb:msg(subtractResponse,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_subtractResponse1"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_subtractResponse/Properties" var="Properties"/>
+            <output path="$ComIbmMessageAssembly_subtractResponse1/Properties"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

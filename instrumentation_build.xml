@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<project name="project" default="rununittests">
+		
+			
+	<path id="project.classpath">		
+		<pathelement location="/tmp/work/bct/lib/MB-precise-sonarplugin-3.120.jar" />
+				
+		<pathelement location="/tmp/work/bct/lib/commons-io-2.7.jar"/>
+		<pathelement location="/tmp/work/bct/lib/commons-lang-2.6.jar"/>
+		
+		<pathelement location="/tmp/work/bct/lib/slf4j-api-1.7.5.jar"/>		
+		<pathelement location="/tmp/work/bct/lib/slf4j-jdk14-1.7.7.jar"/>	
+		<pathelement location="/tmp/work/bct/lib/commons-lang-2.6.jar"/>
+		<pathelement location="/tmp/work/bct/lib/xstream-1.4.7.jar"/>
+		<pathelement location="/tmp/work/bct/lib/plexus-utils-3.0.21.jar"/>
+		<pathelement location="/tmp/work/bct/lib/xmlpull-1.1.3.1.jar"/>
+		<pathelement location="/tmp/work/bct/lib/xpp3-1.1.3.3.jar"/>				
+		<pathelement location="/tmp/work/bct/lib/javassist-3.12.1.GA.jar"/>		
+		<pathelement location="/tmp/work/bct/lib/com.ibm.mqjms.jar"/>		
+						
+		<pathelement location="/tmp/work/bct/lib/javaparser-1.0.11.jar"/>		
+		
+		<!-- jacoco -->
+		<pathelement location="/tmp/work/bct/lib/asm-tree-7.2.jar"/>
+		<pathelement location="/tmp/work/bct/lib/asm-commons-7.2.jar"/>
+		<pathelement location="/tmp/work/bct/lib/asm-7.2.jar"/>
+		<pathelement location="/tmp/work/bct/lib/org.jacoco.report-0.8.5.jar"/>
+		<pathelement location="/tmp/work/bct/lib/org.jacoco.core-0.8.5.jar"/>
+		<pathelement location="/tmp/work/bct/lib/org.jacoco.agent-0.8.5.jar"/>
+		<pathelement location="/tmp/work/bct/lib/org.jacoco.cli-0.8.5.jar"/>
+		<pathelement location="/tmp/work/bct/lib/args4j-2.0.28.jar"/>
+    </path>
+	
+	<typedef name="instrument" 		 
+		 classname="au.com.bettercodingtools.sonar.messagebrokersonar.anttasks.BarFileInstrumentTask" >
+		<classpath refid="project.classpath" />
+	</typedef>			
+	
+	<typedef name="urlTest" 		 
+		 classname="au.com.bettercodingtools.sonar.messagebrokersonar.anttasks.HttpTestTask" >
+		<classpath refid="project.classpath" />
+	</typedef>
+	
+	<typedef name="mqTest" 		 
+		 classname="au.com.bettercodingtools.sonar.messagebrokersonar.anttasks.SendMQMessageTask" >
+		<classpath refid="project.classpath" />
+	</typedef>
+	
+	<typedef name="listener" 		 
+		 classname="au.com.bettercodingtools.sonar.messagebrokersonar.anttasks.TestMessageListenerTask" >
+		<classpath refid="project.classpath" />
+	</typedef>
+	
+	<typedef name="stopper" 		 
+		 classname="au.com.bettercodingtools.sonar.messagebrokersonar.anttasks.StopTestMessageListenerTask" >
+		<classpath refid="project.classpath" />
+	</typedef>
+	
+	<property environment="env" />
+		
+<target name="init" description="">			
+		
+	
+		
+</target>			
+		
+<!--
+
+https://www.ibm.com/docs/en/app-connect/12.0?topic=toolkit-creating-test-case-from-recorded-message-flow
+https://www.ibm.com/docs/en/app-connect/12.0?topic=gtfrmimf-compiling-test-project-creating-bar-file-by-using-command-line
+
+
+https://integrationdesigners.com/blog/ace-v12-unittest-functionality/
+
+https://www.ibm.com/docs/en/integration-bus/10.0?topic=arbf-packaging-resources-that-include-java-code-message-sets
+https://www.ibm.com/docs/en/integration-bus/10.0?topic=solutions-creating-bar-file
+
+https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-command
+
+-->
+
+<target name="mqsicreatebarsUnitTests" depends="init"> 
+
+	<property environment="env"/>
+	
+	
+	<echo message="==============================================" />
+	<echo message="running mqsicreatebar" />
+	<echo message="==============================================" />
+	
+    <delete dir="/tmp/work/bct/code/build/classes"/>
+    <mkdir dir="/tmp/work/bct/code/build/classes"/>
+
+    <javac srcdir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/java" 
+			destdir="/tmp/work/bct/code/build/classes" >
+		<classpath>
+  			<!--pathelement path="${classpath}"/ -->
+  			<pathelement location="/opt/ibm/ace-12/common/classes/IntegrationTest.jar"/>
+			<pathelement location="/opt/ibm/ace-12/common/classes/hamcrest-2.2.jar"/>
+			<pathelement location="/opt/ibm/ace-12/common/classes/hamcrest-core-2.2.jar"/>
+			<pathelement location="/opt/ibm/ace-12/server/classes/junit-platform-console-standalone-1.7.0.jar"/>
+		</classpath>
+	</javac>
+    
+
+	<jar destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" basedir="/tmp/work/bct/code/build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="oata.HelloWorld"/>
+            </manifest>
+    </jar>
+		
+	<echo message="==============================================" />
+	<echo message="adding missing resources (just the root)" />
+	<echo message="==============================================" />		
+
+	
+	<zip destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
+		<zipfileset dir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" />
+	</zip>
+	<zip destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
+		<zipfileset dir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" prefix="test" />
+	</zip>	
+
+</target>
+
+
+<!-- target name="mqsipackagebarsUnitTest" depends="mqsicreatebarsUnitTests" -->
+<target name="mqsipackagebarsUnitTest" depends="mqsicreatebarsUnitTests"> 
+
+	<property environment="env"/>
+	
+		
+	<!-- step 2 packages 2 projects -->
+	<!-- exec dir="C:\Program Files\IBM\ACE\12.0.1.0\server\bin" executable="mqsipackagebar.bat" failonerror="true" >	
+			<arg value="-w"/>
+			<arg value="C:\richard\projects\mb_precise_git\mb-precise-demos\workspaces\ws1"/>
+			<arg value="-a"/>
+			<arg value="C:\richard\projects\mb_precise_git\mb-precise-demos\workspaces\ws1\BarFiles\UnitTests.bar"/>			
+			<arg value="-t"/>
+			<arg value="TestSimple_Project_Test"/>
+			<arg value="-k"/>
+			<arg value="TestSimple_Project"/>
+			
+		</exec -->
+
+	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsipackagebar" failonerror="true" >	
+			<arg value="-w"/>
+			<arg value="/tmp/work/bct/code"/>
+			<arg value="-a"/>
+			<arg value="/tmp/work/bct/code/BarFiles/UnitTests.bar"/>
+			<arg value="-t"/>
+			<arg value="TestSimple_Project_Test"/>
+			<arg value="-k"/>
+			<arg value="TestSimple_Project"/>
+			
+	</exec>		
+		
+	
+	<!-- step 3 create work directory -->
+	<echo message="delete work dir" />
+	<delete dir="/tmp/work/bct/code/test_work_dir"/>
+	
+	<echo message="==============================================" />
+	<echo message="create work dir" />
+	<echo message="==============================================" />	
+	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsicreateworkdir" failonerror="true" >		
+		<arg value="/tmp/work/bct/code/test_work_dir"/>
+	
+	</exec>	
+	
+	<!-- copy -->
+	<!-- echo message="==============================================" />
+	<echo message="copy project" />
+	<echo message="==============================================" / -->
+	
+	<echo message="==============================================" />
+	<echo message="copy policy" />
+	<echo message="==============================================" />
+	<copy file="/tmp/work/bct/code/bars/SimplePolicyTestable.bar" 
+			todir="/tmp/work/bct/code/test_work_dir/run" />
+	<echo message="==============================================" />	
+
+	
+</target>	
+
+<target name="instrumentUnitTestbar" depends="mqsipackagebarsUnitTest"> 
+  <echo message="Instrumenting bar file " />
+        
+  <echo message="==================================================" />
+  <echo message="instrument bars\TestCoverage.bar" />
+  <echo message="==================================================" />
+    
+  <instrument workingFolder="work" 
+				sourceCode="TestSimple_Project" 
+				keepCoverage="No"  
+				barFileName="/tmp/work/bct/code/BarFiles/UnitTests.bar" 
+				coverXSL="TRUE" 
+				coverJava="FALSE" 
+				updateModuleNames="TRUE"				
+				coverageFilePath="coveragetemp" 
+				buildingAce="TRUE" />
+
+  <!-- instrument workingFolder="work" 
+				sourceCode="TestSimple_Project" 
+				keepCoverage="No"  
+				barFileName="BarFiles\UnitTests.bar" 
+				coverXSL="TRUE" 
+				coverJava="FALSE" 
+				updateModuleNames="TRUE"
+				javaNodeFileName="C:/utils/bct/ibm/jplugin2-8.0.0.v20111129_1446.jar"
+				coverageFilePath="coveragetemp" 
+				buildingAce="TRUE" / -->
+  	
+
+	<echo message="==============================================" />
+	<echo message="copy instrumented project" />
+	<echo message="==============================================" />
+	<copy file="/tmp/work/bct/code/BarFiles/UnitTests-instrumented.bar" 
+			todir="/tmp/work/bct/code/test_work_dir/run" />
+  
+  
+ </target>
+
+<!-- target name="rununittests" depends="mqsipackagebarsUnitTest" --> 
+<target name="rununittests" depends="instrumentUnitTestbar"> 
+
+	<property environment="env"/>	
+	
+	<jar destfile="/tmp/work/bct/code/BarFiles/resources.jar"
+     basedir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" />
+     	
+	<!-- step 4 run tests -->
+	<echo message="==============================================" />
+	<echo message="runningtests" />	
+	<echo message="==============================================" />
+	
+	
+	<parallel>	
+		<listener port="9011" maxWait="30" coverageFilePath="coveragetemp" />
+		<sequential>
+			<echo message="Wait while listener starts...." />
+			<sleep seconds="10"/>
+			<echo message="starting listener...done" />
+			<echo message="================================" />
+			<echo message="Running tests" />
+			<echo message="================================" />
+
+
+			<exec executable="IntegrationServer" dir="/opt/ibm/ace-12/server/bin" failonerror="true" >		
+				<arg value="--default-application-name"/>
+				<arg value="TestSimple_Project_UnitTestsApp"/>
+				<arg value="--additional-test-project-classpath"/>
+				<arg value="/tmp/work/bct/code/BarFiles/resources.jar"/>
+				
+				<arg value="--console-log"/>				
+				<arg value="--work-dir"/>
+				<arg value="/tmp/work/bct/code/test_work_dir"/>
+				<arg value="--test-project"/>
+				<arg value="TestSimple_Project_Test"/>
+				<arg value="--start-msgflows"/>
+				<arg value="false"/>
+				
+				<arg value="--stop-after-duration"/>
+				<arg value="60000" />
+				
+			</exec>						
+	
+		</sequential>
+    </parallel>				
+	<sleep seconds="1"/>	
+
+	<echo message="================================" />
+	<echo message="Finished going to run stopper" />
+	<echo message="================================" />
+
+	<sleep seconds="1"/>
+	
+	<stopper />			
+	
+		
+	<echo message="==============================================" />
+	
+</target>
+
+ 
+  
+ 
+</project>

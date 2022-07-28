@@ -1,0 +1,27 @@
+
+BROKER SCHEMA mapLogging
+
+-- CREATE PROCEDURE mbLogCall(IN logRef CHAR, IN srcFile CHAR, IN lineNum CHAR, IN branches CHAR, IN port CHAR, IN addr CHAR ) LANGUAGE JAVA EXTERNAL NAME "au.com.bettercodingtools.sonar.messagebrokersonar.MBCallLog.mbLogCall";
+
+CREATE PROCEDURE mbMapCalLog(IN logRef CHAR) RETURNS INT
+BEGIN
+    DECLARE Result INT 0;
+	
+	--  Call mbLogCall with parms here
+	
+	-- LOG EVENT SEVERITY 1  VALUES("Stuff happend", "Details will be set to queue: GDMRETAILFAILURE");
+	LOG EVENT SEVERITY 3  
+		  VALUES('An exception occured', 'bad code here');  
+	
+	-- THROW USER EXCEPTION MESSAGE 2951 VALUES( 'No should fail here');
+	
+	UPDATE Database.A_DB.A_TABLE AS F 
+						SET VALUE_STATUS = '1'
+						WHERE F.PROCESS_ID = '2';
+	
+	
+	
+	RETURN Result;
+END;
+
+

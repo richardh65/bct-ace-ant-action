@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <input path="/IBMdefined/org/xmlsoap/schemas/soap/envelope/soapenv11.xsd"/>
+    <output path="/FirstLastNames.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="TestSoap_Example_Mapping_unused">
+        <input namespace="http://schemas.xmlsoap.org/soap/envelope/" path="mb:msg(Envelope,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <output path="mb:msg(FirstLastNames,assembly,DFDL,Properties)" var="MessageAssembly1"/>
+        <move>
+            <input path="$MessageAssembly/Properties"/>
+            <output path="$MessageAssembly1/Properties"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

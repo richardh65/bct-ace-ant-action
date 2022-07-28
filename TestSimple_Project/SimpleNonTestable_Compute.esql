@@ -1,0 +1,66 @@
+
+
+-- CREATE PROCEDURE mbLogCall(IN logRef CHAR, IN srcFile CHAR, IN lineNum CHAR, IN branches CHAR, IN port CHAR, IN addr CHAR, IN throwError CHAR) LANGUAGE JAVA EXTERNAL NAME "au.com.bettercodingtools.sonar.messagebrokersonar.MBCallLog.mbLogCall";
+-- CALL mbLogCall( '34', 'TestSimple_Project/TestSoap_Example_Compute.esql', '4', '0', '9011', '127.0.0.1', 'FALSE' );
+
+CREATE COMPUTE MODULE SimpleNonTestable_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE suburbName CHAR;
+		
+		DECLARE notUSed CHAR;
+		DECLARE NOTUSED CHAR;		
+		
+		
+		CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();		
+		
+		CREATE LASTCHILD OF OutputRoot DOMAIN ('XMLNSC');
+		
+		SET suburbName = InputRoot.XMLNSC.SuburbName;
+								
+		IF (suburbName = 'Crace') THEN
+			SET OutputRoot.XMLNSC.Address.Postcode = '2911';								
+		ELSEIF (suburbName = 'Turner') THEN					
+			SET OutputRoot.XMLNSC.Address.Postcode = '2612';		
+		ELSEIF (suburbName = 'Hawker') THEN
+			SET OutputRoot.XMLNSC.Address.Postcode = '2614';					
+		ELSE
+			SET OutputRoot.XMLNSC.Address.Postcode = '-999';
+		END IF;
+		
+		DECLARE details CHARACTER;
+		DETAILS_LOOP : LOOP 
+			SET details = Environment.Variables.Details;
+			IF COALESCE(details,'') = '' THEN				
+				LEAVE DETAILS_LOOP;
+			END IF;
+		
+		END LOOP DETAILS_LOOP;
+		
+		X : LOOP 
+			SET details = Environment.Variables.Details;
+			IF COALESCE(details,'') = '' THEN				
+				LEAVE X;
+			END IF;
+		
+		END LOOP X;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+		
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

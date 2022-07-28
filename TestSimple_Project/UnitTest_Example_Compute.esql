@@ -1,0 +1,153 @@
+
+
+CREATE COMPUTE MODULE UnitTest_Example_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+
+		CALL Test1_Crace();		
+		CALL Test2_Hawker();		
+		CALL Test3_Ainslie();		
+		CALL Test4_Kaleen();
+		
+		
+		RETURN TRUE;
+	END;
+	
+	CREATE PROCEDURE Test1_Crace() BEGIN
+		
+		CREATE FIELD Environment.Test1; 
+		CREATE FIELD Environment.Test1.Input;
+		CREATE FIELD Environment.Test1.Output;
+		
+		CREATE FIELD Environment.Test1.Input.XMLNSC;
+		CREATE FIELD Environment.Test1.Input.XMLNSC.SuburbName;
+				
+		DECLARE inputReference REFERENCE TO Environment.Test1.Input;
+		DECLARE outputReference REFERENCE TO Environment.Test1.Output;
+		
+		SET inputReference.XMLNSC.SuburbName = 'Crace';		
+		
+		CALL SimpleTestable_Compute_ProcessLogic(inputReference, outputReference);
+				
+		if (outputReference.XMLNSC.Address.Postcode = '2911') THEN
+			SET OutputRoot.XMLNSC.Tests.Test1.Result = 'Passed';			
+		ELSE
+			SET OutputRoot.XMLNSC.Tests.Test1.Result = 'Failed';			
+			SET OutputRoot.XMLNSC.Tests.Test1.Message = 'Expected postcode 2911 for Crace';
+		END IF;
+		
+		DELETE FIELD Environment.Test1;
+	END;
+	
+	
+	CREATE PROCEDURE Test2_Hawker() BEGIN
+		
+		CREATE FIELD Environment.Test2; 
+		CREATE FIELD Environment.Test2.Input;
+		CREATE FIELD Environment.Test2.Output;
+						
+		DECLARE inputReference REFERENCE TO Environment.Test2.Input;
+		DECLARE outputReference REFERENCE TO Environment.Test2.Output;
+		
+		
+		DECLARE testXML CHAR;
+		SET testXML =   '<SuburbName>Hawker</SuburbName>';
+		
+		DECLARE xmlBlob BLOB;
+		DECLARE options INTEGER BITOR(FolderBitStream, ValidateContent, ValidateValue);
+		SET xmlBlob = CAST(testXML as BLOB CCSID 1208); 
+		CREATE LASTCHILD OF inputReference DOMAIN('XMLNSC') PARSE (xmlBlob, InputProperties.Encoding, InputProperties.CodedCharSetId);
+		
+		
+		CALL SimpleTestable_Compute_ProcessLogic(inputReference, outputReference);
+		
+		if (outputReference.XMLNSC.Address.Postcode = '2614') THEN
+			SET OutputRoot.XMLNSC.Tests.Test2.Result = 'Passed';			
+		ELSE
+			SET OutputRoot.XMLNSC.Tests.Test2.Result = 'Failed';			
+			SET OutputRoot.XMLNSC.Tests.Test2.Message = 'Expected postcode 2614 for Hawker';
+		END IF;
+		
+		DELETE FIELD Environment.Test2;				
+	END;
+
+	
+	CREATE PROCEDURE Test3_Ainslie() BEGIN
+		
+		CREATE FIELD Environment.Test3; 
+		CREATE FIELD Environment.Test3.Input;
+		CREATE FIELD Environment.Test3.Output;
+						
+		DECLARE inputReference REFERENCE TO Environment.Test3.Input;
+		DECLARE outputReference REFERENCE TO Environment.Test3.Output;
+		
+		
+		DECLARE testXML CHAR;
+		SET testXML =   '<SuburbName>Ainslie</SuburbName>';
+		
+		DECLARE xmlBlob BLOB;
+		DECLARE options INTEGER BITOR(FolderBitStream, ValidateContent, ValidateValue);
+		SET xmlBlob = CAST(testXML as BLOB CCSID 1208); 
+		CREATE LASTCHILD OF inputReference DOMAIN('XMLNSC') PARSE (xmlBlob, InputProperties.Encoding, InputProperties.CodedCharSetId);
+		
+		
+		CALL SimpleTestable_Compute_ProcessLogic(inputReference, outputReference);
+		
+		if (outputReference.XMLNSC.Address.Postcode = '2001') THEN
+			SET OutputRoot.XMLNSC.Tests.Test3.Result = 'Passed';			
+		ELSE
+			SET OutputRoot.XMLNSC.Tests.Test3.Result = 'Failed';			
+			SET OutputRoot.XMLNSC.Tests.Test3.Message = 'Expected postcode 2001 for Anything else';
+		END IF;
+		
+		DELETE FIELD Environment.Test3;				
+	END;
+	
+	CREATE PROCEDURE Test4_Kaleen() BEGIN
+		
+		CREATE FIELD Environment.Test4; 
+		CREATE FIELD Environment.Test4.Input;
+		CREATE FIELD Environment.Test4.Output;
+						
+		DECLARE inputReference REFERENCE TO Environment.Test4.Input;
+		DECLARE outputReference REFERENCE TO Environment.Test4.Output;
+		
+		
+		DECLARE testXML CHAR;
+		SET testXML =   '<SuburbName>Kaleen</SuburbName>';
+		
+		DECLARE xmlBlob BLOB;
+		DECLARE options INTEGER BITOR(FolderBitStream, ValidateContent, ValidateValue);
+		SET xmlBlob = CAST(testXML as BLOB CCSID 1208); 
+		CREATE LASTCHILD OF inputReference DOMAIN('XMLNSC') PARSE (xmlBlob, InputProperties.Encoding, InputProperties.CodedCharSetId);
+		
+		
+		CALL SimpleTestable_Compute_ProcessLogic(inputReference, outputReference);
+		
+		if (outputReference.XMLNSC.Address.Postcode = '-999') THEN
+			SET OutputRoot.XMLNSC.Tests.Test4.Result = 'Passed';			
+		ELSE
+			SET OutputRoot.XMLNSC.Tests.Test4.Result = 'Failed';			
+			SET OutputRoot.XMLNSC.Tests.Test4.Message = 'Expected postcode -999 for Anything else';
+		END IF;
+		
+		DELETE FIELD Environment.Test3;				
+	END;
+	
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

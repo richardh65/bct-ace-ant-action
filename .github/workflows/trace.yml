@@ -1,0 +1,17 @@
+name: Workflow to trigger ACE unit tests
+on: push
+
+jobs:
+  build:
+    name: ACE trace coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./coverage
+        with:
+          ANT_FILE_NAME: "trace_build.xml"          
+      
+      - name: debug
+        run: |
+          ls -la
+          pwd
