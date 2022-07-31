@@ -21,6 +21,7 @@ jobs:
           options: -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
+            ls -la /opt/ibm/ace-12/server/bin
             ls -la
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
             ls -la
