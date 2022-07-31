@@ -18,7 +18,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: richardh65/bct-tools:latest
-          options: -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
+          options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
             whoami
