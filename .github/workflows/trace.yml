@@ -8,21 +8,21 @@ on:
 # richardh65/bct-tools:latest
 
 jobs:
-  # build:
-  name: Compile site assets
-  runs-on: ubuntu-latest
-  steps:
-    - name: Check out the repo
-      uses: actions/checkout@v2
-    - name: Run the build process with Docker
-      uses: addnab/docker-run-action@v3
-      with:
-        image: richardh65/bct-tools:latest
-        options: -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
-        run: |
-          pwd
-          ls -la
-          /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
-          ls -la
+  build:
+    name: Compile site assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: richardh65/bct-tools:latest
+          options: -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
+          run: |
+            pwd
+            ls -la
+            /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
+            ls -la
 
            
