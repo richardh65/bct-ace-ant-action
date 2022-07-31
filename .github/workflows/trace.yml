@@ -17,7 +17,7 @@ jobs:
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
-          image: richardh65/bct-tools:v1
+          image: richardh65/bct-tools:latest
           options: -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
