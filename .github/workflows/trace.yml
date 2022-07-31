@@ -22,5 +22,7 @@ jobs:
           run: |
             pwd
             ls -la
+            /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
+            ls -la
 
            
