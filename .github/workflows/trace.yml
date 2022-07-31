@@ -22,8 +22,8 @@ jobs:
           run: |
             pwd
             whoami
-            ls -la /opt/ibm/ace-12/server/bin
             ls -la /opt/ibm/ace-12/server/bin/mqsipackagebar
+            /opt/ibm/ace-12/server/bin/mqsipackagebar
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
             ls -la
 
