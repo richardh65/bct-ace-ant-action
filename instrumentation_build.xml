@@ -88,11 +88,11 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 	<echo message="running mqsicreatebar" />
 	<echo message="==============================================" />
 	
-    <delete dir="/tmp/work/bct/code/build/classes"/>
-    <mkdir dir="/tmp/work/bct/code/build/classes"/>
+    <delete dir="/tmp/work/other/code/build/classes"/>
+    <mkdir dir="/tmp/work/other/code/build/classes"/>
 
-    <javac srcdir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/java" 
-			destdir="/tmp/work/bct/code/build/classes" >
+    <javac srcdir="/tmp/work/other/code/TestSimple_Project_Test/src/main/java" 
+			destdir="/tmp/work/other/code/build/classes" >
 		<classpath>
   			<!--pathelement path="${classpath}"/ -->
   			<pathelement location="/opt/ibm/ace-12/common/classes/IntegrationTest.jar"/>
@@ -103,7 +103,7 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 	</javac>
     
 
-	<jar destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" basedir="/tmp/work/bct/code/build/classes">
+	<jar destfile="/tmp/work/other/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" basedir="/tmp/work/other/code/build/classes">
             <manifest>
                 <attribute name="Main-Class" value="oata.HelloWorld"/>
             </manifest>
@@ -114,11 +114,11 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 	<echo message="==============================================" />		
 
 	
-	<zip destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
-		<zipfileset dir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" />
+	<zip destfile="/tmp/work/other/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
+		<zipfileset dir="/tmp/work/other/code/TestSimple_Project_Test/src/main/resources" />
 	</zip>
-	<zip destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
-		<zipfileset dir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" prefix="test" />
+	<zip destfile="/tmp/work/other/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
+		<zipfileset dir="/tmp/work/other/code/TestSimple_Project_Test/src/main/resources" prefix="test" />
 	</zip>	
 
 </target>
@@ -145,9 +145,9 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 
 	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsipackagebar" failonerror="true" >	
 			<arg value="-w"/>
-			<arg value="/tmp/work/bct/code"/>
+			<arg value="/tmp/work/other/code"/>
 			<arg value="-a"/>
-			<arg value="/tmp/work/bct/code/BarFiles/UnitTests.bar"/>
+			<arg value="/tmp/work/other/code/BarFiles/UnitTests.bar"/>
 			<arg value="-t"/>
 			<arg value="TestSimple_Project_Test"/>
 			<arg value="-k"/>
@@ -158,13 +158,13 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 	
 	<!-- step 3 create work directory -->
 	<echo message="delete work dir" />
-	<delete dir="/tmp/work/bct/code/test_work_dir"/>
+	<delete dir="/tmp/work/other/code/test_work_dir"/>
 	
 	<echo message="==============================================" />
 	<echo message="create work dir" />
 	<echo message="==============================================" />	
 	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsicreateworkdir" failonerror="true" >		
-		<arg value="/tmp/work/bct/code/test_work_dir"/>
+		<arg value="/tmp/work/other/code/test_work_dir"/>
 	
 	</exec>	
 	
@@ -176,8 +176,8 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 	<echo message="==============================================" />
 	<echo message="copy policy" />
 	<echo message="==============================================" />
-	<copy file="/tmp/work/bct/code/bars/SimplePolicyTestable.bar" 
-			todir="/tmp/work/bct/code/test_work_dir/run" />
+	<copy file="/tmp/work/other/code/bars/SimplePolicyTestable.bar" 
+			todir="/tmp/work/other/code/test_work_dir/run" />
 	<echo message="==============================================" />	
 
 	
@@ -193,7 +193,7 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
   <instrument workingFolder="work" 
 				sourceCode="TestSimple_Project" 
 				keepCoverage="No"  
-				barFileName="/tmp/work/bct/code/BarFiles/UnitTests.bar" 
+				barFileName="/tmp/work/other/code/BarFiles/UnitTests.bar" 
 				coverXSL="TRUE" 
 				coverJava="FALSE" 
 				updateModuleNames="TRUE"				
@@ -215,8 +215,8 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 	<echo message="==============================================" />
 	<echo message="copy instrumented project" />
 	<echo message="==============================================" />
-	<copy file="/tmp/work/bct/code/BarFiles/UnitTests-instrumented.bar" 
-			todir="/tmp/work/bct/code/test_work_dir/run" />
+	<copy file="/tmp/work/other/code/BarFiles/UnitTests-instrumented.bar" 
+			todir="/tmp/work/other/code/test_work_dir/run" />
   
   
  </target>
@@ -226,8 +226,8 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 
 	<property environment="env"/>	
 	
-	<jar destfile="/tmp/work/bct/code/BarFiles/resources.jar"
-     basedir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" />
+	<jar destfile="/tmp/work/other/code/BarFiles/resources.jar"
+     basedir="/tmp/work/other/code/TestSimple_Project_Test/src/main/resources" />
      	
 	<!-- step 4 run tests -->
 	<echo message="==============================================" />
@@ -250,11 +250,11 @@ https://www.ibm.com/docs/en/app-connect/12.0?topic=commands-integrationserver-co
 				<arg value="--default-application-name"/>
 				<arg value="TestSimple_Project_UnitTestsApp"/>
 				<arg value="--additional-test-project-classpath"/>
-				<arg value="/tmp/work/bct/code/BarFiles/resources.jar"/>
+				<arg value="/tmp/work/other/code/BarFiles/resources.jar"/>
 				
 				<arg value="--console-log"/>				
 				<arg value="--work-dir"/>
-				<arg value="/tmp/work/bct/code/test_work_dir"/>
+				<arg value="/tmp/work/other/code/test_work_dir"/>
 				<arg value="--test-project"/>
 				<arg value="TestSimple_Project_Test"/>
 				<arg value="--start-msgflows"/>

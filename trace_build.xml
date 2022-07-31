@@ -76,11 +76,11 @@
 	<echo message="running mqsicreatebar" />
 	<echo message="==============================================" />
 	
-    <delete dir="/tmp/work/bct/code/build/classes"/>
-    <mkdir dir="/tmp/work/bct/code/build/classes"/>
+    <delete dir="/tmp/work/other/code/build/classes"/>
+    <mkdir dir="/tmp/work/other/code/build/classes"/>
 
-    <javac srcdir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/java" 
-			destdir="/tmp/work/bct/code/build/classes" >
+    <javac srcdir="/tmp/work/other/code/TestSimple_Project_Test/src/main/java" 
+			destdir="/tmp/work/other/code/build/classes" >
 		<classpath>
   			<!--pathelement path="${classpath}"/ -->
   			<pathelement location="/opt/ibm/ace-12/common/classes/IntegrationTest.jar"/>
@@ -91,7 +91,7 @@
 	</javac>
     
 
-	<jar destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" basedir="/tmp/work/bct/code/build/classes">
+	<jar destfile="/tmp/work/other/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" basedir="/tmp/work/other/code/build/classes">
             <manifest>
                 <attribute name="Main-Class" value="oata.HelloWorld"/>
             </manifest>
@@ -102,11 +102,11 @@
 	<echo message="==============================================" />		
 
 	
-	<zip destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
-		<zipfileset dir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" />
+	<zip destfile="/tmp/work/other/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
+		<zipfileset dir="/tmp/work/other/code/TestSimple_Project_Test/src/main/resources" />
 	</zip>
-	<zip destfile="/tmp/work/bct/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
-		<zipfileset dir="/tmp/work/bct/code/TestSimple_Project_Test/src/main/resources" prefix="test" />
+	<zip destfile="/tmp/work/other/code/TestSimple_Project_Test/TestSimple_Project_Test.jar" update="true" >
+		<zipfileset dir="/tmp/work/other/code/TestSimple_Project_Test/src/main/resources" prefix="test" />
 	</zip>	
 
 </target>
@@ -120,9 +120,9 @@
 	<!-- step 2 packages 2 projects -->			
 	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsipackagebar" failonerror="true" >	
 			<arg value="-w"/>
-			<arg value="/tmp/work/bct/code"/>
+			<arg value="/tmp/work/other/code"/>
 			<arg value="-a"/>
-			<arg value="/tmp/work/bct/code/BarFiles/UnitTests.bar"/>			
+			<arg value="/tmp/work/other/code/BarFiles/UnitTests.bar"/>			
 			<arg value="-t"/>
 			<arg value="TestSimple_Project_Test"/>
 			<arg value="-k"/>
@@ -133,26 +133,26 @@
 	
 	<!-- step 3 create work directory -->
 	<echo message="delete work dir" />
-	<delete dir="/tmp/work/bct/code/test_work_dir"/>
+	<delete dir="/tmp/work/other/code/test_work_dir"/>
 	
 	<echo message="==============================================" />
 	<echo message="create work dir" />
 	<echo message="==============================================" />	
 	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsicreateworkdir" failonerror="true" >		
-		<arg value="/tmp/work/bct/code/test_work_dir"/>
+		<arg value="/tmp/work/other/code/test_work_dir"/>
 	
 	</exec>	
 	
 	<echo message="==============================================" />
 	<echo message="delete trace config" />
 	<echo message="==============================================" />
-	<delete file="/tmp/work/bct/code/test_work_dir/server.conf.yaml" quiet="false" failonerror="true" verbose="true" />
+	<delete file="/tmp/work/other/code/test_work_dir/server.conf.yaml" quiet="false" failonerror="true" verbose="true" />
 	
 	<echo message="==============================================" />
 	<echo message="copy trace config" />
 	<echo message="==============================================" />
-	<copy file="/tmp/work/bct/code/config/server.conf.yaml" 
-			todir="/tmp/work/bct/code/test_work_dir" force="true" failonerror="true" />
+	<copy file="/tmp/work/other/code/config/server.conf.yaml" 
+			todir="/tmp/work/other/code/test_work_dir" force="true" failonerror="true" />
 	<echo message="==============================================" />	
 	
 	
@@ -160,15 +160,15 @@
 	<echo message="==============================================" />
 	<echo message="copy policy" />
 	<echo message="==============================================" />
-	<copy file="/tmp/work/bct/code/bars/SimplePolicyTestable.bar" 
-			todir="/tmp/work/bct/code/test_work_dir/run" />
+	<copy file="/tmp/work/other/code/bars/SimplePolicyTestable.bar" 
+			todir="/tmp/work/other/code/test_work_dir/run" />
 	<echo message="==============================================" />	
 
 	<echo message="==============================================" />
 	<echo message="copy project" />
 	<echo message="==============================================" />			
-	<copy file="/tmp/work/bct/code/BarFiles/UnitTests.bar" 
-			todir="/tmp/work/bct/code/test_work_dir/run" />
+	<copy file="/tmp/work/other/code/BarFiles/UnitTests.bar" 
+			todir="/tmp/work/other/code/test_work_dir/run" />
 			
 			
 	
@@ -192,7 +192,7 @@
 				
 			<arg value="--console-log"/>				
 			<arg value="--work-dir"/>
-			<arg value="/tmp/work/bct/code/test_work_dir"/>
+			<arg value="/tmp/work/other/code/test_work_dir"/>
 			<arg value="--test-project"/>
 			<arg value="TestSimple_Project_Test"/>
 			<arg value="--start-msgflows"/>
@@ -235,7 +235,7 @@
 	<java classname="au.com.bettercodingtools.sonar.messagebrokersonar.standalone.ConsumeTraceStandAlone" failonerror="true" fork="false">
 		<arg value="coveragetemp" />
 		<arg value="N" />
-		<arg value="/tmp/work/bct/code/test_work_dir/config/common/log/integration_server.test_work_dir.userTrace.0.txt" />		
+		<arg value="/tmp/work/other/code/test_work_dir/config/common/log/integration_server.test_work_dir.userTrace.0.txt" />		
 		<arg value="TestSimple_Project" />
 		
 		<classpath>			

@@ -30,8 +30,8 @@ echo ========================= starting trace ==================================
 
 # check trace file config will be applied
 echo ===============================================================
-cat /tmp/work/bct/code/test_work_dir/server.conf.yaml | grep BCT
-cat /tmp/work/bct/code/test_work_dir/server.conf.yaml | grep userTrace
+cat /tmp/work/other/code/test_work_dir/server.conf.yaml | grep BCT
+cat /tmp/work/other/code/test_work_dir/server.conf.yaml | grep userTrace
 echo ===============================================================
 
 

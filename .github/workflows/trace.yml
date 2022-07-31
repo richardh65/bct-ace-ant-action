@@ -1,17 +1,26 @@
 name: Workflow to trigger ACE unit tests
-on: push
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# richardh65/bct-tools:latest
 
 jobs:
   build:
-    name: ACE trace coverage
+    name: Compile site assets
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: ./coverage
-        with:
-          ANT_FILE_NAME: "trace_build.xml"          
-      
-      - name: debug
-        run: |
-          ls -la
-          pwd
+      steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+        - name: Run the build process with Docker
+          uses: addnab/docker-run-action@v3
+          with:
+            image: richardh65/bct-tools:latest
+            options: -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
+            run: |
+              pwd
+              ls -la
+
+           
