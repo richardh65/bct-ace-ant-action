@@ -23,9 +23,10 @@ jobs:
             pwd
             whoami
             ls -la /opt/ibm/ace-12/server/bin/mqsipackagebar
-            . /opt/ibm/ace-12/server/bin/mqsiprofile && /opt/ibm/ace-12/server/bin/mqsipackagebar
-            /opt/ibm/ace-12/server/bin/mqsipackagebar
-            /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
-            ls -la
+            . /opt/ibm/ace-12/server/bin/mqsiprofile            
+            /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml            
+            ls -la /tmp/work/other/code/coveragetemp
+            /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties            
+
 
            
