@@ -6,7 +6,8 @@ CREATE COMPUTE MODULE TestSoap_Example_Compute
 		
 		DECLARE calNs NAMESPACE 'http://www.parasoft.com/wsdl/calculator/';
 		
-		DECLARE xValue, yValue CHAR;
+		DECLARE xValue, yValue CHAR
+		DECLARE unused6 CHAR;
 		
 		
 		SET xValue = InputRoot.XMLNSC.Test.x;

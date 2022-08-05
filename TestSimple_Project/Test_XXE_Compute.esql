@@ -5,6 +5,7 @@ CREATE COMPUTE MODULE Test_XXE_Compute
 	BEGIN
 		CALL CopyMessageHeaders();
 		CALL CopyEntireMessage();
+		DECLARE unused5 CHAR;
 		
 		SET OutputRoot.XML.Test.Value1 = InputRoot.XMLNSC.Test.Value1;
 		
