@@ -27,7 +27,10 @@ jobs:
             . /opt/ibm/ace-12/server/bin/mqsiprofile            
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml            
             ls -la /tmp/work/other/code/coveragetemp
-            /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties            
+            /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties
+            ls -la 
+            ls -la /tmp/work/other/code
+            
 
 
            
