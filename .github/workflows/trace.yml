@@ -29,7 +29,7 @@ jobs:
             ls -la /tmp/work/other/code/coveragetemp
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties
             ls -la 
-            ls -la /tmp/work/other/code
+            cat BCT_report.sarif
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
