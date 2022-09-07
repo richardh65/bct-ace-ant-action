@@ -16,13 +16,14 @@ jobs:
     steps:
       - name: Check out code repo
         uses: actions/checkout@v2
-        path: code
+        with:
+          path: code
 
       - name: checkout wiki
         uses: actions/checkout@v3
         with:
           repository: ${{github.repository}}.wiki
-        path: wiki        
+          path: wiki        
 
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
