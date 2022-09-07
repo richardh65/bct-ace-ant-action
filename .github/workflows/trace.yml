@@ -50,7 +50,7 @@ jobs:
       - name: Generate diagrams
         uses: addnab/docker-run-action@v3
         with:
-          image: richardh65/bct-tools:v4
+          image: richardh65/bct-tools:v7
           options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
