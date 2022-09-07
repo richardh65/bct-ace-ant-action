@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_ord="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			
+			<xsd:include schemaLocation="GetOrder.mxsd"/>
+			<xsd:include schemaLocation="ShowOrder.mxsd"/>
+			<xsd:include schemaLocation="ProcessOrder.mxsd"/>
+			<xsd:include schemaLocation="AcknowledgeOrder.mxsd"/>
+			<xsd:include schemaLocation="ChangeOrder.mxsd"/>
+			<xsd:include schemaLocation="RespondOrder.mxsd"/>
+			<xsd:include schemaLocation="SyncOrder.mxsd"/>
+			<xsd:include schemaLocation="GetQuote.mxsd"/>
+			<xsd:include schemaLocation="ShowQuote.mxsd"/>
+			<xsd:include schemaLocation="ProcessQuote.mxsd"/>
+			<xsd:include schemaLocation="AcknowledgeQuote.mxsd"/>
+			<xsd:include schemaLocation="ChangeQuote.mxsd"/>
+			<xsd:include schemaLocation="RespondQuote.mxsd"/>
+			<xsd:include schemaLocation="SyncQuote.mxsd"/>
+		</xsd:schema>

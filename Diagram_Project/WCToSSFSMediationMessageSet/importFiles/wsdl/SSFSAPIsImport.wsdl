@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="SSFSAPIsImport" targetNamespace="http://WCToSSFSMediationModule/SSFSAPIsImport" xmlns:bons1="http://www.sterlingcommerce.com/documentation/YFS/findInventory/input" xmlns:bons2="http://www.sterlingcommerce.com/documentation/YFS/findInventory/output" xmlns:bons3="http://www.sterlingcommerce.com/documentation/YFSError" xmlns:bons4="http://www.sterlingcommerce.com/documentation/YFS/reserveAvailableInventory/input" xmlns:bons5="http://www.sterlingcommerce.com/documentation/YFS/reserveAvailableInventory/output" xmlns:bons6="http://www.sterlingcommerce.com/documentation/YFS/cancelReservation/input" xmlns:bons7="http://www.sterlingcommerce.com/documentation/YFS/cancelReservation/output" xmlns:bons8="http://www.sterlingcommerce.com/documentation/YFS/createOrder/input" xmlns:bons9="http://www.sterlingcommerce.com/documentation/YFS/createOrder/output" xmlns:bons10="http://www.sterlingcommerce.com/documentation/YCP/multiApi/input" xmlns:bons11="http://www.sterlingcommerce.com/documentation/YCP/multiApi/output" xmlns:tns="http://WCToSSFSMediationModule/SSFSAPIsImport" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://WCToSSFSMediationModule/SSFSAPIsImport">
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFSError" schemaLocation="YFSError.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/createOrder/output" schemaLocation="YFS_createOrder_output.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/createOrder/input" schemaLocation="YFS_createOrder_input.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/cancelReservation/output" schemaLocation="YFS_cancelReservation_output.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/cancelReservation/input" schemaLocation="YFS_cancelReservation_input.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/reserveAvailableInventory/output" schemaLocation="YFS_reserveAvailableInventory_output.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/reserveAvailableInventory/input" schemaLocation="YFS_reserveAvailableInventory_input.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/findInventory/output" schemaLocation="YFS_findInventory_output.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/findInventory/input" schemaLocation="YFS_findInventory_input.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YCP/multiApi/output" schemaLocation="YCP_multiApi_output.xsd"/>
+      <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YCP/multiApi/input" schemaLocation="YCP_multiApi_input.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="findInventoryRequestMsg">
+    <wsdl:part element="bons1:Promise" name="Promise"/>
+  </wsdl:message>
+    <wsdl:message name="findInventoryResponseMsg">
+    <wsdl:part element="bons2:Promise" name="Promise"/>
+  </wsdl:message>
+    <wsdl:message name="findInventory_ErrorsMsg">
+    <wsdl:part element="bons3:Errors" name="Errors"/>
+  </wsdl:message>
+    <wsdl:message name="reserveAvailableInventoryRequestMsg">
+    <wsdl:part element="bons4:Promise" name="Promise"/>
+  </wsdl:message>
+    <wsdl:message name="reserveAvailableInventoryResponseMsg">
+    <wsdl:part element="bons5:PromiseHeader" name="PromiseHeader"/>
+  </wsdl:message>
+    <wsdl:message name="reserveAvailableInventory_ErrorsMsg">
+    <wsdl:part element="bons3:Errors" name="Errors"/>
+  </wsdl:message>
+    <wsdl:message name="cancelReservationRequestMsg">
+    <wsdl:part element="bons6:CancelReservation" name="CancelReservation"/>
+  </wsdl:message>
+    <wsdl:message name="cancelReservationResponseMsg">
+    <wsdl:part element="bons7:CancelReservation" name="CancelReservation"/>
+  </wsdl:message>
+    <wsdl:message name="cancelReservation_ErrorsMsg">
+    <wsdl:part element="bons3:Errors" name="Errors"/>
+  </wsdl:message>
+    <wsdl:message name="createOrderRequestMsg">
+    <wsdl:part element="bons8:Order" name="Order"/>
+  </wsdl:message>
+    <wsdl:message name="createOrderResponseMsg">
+    <wsdl:part element="bons9:Order" name="Order"/>
+  </wsdl:message>
+    <wsdl:message name="createOrder_ErrorsMsg">
+    <wsdl:part element="bons3:Errors" name="Errors"/>
+  </wsdl:message>
+    <wsdl:message name="multiApiRequestMsg">
+    <wsdl:part element="bons10:MultiApi" name="MultiApi"/>
+  </wsdl:message>
+    <wsdl:message name="multiApiResponseMsg">
+    <wsdl:part element="bons11:MultiApi" name="MultiApi"/>
+  </wsdl:message>
+    <wsdl:message name="multiApi_ErrorsMsg">
+    <wsdl:part element="bons3:Errors" name="Errors"/>
+  </wsdl:message>
+    <wsdl:portType name="SSFSAPIsImport">
+    <wsdl:operation name="findInventory">
+      <wsdl:input message="tns:findInventoryRequestMsg" name="findInventoryRequest"/>
+      <wsdl:output message="tns:findInventoryResponseMsg" name="findInventoryResponse"/>
+      <wsdl:fault message="tns:findInventory_ErrorsMsg" name="Errors"/>
+    </wsdl:operation>
+    <wsdl:operation name="reserveAvailableInventory">
+      <wsdl:input message="tns:reserveAvailableInventoryRequestMsg" name="reserveAvailableInventoryRequest"/>
+      <wsdl:output message="tns:reserveAvailableInventoryResponseMsg" name="reserveAvailableInventoryResponse"/>
+      <wsdl:fault message="tns:reserveAvailableInventory_ErrorsMsg" name="Errors"/>
+    </wsdl:operation>
+    <wsdl:operation name="cancelReservation">
+      <wsdl:input message="tns:cancelReservationRequestMsg" name="cancelReservationRequest"/>
+      <wsdl:output message="tns:cancelReservationResponseMsg" name="cancelReservationResponse"/>
+      <wsdl:fault message="tns:cancelReservation_ErrorsMsg" name="Errors"/>
+    </wsdl:operation>
+    <wsdl:operation name="createOrder">
+      <wsdl:input message="tns:createOrderRequestMsg" name="createOrderRequest"/>
+      <wsdl:output message="tns:createOrderResponseMsg" name="createOrderResponse"/>
+      <wsdl:fault message="tns:createOrder_ErrorsMsg" name="Errors"/>
+    </wsdl:operation>
+    <wsdl:operation name="multiApi">
+      <wsdl:input message="tns:multiApiRequestMsg" name="multiApiRequest"/>
+      <wsdl:output message="tns:multiApiResponseMsg" name="multiApiResponse"/>
+      <wsdl:fault message="tns:multiApi_ErrorsMsg" name="Errors"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:AuthCredentialSubFlow.msgflow="AuthCredentialSubFlow.msgflow" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmJMSClientInput.msgnode="ComIbmJMSClientInput.msgnode" xmlns:ComIbmSOAPRequest.msgnode="ComIbmSOAPRequest.msgnode" xmlns:ComIbmThrow.msgnode="ComIbmThrow.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ComIbmXslMqsi.msgnode="ComIbmXslMqsi.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow"
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="SSFSAPIsExport_sendOrderDetails.msgflow"
+    nsPrefix="SSFSAPIsExport_sendOrderDetails.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="SSFSAPIsExport_sendOrderDetails" bundleName="SSFSAPIsExport_sendOrderDetails" pluginId="WCToSSFSMediationModule"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WCToSSFSMediationModule/icons/full/obj16/SSFSAPIsExport_sendOrderDetails.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WCToSSFSMediationModule/icons/full/obj30/SSFSAPIsExport_sendOrderDetails.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="11,47" sourceQueueName="SSFSAPIsExport_RECEIVE_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" propertySelector="TargetFunctionName='sendOrderDetails'">
+        <translation xmi:type="utility:ConstantString" string="SSFSAPIsExport"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="101,101" stylesheetName="xslt/custom/SendOrderDetailsToSyncOrder.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="SendOrderDetailsToSyncOrder_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="572,53" wsdlFileName="WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/OrderServices.wsdl" selectedPortType="OrderServicesPortType" selectedBinding="OrderServices" selectedOperation="SyncOrder" selectedPort="OrderServices" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" useHTTPTransport="true" webServiceURL="http://wcserver/webapp/wcs/component/order/services/OrderServices"
+          sslProtocol="TLS" messageSetProperty="WCToSSFSMediationMessageSet" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SyncOrderRequest"/>
+        <longDescription xmi:type="utility:ConstantString" string="Send soap request ove http(s) to WC"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="738,86">
+        <translation xmi:type="utility:ConstantString" string="ConfirmBODTrace"/>
+      </nodes>
+      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="705,15" messageText="SyncOrderCallFailed">
+        <translation xmi:type="utility:ConstantString" string="SyncOrderCallFailed"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="452,52" computeExpression="esql://routine/#SSFSAPIsExport_setSOAPHeader.Main">
+        <translation xmi:type="utility:ConstantString" string="SetSOAPHeader"/>
+      </nodes>
+      <nodes xmi:type="AuthCredentialSubFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="265,23">
+        <translation xmi:type="utility:ConstantString" string="AuthCredentialSubFlow"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="customerName" type="xsd:string"/>
+  <xsd:element name="btm_retail">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="requestType"/>
+        <xsd:element ref="customerNumber"/>
+        <xsd:element ref="customerName"/>
+        <xsd:element ref="itemNumber"/>
+        <xsd:element ref="itemName"/>
+        <xsd:element ref="flows"/>
+        <xsd:element ref="requestTime"/>
+        <xsd:element ref="processTime"/>
+        <xsd:element ref="responseTime"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="itemName" type="xsd:string"/>
+  <xsd:element name="requestTime">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="processTime">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="customerNumber" type="xsd:string"/>
+  <xsd:element name="requestType" type="xsd:string"/>
+  <xsd:element name="itemNumber" type="xsd:string"/>
+  <xsd:element name="responseTime">
+    <xsd:complexType/>
+  </xsd:element>
+  <xsd:element name="flows">
+    <xsd:complexType/>
+  </xsd:element>
+</xsd:schema>

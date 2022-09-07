@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.openapplications.org/oagis/9" xmlns:_inv="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:include schemaLocation="ConfirmBOD.mxsd"/>
+		</xsd:schema>

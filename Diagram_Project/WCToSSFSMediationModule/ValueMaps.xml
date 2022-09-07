@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2011 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<!-- Maps WC values to SSFS values -->
+<mm:ValueMaps
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mm="http://WCToSSFSMediationModule"
+	xsi:schemaLocation="http://WCToSSFSMediationModule ValueMaps.xsd ">
+	
+	<!-- Maps WC store IDs to SSFS organization codes -->
+	<mm:Map name="storeIdToOrganizationCode">
+		<!--<mm:Entry key="10101">MadisonsRoot</mm:Entry>-->
+		<mm:Entry key="10152">MadisonsRoot</mm:Entry>
+	</mm:Map>
+	
+	<!-- Maps WC store IDs to SSFS nodes -->
+	<mm:Map name="storeIdToNode">
+		<!--<mm:Entry key="10101">Madisons</mm:Entry>-->
+		<mm:Entry key="10152">MadisonsESite</mm:Entry>
+	</mm:Map>
+	
+</mm:ValueMaps>

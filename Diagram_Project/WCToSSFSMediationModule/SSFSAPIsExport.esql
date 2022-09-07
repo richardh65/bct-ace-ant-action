@@ -1,0 +1,46 @@
+ --=================================================================
+  --Licensed Materials - Property of IBM
+
+  --WebSphere Commerce
+
+  --(C) Copyright IBM Corp. 2011 All Rights Reserved.
+
+  --US Government Users Restricted Rights - Use, duplication or
+  --disclosure restricted by GSA ADP Schedule Contract with
+  --IBM Corp.
+ --=================================================================
+
+-- Construct SOAP header with Authentication Credential. Make sure transport protocal is secured (ssl). Header can be encryted as well for additional security.
+CREATE COMPUTE MODULE SSFSAPIsExport_setSOAPHeader
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+    CALL CopyMessageHeaders();
+	 CALL CopyEntireMessage();
+	 
+	 DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+	 DECLARE wsse NAMESPACE 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
+	 
+		SET OutputRoot.SOAP.Header.wsse:Security.(SOAP.Attribute)soapenv:mustUnderstand = '1';
+	 	SET OutputRoot.SOAP.Header.wsse:Security.wsse:UsernameToken.wsse:Username = OutputRoot.Properties.IdentitySourceToken;
+	 	SET OutputRoot.SOAP.Header.wsse:Security.wsse:UsernameToken.wsse:Password = OutputRoot.Properties.IdentitySourcePassword;
+	 	SET OutputRoot.SOAP.Header.wsse:Security.wsse:UsernameToken.wsse:Password.(SOAP.Attribute)Type='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText';
+		SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
+		
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="WCOrderServicesExport_OrderServicesPortTypeHttp_Service" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order/Binding" xmlns:Port_0="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:this="http://www.ibm.com/xmlns/prod/commerce/9/order/Binding" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import location="OrderServices.wsdl" namespace="http://www.ibm.com/xmlns/prod/commerce/9/order"/>
+  <wsdl:binding name="WCOrderServicesExport_OrderServicesPortTypeHttpBinding" type="Port_0:OrderServicesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetOrder">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetOrder">
+        <soap:body parts="GetOrder" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ShowOrder">
+        <soap:body parts="ShowOrder" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessOrder">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ProcessOrder">
+        <soap:body parts="ProcessOrder" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AcknowledgeOrder">
+        <soap:body parts="AcknowledgeOrder" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrder">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChangeOrder">
+        <soap:body parts="ChangeOrder" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RespondOrder">
+        <soap:body parts="RespondOrder" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncOrder">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SyncOrder">
+        <soap:body parts="SyncOrder" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ConfirmOrderBOD">
+        <soap:body parts="ConfirmBOD" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuote">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetQuote">
+        <soap:body parts="GetQuote" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ShowQuote">
+        <soap:body parts="ShowQuote" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessQuote">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ProcessQuote">
+        <soap:body parts="ProcessQuote" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AcknowledgeQuote">
+        <soap:body parts="AcknowledgeQuote" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeQuote">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChangeQuote">
+        <soap:body parts="ChangeQuote" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RespondQuote">
+        <soap:body parts="RespondQuote" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncQuote">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SyncQuote">
+        <soap:body parts="SyncQuote" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ConfirmQuoteBOD">
+        <soap:body parts="ConfirmBOD" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WCOrderServicesExport_OrderServicesPortTypeHttpService">
+    <wsdl:port binding="this:WCOrderServicesExport_OrderServicesPortTypeHttpBinding" name="WCOrderServicesExport_OrderServicesPortTypeHttpPort">
+      <soap:address location="http://localhost:9080/WCToSSFSMediationModuleWeb/sca/WCOrderServicesExport"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

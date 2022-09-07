@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.sterlingcommerce.com/documentation/YFSError"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:yfc="http://www.sterlingcommerce.com/documentation/YFSError" xmlns:yfctype="http://www.sterlingcommerce.com/documentation/types">
+    <xsd:annotation yfc:fileName="YFSError.xsd" yfc:rootElement="Errors">
+        <xsd:appinfo source="yfc:structure">
+            <Errors>
+                <Error hasAttributes="Y">
+                    <Attribute hasAttributes="Y"/>
+                    <Error hasAttributes="Y">
+                        <Attribute hasAttributes="Y"/>
+                        <Stack/>
+                    </Error>
+                    <Stack/>
+                </Error>
+            </Errors>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:import
+        namespace="http://www.sterlingcommerce.com/documentation/types" schemaLocation="datatypes.xsd"/>
+    <xsd:element name="Errors" type="yfc:ErrorsXSDType"/>
+    <xsd:complexType name="ErrorsXSDType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Error">
+                <xsd:annotation yfc:tableName="YFS_ERROR_CODE">
+                    <xsd:documentation>Thrown by the app.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="Attribute">
+                            <xsd:annotation yfc:tableName="YFS_ATTRIBUTE">
+                                <xsd:documentation>This element provides additional information for error resolution. Important attributes at the moment the error occured are output as Name and Value.  The ErrorCode, ErrorDescription and ErrorRelatedMoreInfo are also output as Attribute elements.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                                <xsd:attribute name="Name"
+                                    type="yfctype:CLOB" use="optional">
+                                    <xsd:annotation>
+                                    <xsd:documentation>The XML attribute Name or the attribute name for providing additional information.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:attribute>
+                                <xsd:attribute name="Value"
+                                    type="yfctype:CLOB" use="optional">
+                                    <xsd:annotation>
+                                    <xsd:documentation>The value of the attribute when the error occured.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:attribute>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="Error">
+                            <xsd:annotation yfc:tableName="YFS_REPROCESS_ERROR">
+                                <xsd:documentation>This table stores infomation about the interop reprocessable errors.  When a service is configured to reprocess errors, the IntegrationServer populates this table with the appropriate error message and the input XML. This information is displayed in the exception console and the user can correct the XML and reprocess the error.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element maxOccurs="unbounded"
+                                    minOccurs="0" name="Attribute">
+                                    <xsd:annotation yfc:tableName="YFS_ATTRIBUTE">
+                                    <xsd:documentation>This table stores attribute definitions. Attributes represent characteristics of entities and can be assigned to an attribute group.</xsd:documentation>
+                                    </xsd:annotation>
+                                    <xsd:complexType>
+                                    <xsd:attribute name="Name"
+                                    type="yfctype:CLOB" use="optional"/>
+                                    <xsd:attribute name="Value"
+                                    type="yfctype:CLOB" use="optional"/>
+                                    </xsd:complexType>
+                                    </xsd:element>
+                                    <xsd:element maxOccurs="1"
+                                    minOccurs="0" name="Stack">
+                                    <xsd:complexType>
+                                    <xsd:simpleContent>
+                                    <xsd:extension base="xsd:string"/>
+                                    </xsd:simpleContent>
+                                    </xsd:complexType>
+                                    </xsd:element>
+                                </xsd:sequence>
+                                <xsd:attribute name="ErrorCode"
+                                    type="yfctype:ErrorCode-128" use="optional">
+                                    <xsd:annotation
+                                    yfc:columnName="ERRORCODE" yfc:tableName="YFS_REPROCESS_ERROR">
+                                    <xsd:documentation>The error code of the exception.</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:attribute>
+                                <xsd:attribute name="ErrorDescription"
+                                    type="yfctype:CLOB" use="optional"/>
+                                <xsd:attribute
+                                    name="ErrorRelatedMoreInfo"
+                                    type="yfctype:CLOB" use="optional"/>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element maxOccurs="1" minOccurs="0" name="Stack">
+                            <xsd:annotation>
+                                <xsd:documentation>Stack trace of this error or exception as text node under this element.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:complexType>
+                                <xsd:simpleContent>
+                                    <xsd:extension base="xsd:string"/>
+                                </xsd:simpleContent>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                    <xsd:attribute name="ErrorCode" type="yfctype:CLOB" use="optional">
+                        <xsd:annotation>
+                            <xsd:documentation>Link to YFS_ERROR_CODE table.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="ErrorDescription"
+                        type="yfctype:CLOB" use="optional">
+                        <xsd:annotation>
+                            <xsd:documentation>Description of the error.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="ErrorRelatedMoreInfo"
+                        type="yfctype:CLOB" use="optional">
+                        <xsd:annotation>
+                            <xsd:documentation>More information about the error added by the application.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

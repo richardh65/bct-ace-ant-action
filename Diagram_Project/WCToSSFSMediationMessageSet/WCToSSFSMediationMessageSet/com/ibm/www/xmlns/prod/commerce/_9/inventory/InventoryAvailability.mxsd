@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2008, 2009 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_inv" ecore:package="com.ibm.commerce.inventory.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:_inv="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>This file contains all type definitions that make up an InventoryAvailability.</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" schemaLocation="../foundation/CommonTypes.mxsd"/>
+
+	<xsd:element fixed="7.0.0.0" name="InventoryAvailabilityBODVersion" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>
+				The version of WebSphere Commerce when the InventoryAvailability noun was last changed. The value is set as the versionID attribute in
+				the corresponding BODs.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:simpleType name="InventoryStatusEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the predefined inventory status enumerations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Available"/>
+			<xsd:enumeration value="Backorderable"/>
+			<xsd:enumeration value="Unavailable"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="InventoryStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the inventory status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_inv:InventoryStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>	
+
+	<xsd:complexType name="InventoryAvailabilityType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of an InventoryAvailability.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="InventoryAvailabilityIdentifier" type="_wcf:InventoryAvailabilityIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The InventoryAvailability identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="InventoryStatus" type="_inv:InventoryStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The inventory status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AvailableQuantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The available quantity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AvailabilityDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The availability date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AvailabilityOffset" type="xsd:integer">
+				<xsd:annotation>
+					<xsd:documentation>The availability offset in seconds.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="LastUpdateDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The last update date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="FulfillmentCenterInventoryAvailability" type="_inv:FulfillmentCenterInventoryAvailabilityType">
+				<xsd:annotation>
+					<xsd:documentation>The inventory availability on a fulfillment center.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FulfillmentCenterInventoryAvailabilityType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a fulfillment center inventory availability.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="FulfillmentCenterIdentifier" type="_wcf:FulfillmentCenterIdentifierType">	
+				<xsd:annotation>
+					<xsd:documentation>The fulfillment center identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AvailableQuantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The available quantity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ExpectedInventory" type="_inv:ExpectedInventoryType">
+				<xsd:annotation>
+					<xsd:documentation>The expected inventory.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ExpectedInventoryType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of an expected inventory.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>			
+			<xsd:element maxOccurs="1" minOccurs="1" name="AvailableQuantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The available quantity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="AvailabilityDateTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The availability date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+	<xsd:element name="InventoryAvailability" type="_inv:InventoryAvailabilityType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the inventory availability.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+</xsd:schema>

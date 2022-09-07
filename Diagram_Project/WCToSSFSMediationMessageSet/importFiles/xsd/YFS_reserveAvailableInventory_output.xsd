@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.sterlingcommerce.com/documentation/YFS/reserveAvailableInventory/output"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:yfc="http://www.sterlingcommerce.com/documentation/YFS/reserveAvailableInventory/output" xmlns:yfctype="http://www.sterlingcommerce.com/documentation/types">
+    <xsd:annotation
+        yfc:fileName="YFS_reserveAvailableInventory_output.xsd" yfc:rootElement="PromiseHeader">
+        <xsd:appinfo source="yfc:structure">
+            <PromiseHeader hasAttributes="Y">
+                <PromiseLines hasAttributes="Y">
+                    <PromiseLine hasAttributes="Y">
+                        <Reservations hasAttributes="Y">
+                            <Reservation hasAttributes="Y"/>
+                        </Reservations>
+                    </PromiseLine>
+                </PromiseLines>
+            </PromiseHeader>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:import
+        namespace="http://www.sterlingcommerce.com/documentation/types" schemaLocation="datatypes.xsd"/>
+    <xsd:element name="PromiseHeader" type="yfc:PromiseHeaderXSDType"/>
+    <xsd:complexType name="PromiseHeaderXSDType">
+        <xsd:all>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:PromiseLines"/>
+        </xsd:all>
+        <xsd:attribute name="AggregateSupplyOfNonRequestedTag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The <code>AggregateSupplyOfNonRequestedTag</code> flag indicates whether the system has aggregated the supplies that are returned by the API. If the flag is set to Y, supplies are aggregated irrespective of the tag information and displayed in the output XML. If the flag is set to N, supplies are returned in the output XML with the tag information.			
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="yfctype:Flag">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="AllocationRuleID" type="yfctype:ID-10" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				An enterprise can configure multiple allocation rule sets with different document types.
+				If an <code>AllocationRuleID</code> is  passed, the  allocation rule set is associated with the <code>AllocationRuleID</code> is used to select <code>Option</code>. 
+				<Validation>
+                            <Condition>The <code>AllocationRuleID</code> passed must be valid for both the Enterprise's rule set and document type of the order.
+					</Condition>
+                            <Error
+                                Description="Invalid Allocation Rule Id." ErrorCode="YFS10309"/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="CarrierServiceCode" type="yfctype:Text-40" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Carrier service code.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="CheckCapacity" type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+				Indicates if capacity check of resource pool is required.
+				<div>
+                        <br/>Default: <b>
+                            <code>Y</code>
+                        </b>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b>Y or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="CheckInventory" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Indicate if inventory should to be checked.
+				<br/>Default: <b>
+                            <code>Y</code>
+                        </b>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b>Y or <b>
+                            <code>N</code>
+                        </b>
+                        <br/>If  <b>
+                            <code>Y</code>
+                        </b>, either the <code>DistributionRuleId</code> passed or the organization's default <code>DistributionRuleId</code> is used to obtain a distribution rule for supply and demand filtering for the availability calculations.
+				<br/>If  <b>
+                            <code>N</code>
+                        </b>, either the <code>DistributionRuleId</code> passed or the organization's default <code>DistributionRuleId</code>  is used to obtain a distribution rule for inventory availability. No supply or demand is read. Distribution drives inventory availability calculations.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="yfctype:Flag">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="ConsiderCurrentSlot" type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The <code>ConsiderCurrentSlot</code> flag indicates that system should consider the available capacity of the current slots, which the current timestamp falls under.
+				<br/>Default: <b>
+                            <code>N</code>
+                        </b>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ConsiderSupplementalCapacity"
+            type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The <code>ConsiderSupplementalCapacity</code> flag indicates that supplemental capacity should also be considered when computing the availability of the resource pools which can serve the service lines.
+				<br/>If <code>ConsiderSupplementalCapacity</code> flag is not passed as <b>
+                            <code>Y</code>
+                        </b>, then the value of the <code>CanConsumeSupplementalCapacity</code> attribute of the customer (if provided) will be used.
+				<br/>Default: <b>
+                            <code>N</code>
+                        </b>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="CustomerID" type="yfctype:Text-24" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Indicates the Customer ID on which behalf inquiry is being made.  Customer preferences are used in capacity computations.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="DeliveryDateBased" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				A flag to determine if inventory options should be based on <code>DeliveryDate</code> or <code>ShipDate</code>. 
+				<br/>Default: <b>
+                            <code>N</code>
+                        </b>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b>Y or <b>
+                            <code>N</code>
+                        </b>
+                        <br/>If <code>DeliveryDateBased</code>
+                        <br/>is passed as <b>
+                            <code>y</code>
+                        </b>, base options on <code>DeliveryDate</code>.
+				<br/>If <code>DeliveryDateBased</code>
+                        <br/>is passed as <b>
+                            <code>N</code>
+                        </b>, base options on <code>ShipDate</code>.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="yfctype:Flag">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="DemandType" type="yfctype:Text-40" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Specifies a <code>DemandType</code> used in the inventory availability calculations.
+				<BR/>Default: OPEN_ORDER
+				<br/>Only valid <code>SupplyType</code>s that can be consumed against the <code>DemandType</code> value are considered in the inventory availability calculations.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="DependencyShippingRule"
+            type="yfctype:Text-2" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				If multiple lines are provided in the criteria, the value of the <code>DependencyShippingRule</code> indicates how the lines are dependent on each other. If the <code>DependencyShippingRule</code> is not passed, no dependency rule is applied to the lines.
+				<br/>Valid values: 
+				<br/>
+                        <b>
+                            <code>01</code>
+                        </b> - Ship together. This choice causes the resulting <code>Option</code>s to have inventory from the same <code>ShipNode</code>.
+				<br/>
+                        <b>
+                            <code>02</code>
+                        </b> - Deliver together. 
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="DistanceToConsider" type="yfctype:Distance" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Indicates radius within which nodes can be considered for final leg sourcing.  If distance between shipping node and ship to address is greater than this distance, node will not be used for sourcing.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="DistanceUOMToConsider"
+            type="yfctype:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Indicates radius unit of measure.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="DistributionRuleId"
+            type="yfctype:DistributionRuleId" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				An ID that identifies an distribution rule, which can be used in inventory processing.
+				<BR/>If the <code>DistributionRuleId</code> is passed, supplies and demands are read by applying the associated distribution rule filter.
+			    <BR/>If the <code>DistributionRuleId</code> is not passed, the <code>Organization</code>'s default <code>DistributionRuleId</code> is used. 
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="EnterpriseCode" type="yfctype:OrgCode" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The <code>EnterpriseCode</code> on which behalf inquiry is being made.  If not passed <code>OrganizationCode</code> primary enterprise will be used.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="FillQuantity" type="yfctype:Quantity" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The minimum order line quantity that must be fulfilled in an order release before it is shipped
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="FulfillmentType" type="yfctype:ID-40" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Depicts the method of fulfilling the order line during scheduling. This field can be matched with the corresponding field in YFS_Sourcing_Rule_Hdr table and appropriate sourcing rule can be selected. 
+			</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="IgnoreMinNotificationTime"
+            type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Flag to ignore Minimum Notification time associated with Item and Shipnode.
+				<br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="IgnorePromised" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>If <code>IgnorePromised</code> is passed as <b>
+                            <code>Y</code>
+                        </b>, promised demands are not considered during inventory availability calculations.
+				<BR/>Default: <code>N</code>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="yfctype:Flag">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="IgnoreUnpromised" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>If <code>IgnoreUnpromised</code> is passed as <b>
+                            <code>Y</code>
+                        </b>, unpromised demands are not considered during inventory availability calculations.
+				<BR/>Default: <code>N</code>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="yfctype:Flag">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="IsPartialSubstitutionAllowed"
+            type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Flag to indicates whether inventory can be partially promised against substitute and partially against original item.  On the order this flag will always be N.
+				<br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="IsSubstitutionAllowed" type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Flag to indicate if substitution is allowed for Items.
+				<br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="LevelOfService" type="yfctype:ID-40" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+					Determines the level of service to be used for the lines if not passed on the lines.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="MaximumRecords" type="yfctype:String" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Positive integer used to determine the maximum number of possible solutions to find.
+				<BR/>Default: <b>
+                            <code>1</code>
+                        </b>
+                        <Validation>
+                            <Condition>Valid positive integer.
+					</Condition>
+                            <Error
+                                Description="java.lang.NumberFormatException" ErrorCode=""/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="OptimizationType"
+            type="yfctype:EnumOptimizationType" use="optional">
+            <xsd:annotation yfc:columnName="OPTIMIZATION_TYPE" yfc:tableName="YFS_ALLOCATION_RULE">
+                <xsd:documentation>
+                    <div>
+				This value determines the optimization rules to be applied to the scheduling process.
+				<br/>Default: <b>
+                            <code>01</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="OrganizationCode" type="yfctype:OrgCode" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+			Inventory is being checked on behalf of the organization specified by <code>OrganizationCode</code>.
+			<Validation>
+                            <Condition>Must be an existing <code>Organization</code>.
+				</Condition>
+                            <Error Description="Invalid organization." ErrorCode="YFS10395"/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ReceivingNode" type="yfctype:ShipNode" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>If the <code>AllocationRule</code>'s  <code>UseGeography</code> flag is set to <b>
+                            <code>Y</code>
+                        </b>, the <code>ReceivingNode</code>'s location is used to calculate the priority of the <code>Option</code>.
+				<Validation>
+                            <Condition>Must be an existing <code>ReceivingNode</code>.
+					</Condition>
+                            <Error Description="" ErrorCode=""/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ReqEndDate" type="yfctype:TimeStamp" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				End Date upto which to look inventory
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ReqStartDate" type="yfctype:TimeStamp" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Start Date from which to look inventory
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ReturnMultipleSrvcSlots" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Flag to indicate if Multiple Service Slots be returned by the api
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="yfctype:Flag">
+                    <xsd:enumeration value="Y"/>
+                    <xsd:enumeration value="N"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="ReturnSlotsWithUnavailableCapacity"
+            type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The <code>ReturnSlotsWithUnavailableCapacity</code> flag indicates that slots with unavailable capacity should be returned in the output XML.
+				<br/>Default: <b>
+                            <code>N</code>
+                        </b>
+                        <br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b> or <b>
+                            <code>N</code>
+                        </b>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="SCAC" type="yfctype:Text-40" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Carrier being used.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ScacAndServiceKey" type="yfctype:Key" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Scac And Service Key
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="Segment" type="yfctype:Segment" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Inventory segment
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="SegmentType" type="yfctype:SegmentType" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Inventory Segment type
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ShipNode" type="yfctype:ShipNode" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Shipping node from which the inventory should be found.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ShipTogetherInRatio" type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Indicates if promise lines should be shipped (Checked for availability) in ratio. If set to Y, KitQty under Promise Line should be passed. Decimal Ratios are not allowed.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="SourcingClassification"
+            type="yfctype:Text-24" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Used for sourcing rule determination.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="UseUnplannedInventory" type="yfctype:Flag" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				The <code>UseUnplannedInventory</code> flag indicates that system should assume that there is available unplanned inventory (inventory for which assumes to be available on current date + item's lead time) for any unavailable quantities.  If the <code>UseUnplannedInventory</code> flag is passed, it will override the <code>UseUnplannedInventory</code> attribute on the item in the catalog.  Otherwise, the <code>UseUnplannedInventory</code> attribute on the item will be used.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:element name="PromiseLines">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:PromiseLine"/>
+            </xsd:sequence>
+            <xsd:attribute name="TotalNumberOfRecords"
+                type="yfctype:Count" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Total number of promise lines records in the output.
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="PromiseLine">
+        <xsd:annotation yfc:tableName="YFS_ORDER_LINE">
+            <xsd:documentation>This table stores order line information, including item details and shipping information. Multiple lines can be created for a single order defined in the YFS_ORDER_HEADER table.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="1" ref="yfc:Reservations"/>
+            </xsd:all>
+            <xsd:attribute name="AutoReplacedByPreferredSubstitute"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+					Flag to indicates whether the item inventory is replaced with the Preferred Substitute. 
+					<br/>Valid Values: <b>
+                                <code>Y</code>
+                            </b> or <b>
+                                <code>N</code>
+                            </b>
+                        </div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="BundleFulfillmentMode"
+                type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="BUNDLE_FULFILLMENT_MODE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The way in which the bundle will be fulfilled. It can be Ship Independent (00), Ship Together (01), or Deliver Together (02) for Bundle Item. Default value is based on the catalog. If the item is not in the catalog, then Ship Together(01) is defaulted for Bundle Item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="BundleParentLineId"
+                type="yfctype:Text-128" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+			Unique identifier for the parent line.
+			</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="CarrierServiceCode"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="CARRIER_SERVICE_CODE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The carrier service code for this order line.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="DeliveryMethod" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="DELIVERY_METHOD" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The delivery method for the product line.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="DistributionRuleId"
+                type="yfctype:DistributionRuleId" use="optional">
+                <xsd:annotation yfc:columnName="DISTRIBUTION_RULE_ID" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>the identifier of the distribution group that is used to determine the ship node(s) that will ship the order line. If not proviFded, the seller organization's default distribution rule ID is used. If provided, it must be a valid ID for the Seller organization.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="FillQuantity" type="yfctype:Quantity" use="optional">
+                <xsd:annotation yfc:columnName="FILL_QUANTITY" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The minimum order line quantity that must be fulfilled in an order release before it is shipped.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="FulfillmentType" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="FULFILLMENT_TYPE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The method of fulfilling the order line during scheduling. This field can be matched with the corresponding field in the YFS_SOURCING_RULE_HDR table and the appropriate sourcing rule can be selected.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsBundleParent" type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Flag to indicate if the promise line is a bundle parent.
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsSubOnOrderAllowed"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Flag to indicate whether the item allows supersession during order schedule or not. 
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemGroupCode"
+                type="yfctype:ItemGroupCode" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_GROUP_CODE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>Item Group Code of the promise line.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemID" type="yfctype:ItemID" use="required">
+                <xsd:annotation yfc:columnName="ITEM_ID" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The identifier for the item. The ITEM_ID, UOM, and PRODUCT_CLASS form the unique inventory identifier for an order line. The ITEM_ID, UOM and ORGANIZATION_CODE form the unique item identifier for the Product Management module.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="KitQty" use="optional">
+                <xsd:annotation yfc:columnName="KIT_QTY" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>
+                        <div>
+							Indicates ratio between the promise lines. This should be passed when ShipTogetherInRatio under Promise is set to Y. Decimal Ratios are not allowed.
+						</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Quantity"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="LevelOfService"
+                type="yfctype:LevelOfService" use="optional">
+                <xsd:annotation yfc:columnName="LEVEL_OF_SERVICE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>Indicates the level of service required for this order line.  Default is Null.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LineId" type="yfctype:Text-128" use="optional">
+                <xsd:annotation yfc:isConditional="Y">
+                    <xsd:documentation>
+                        <div>
+					Unique identifier for the line. 
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="MinShipByDate" use="optional">
+                <xsd:annotation yfc:columnName="MIN_SHIP_BY_DATE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>
+                        <div>
+					The preferred minimum ship by date of the available supply that promise line can schedule against.  Available supply with ship by date earlier than the minimum ship by date will not be considered.
+					<br/>Default: None
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:TimeStamp"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="NewItemID" type="yfctype:Text-40" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+			The ItemId of the preferred substitute that is used in place of the original item.
+            </div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ProductClass"
+                type="yfctype:ProductClass" use="optional">
+                <xsd:annotation yfc:columnName="PRODUCT_CLASS" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The product class. This field is used as an inventory identifier.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ReceivingNode" type="yfctype:ShipNode" use="optional">
+                <xsd:annotation yfc:columnName="RECEIVING_NODE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The receiving node that is associated with this order line.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ReqEndDate" type="yfctype:TimeStamp" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+					Look for inventory between the <code>ReqStartDate</code> and the <code>ReqEndDate</code>.
+					<br/>Default: Current date
+					<Validation>
+                                <Condition>Must be a valid date.
+						</Condition>
+                                <Error
+                                    Description="Invalid Date Format." ErrorCode="YFC004"/>
+                            </Validation>
+                        </div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ReqStartDate" type="yfctype:TimeStamp" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+					Look for inventory between the <code>ReqStartDate</code> and the <code>ReqEndDate</code>.
+					<br/>Default: Current date
+					<Validation>
+                                <Condition>Must be a valid date.
+						</Condition>
+                                <Error
+                                    Description="Invalid Date Format." ErrorCode="YFC004"/>
+                            </Validation>
+                        </div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="RequiredQty" type="yfctype:Quantity" use="required">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+					Required Quantity
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SCAC" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="SCAC" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The carrier to be used for this line.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ScacAndServiceKey" type="yfctype:Key" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+					Scac And Service Key
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Segment" type="yfctype:Segment" use="optional">
+                <xsd:annotation yfc:columnName="SEGMENT" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The segment of the inventory.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SegmentType" type="yfctype:SegmentType" use="optional">
+                <xsd:annotation yfc:columnName="SEGMENT_TYPE" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The segment type of the inventory.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShipNode" type="yfctype:ShipNode" use="optional">
+                <xsd:annotation yfc:columnName="SHIPNODE_KEY" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The ship node that is associated with this order line. If provided, all releases will be made against this node.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TagNumber" type="yfctype:TagNumber" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+					Tag Number
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UnitOfMeasure" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_ORDER_LINE">
+                    <xsd:documentation>The unit of measure.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Reservations">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:Reservation"/>
+            </xsd:sequence>
+            <xsd:attribute name="AvailableQty" type="yfctype:Quantity" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Quantity available for the reservation.
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="QtyToBeReserved"
+                type="yfctype:Quantity" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Quantity that needs to be reserved for the line.
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TotalReservedQty"
+                type="yfctype:Quantity" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Total quantity that is reserved for the line.
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Reservation">
+        <xsd:annotation yfc:tableName="YFS_INVENTORY_RESERVATION">
+            <xsd:documentation>This table stores reservation information about an item.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ExpirationDate"
+                type="yfctype:TimeStamp" use="optional">
+                <xsd:annotation yfc:columnName="EXPIRATION_DATE" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>Expiration timestamp of the reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ExternalNode" type="yfctype:ShipNode" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>External ship node.</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsProcured" type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>Indicates if the reservation is from a procurement node.</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsSubstituted" type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+				Flag to indicate if reservation is made against substituted item. If this flag is <code>Y</code>, item details are for the substituted item.
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemID" type="yfctype:ItemID" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ID" yfc:tableName="YFS_INVENTORY_ITEM">
+                    <xsd:documentation>The identifer for this inventory item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="MergeNode" type="yfctype:ShipNode" use="optional">
+                <xsd:annotation yfc:columnName="MERGE_NODE" yfc:tableName="YFS_ORDER_LINE_SCHEDULE">
+                    <xsd:documentation>The node that is used as either forwarding or merge location.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_INVENTORY_ITEM">
+                    <xsd:documentation>The code of the organization associated with this inventory item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ProcureToNode" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="SHIPNODE_KEY" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>
+                        <div>
+				If the item is procured, then the reservation is made for the ShipNode. Inventory is replenished to the ProcureToNode. 
+				</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ProductAvailabilityDate" use="optional">
+                <xsd:annotation
+                    yfc:columnName="PRODUCT_AVAILABILITY_DATE" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>The product availability date of the supply against which the reservation is made.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Date"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="ProductClass"
+                type="yfctype:ProductClass" use="optional">
+                <xsd:annotation yfc:columnName="PRODUCT_CLASS" yfc:tableName="YFS_INVENTORY_ITEM">
+                    <xsd:documentation>The product class for this inventory item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="QuantityFromUnplannedInventory"
+                type="yfctype:QuantityPositiveAndNegative" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>Reserved quantity from unplanned inventory.</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ReservationID" type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="RESERVATION_ID" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>Identification of a reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ReservedQty" type="yfctype:Quantity" use="optional">
+                <xsd:annotation yfc:columnName="QUANTITY" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>Reserved quantity.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShipDate" type="yfctype:Date" use="optional">
+                <xsd:annotation yfc:columnName="SHIP_DATE" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>Ship date of the reservation.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShipNode" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="SHIPNODE_KEY" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                    <xsd:documentation>Node where the reservation is being made.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UnitOfMeasure" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_INVENTORY_ITEM">
+                    <xsd:documentation>The unit of measure for this inventory item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

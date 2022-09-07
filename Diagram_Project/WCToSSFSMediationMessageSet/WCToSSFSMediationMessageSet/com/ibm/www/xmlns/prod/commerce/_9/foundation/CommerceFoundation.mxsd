@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!--********************************************************************--><!--  Licensed Materials - Property of IBM                              --><!--                                                                    --><!--  WebSphere Commerce                                                --><!--                                                                    --><!--  (c) Copyright IBM Corp. 2006                                      --><!--                                                                    --><!--  US Government Users Restricted Rights - Use, duplication or       --><!--  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. --><!--                                                                    --><!--********************************************************************--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_wcf" ecore:package="com.ibm.commerce.foundation.common.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This XML schema file defines the elements and types used by foundation.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../../../../org/openapplications/www/oagis/_9/Meta.mxsd"/>
+
+	<xsd:complexType name="ApplicationAreaType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Type definition of the application area of a business object document.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="oa:ApplicationAreaType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:BusinessContext">
+						<xsd:annotation>
+							<xsd:documentation>The business context.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:element name="ApplicationArea" substitutionGroup="oa:ApplicationArea" type="_wcf:ApplicationAreaType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the application area of a business object document. A
+				substitution for the OAGIS application area.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="BusinessContextType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the business context.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ContextData" type="_wcf:ContextDataType">
+				<xsd:annotation>
+					<xsd:documentation>The context data.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="intent" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>The intent of the request.  The purpose of the intent is to give a hint to the server on the type of request this will be.  The server may need to setup the environment to execute the request depending on the intent of the request. Valid intents include: 
+				
+Store - For requests against a store.
+Authoring - For requests which are used to author content or preview the authored content.
+Administration - For requests which are meant for administration purposes.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:element name="BusinessContext" type="_wcf:BusinessContextType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the business context.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="ContextDataType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the context data.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>Name of the context data.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:element name="ContextData" type="_wcf:ContextDataType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of a context data.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:complexType name="MetadataPropertyType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a property that is part of the object's metadata.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>Name of the metadata property.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MetadataType">		
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="1" name="ObjectReference" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation>The XPath (relative to the data area) that refers to an object that is part of the list of nouns which
+							the metadata applies to.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Property" type="_wcf:MetadataPropertyType">
+						<xsd:annotation>
+							<xsd:documentation>Additional properties associated with objects that are returned as part of this response.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:attribute name="usage" type="xsd:string">
+					<xsd:annotation>
+							<xsd:documentation>The purpose of the metadata.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:element name="Metadata" type="_wcf:MetadataType"/>
+	
+	<xsd:complexType name="ResponseActionCriteriaType">
+		<xsd:complexContent>
+			<xsd:extension base="oa:ResponseActionCriteriaType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:Metadata">
+						<xsd:annotation>
+							<xsd:documentation>Additional properties associated with the response expression.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:element name="ResponseCriteria" substitutionGroup="oa:ResponseCriteria" type="_wcf:ResponseActionCriteriaType"/>
+
+</xsd:schema>

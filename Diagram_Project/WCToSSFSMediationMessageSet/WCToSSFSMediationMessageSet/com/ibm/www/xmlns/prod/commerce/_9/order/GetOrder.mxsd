@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!--********************************************************************--><!--  Licensed Materials - Property of IBM                              --><!--                                                                    --><!--  WebSphere Commerce                                                --><!--                                                                    --><!--  (c) Copyright IBM Corp. 2006                                      --><!--                                                                    --><!--  US Government Users Restricted Rights - Use, duplication or       --><!--  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. --><!--                                                                    --><!--********************************************************************--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_ord" ecore:package="com.ibm.commerce.order.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_ord="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This Order XML schema file defines the GetOrder BOD which is used to retrieve an order, or an order
+			list based on the XPath and access profile. By default, the following XPath and access profile are defined:
+			XPath: /Order[OrderStatus[(Status=)]] , {ibmord.isCurrentShoppingCart='true'}/Order, and /Order[OrderIdentifier[(UniqueID=)]].
+			access profile: OrderSummaryProfile, WC_OrderDetailsProfile,WC_UsableShippingInfoProfile, and WC_UsablePaymentInfoProfile.
+			You can add additional access profiles and XPath queries.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../../../../org/openapplications/www/oagis/_9/Meta.mxsd"/>
+
+	<xsd:include schemaLocation="Order.mxsd"/>
+
+	<xsd:element name="GetOrder" type="_ord:GetOrderType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the GetOrder BOD.
+			</xsd:documentation>
+		<xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/GetOrder;XSDElementDeclaration$MRObject" schemaObject="/0/GetOrder;XSDElementDeclaration"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="GetOrderType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Type definition of the GetOrder BOD.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="oa:BusinessObjectDocumentType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="_ord:GetOrderDataAreaType">
+						<xsd:annotation>
+							<xsd:documentation>Data area of the GetOrder BOD.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetOrderDataAreaType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the GetOrder BOD's data area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="oa:Get">
+				<xsd:annotation>
+					<xsd:documentation>The Get verb.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:Order">
+				<xsd:annotation>
+					<xsd:documentation>The Order noun.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

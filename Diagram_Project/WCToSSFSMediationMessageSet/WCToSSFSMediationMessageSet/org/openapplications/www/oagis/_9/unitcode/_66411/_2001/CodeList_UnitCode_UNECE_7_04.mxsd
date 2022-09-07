@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.openapplications.org/oagis/9/unitcode/66411:2001" xmlns:clm66411="http://www.openapplications.org/oagis/9/unitcode/66411:2001" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:simpleType name="UnitCodeContentType">
+                <xsd:restriction base="xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:complexType name="UnitCodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="clm66411:UnitCodeContentType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+</xsd:schema>

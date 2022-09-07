@@ -1,0 +1,2083 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2006, 2010 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_wcf" ecore:package="com.ibm.commerce.foundation.common.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This XML schema file defines the common elements and types shared by the
+			entire schema.
+		</xsd:documentation>
+	</xsd:annotation>
+
+<!-- 
+	Identifier types for member component
+-->
+
+	<xsd:complexType name="PersonIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a person identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the person.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="DistinguishedName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The distinguished name of the person.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OrganizationIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an organization identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the organization.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="DistinguishedName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The distinguished name of the organization.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ContactInfoExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an external identifier for contact information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="ContactInfoNickName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The nickname of the contact information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element maxOccurs="1" minOccurs="0" name="PersonIdentifier" type="_wcf:PersonIdentifierType">
+					<xsd:annotation>
+						<xsd:documentation>The person that owns the contact information.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>	
+				<xsd:element maxOccurs="1" minOccurs="0" name="OrganizationIdentifier" type="_wcf:OrganizationIdentifierType">
+					<xsd:annotation>
+						<xsd:documentation>The organization that owns the contact information.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>		
+			</xsd:choice>				
+		</xsd:sequence>			
+	</xsd:complexType>		
+	
+	<xsd:complexType name="ContactInfoIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an identifier for contact information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the contact information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:ContactInfoExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the contact information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="MemberGroupExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an external identifier for a member group.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the member group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store associated with the member group, for example
+					a customer segment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>	
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner of a member group.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>		
+	</xsd:complexType>	
+	
+	<xsd:complexType name="MemberGroupIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an identifier for a member group.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the member group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:MemberGroupExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the member group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="RoleIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a role identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the role.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the role.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<!-- 
+	Identifier types for catalog component
+-->
+
+	<xsd:complexType name="CatalogExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition for a unique external identifier for
+				the catalog.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifying name for the catalog.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store associated with the catalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner organization of the catalog.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID for a catalog.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the catalog.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CatalogGroupIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition for a catalog group identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID for a catalog group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogGroupExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						An external identifier for a catalog group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogGroupExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition of an unique external identifier for a
+				catalog group.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="GroupIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifying name for the catalog group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store associated with the catalog group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner organization of the catalog group.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogEntryIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition for a catalog entry identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID for a catalog entry.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:PartNumberIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						An external identifier for a catalog entry.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PartNumberIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="PartNumber" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The part number or SKU for a catalog entry.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store associated with the catalog entry.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner organization of the catalog entry.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="AttributeDictionaryIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition for an attribute dictionary identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID for an attribute dictionary. Reference to ATTRDICT.ATTRDICT_ID.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:AttributeDictionaryExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						An external identifier for an attribute	dictionary.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>			
+	</xsd:complexType>
+
+	<xsd:complexType name="AttributeDictionaryExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				An external identifier for an attribute dictionary.			
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>		
+			<xsd:element maxOccurs="1" minOccurs="1" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique string identifier of the attribute dictionary.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+				   	<xsd:documentation>The identifier of the store that owns this Attribute Dictionary.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>		
+	</xsd:complexType>
+
+	<xsd:complexType name="AttributeIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition for an catalog attribute identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The attribute ID. Reference to ATTR.ATTR_ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:AttributeExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The external identifier for this catalog attribute.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>	
+	
+	<xsd:complexType name="AttributeExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				An external identifier for an catalog attribute.		
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="AttributeDictionaryIdentifier" type="_wcf:AttributeDictionaryIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the attribute dictionary to which the attribute belongs.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="1" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique string identifier of the catalog attribute.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+				   	<xsd:documentation>The identifier of the store that owns this catalog attribute.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>	
+	</xsd:complexType>
+	
+	<xsd:complexType name="AttributeGroupIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition for an catalog attribute group identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unqiue identifier of the catalog attribute group. Reference to ATTRDICTGRP.ATTRDICTGRP_ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:AttributeGroupExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The external identifier for this catalog attribute group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>	
+
+	<xsd:complexType name="AttributeGroupExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				An external identifier for an catalog attribute group.			
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AttributeDictionaryIdentifier" type="_wcf:AttributeDictionaryIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the attribute dictionary to which the attribute group belongs. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="1" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique string identifier of the catalog attribute group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+                <xsd:annotation>
+                	<xsd:documentation>The identifier of the store that owns this catalog attribute group.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>				
+		</xsd:sequence>	
+	</xsd:complexType>
+
+<!-- 
+	Identifier types for contract component
+-->
+
+	<xsd:complexType name="ContractIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an contract identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The contract ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:ContractExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external contract ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ContractExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of an ExternalContractId.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the contract.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+		<xsd:attribute name="origin" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>The Origin of the contract.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>		
+		<xsd:attribute default="1" name="majorVersionNumber" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>The major version of the contract.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute default="0" name="minorVersionNumber" type="xsd:int">
+			<xsd:annotation>
+				<xsd:documentation>The minor version of the contract.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="ownerID" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>The owner of the contract.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+       
+        <xsd:complexType name="PolicyIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a policy identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The policy ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:PolicyExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external policy ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PolicyExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of an external policy ID.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the policy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="1" name="Type" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The type of the policy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store associated with the policy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="BusinessAccountIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a business account identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The business account ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:BusinessAccountExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external business account ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="BusinessAccountExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of an external business account ID.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of a business account.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>The owner of business account.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- 
+	Identifier types for order component
+-->
+
+	<xsd:complexType name="OrderIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique order ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalOrderID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external order ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CustomerOrderNumber" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The customer order number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OrderItemIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order item identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The order item ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalOrderItemID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external order item ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FulfillmentCenterIdentifierType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The fulfillment center unique ID.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The fulfillment center name.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ownerId" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The owner ID of the user that owns the fulfillment center.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="ShippingModeIdentifierType">
+	   <xsd:sequence>
+	   		<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode unique ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:ExternalShipModeIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>The external shipping mode identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExternalShipModeIdentifier">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreUniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The store ID with which the shipping mode is associated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShipModeCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Carrier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode carrier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- 
+	Identifier types for foundation
+-->
+		
+	<xsd:complexType name="StoreExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a store external identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="NameIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner organization of the store.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+	</xsd:complexType>
+
+<!-- 
+	Identifier types for store locator
+-->	
+	<xsd:complexType name="StoreIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a store identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of the store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:StoreExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="StoreLocationIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a store location identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of the store location.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the store location.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GeoNodeIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a geo node identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of the geo node.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the geo node.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<!-- 
+	Identifier types for store event
+-->	
+	<xsd:complexType name="StoreEventCategoryIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a event type identifier</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the event type</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of a event type</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="StoreEventIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a store event identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the store event.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of a store event.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="StoreEventBookingIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an event booking record.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the event booking record</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of a event booking record.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+<!-- 
+	Identifier types for marketing
+-->	
+
+	<xsd:complexType name="MarketingSpotExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique external identifier of an e-Marketing Spot.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of an e-Marketing Spot.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store associated with the e-Marketing Spot.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:complexType name="MarketingSpotIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>The unique identifier of an e-Marketing Spot.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of an e-Marketing Spot.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:MarketingSpotExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The unique external identifier of an e-Marketing Spot.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CampaignExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique external identifier of a campaign.</xsd:documentation>
+		</xsd:annotation>
+        <xsd:sequence>		
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The name of the campaign.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+                <xsd:annotation>
+                	<xsd:documentation>The identifier of the store in which the campaign is configured.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>				
+	</xsd:complexType>
+	
+	<xsd:complexType name="CampaignIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>The unique identifier of a marketing campaign.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of the campaign.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:CampaignExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The unique external identifier of a campaign.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ActivityExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique external identifier of an activity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>			
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The name of a marketing activity.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+                <xsd:annotation>
+                	<xsd:documentation>The identifier of the store associated with the marketing activity.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>						
+	</xsd:complexType>
+	 				
+	<xsd:complexType name="ActivityIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>The unique identifier of a marketing activity.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The unique ID of a marketing activity.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:ActivityExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The unique external identifier of a marketing activity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+		
+	<xsd:complexType name="MarketingContentExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique external identifier of marketing content.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the marketing content.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store which is associated with the marketing content.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="MarketingContentIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>The unique identifier of a marketing content.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of the marketing content.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:MarketingContentExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The unique external identifier of marketing content.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MarketingEmailTemplateExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique external identifier of a marketing e-mail template.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the marketing e-mail template.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+                <xsd:annotation>
+                	<xsd:documentation>The identifier of the store to which the marketing e-mail template is registered.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>				
+	</xsd:complexType>
+
+	<xsd:complexType name="MarketingEmailTemplateIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The unique identifier of a marketing e-mail template.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The unique ID of the marketing e-mail template.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:MarketingEmailTemplateExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The unique external identifier of a marketing
+						e-mail template.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- 
+	Identifiers for promotion 
+-->	
+	<xsd:complexType name="PromotionExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Promotion external identifier type definition.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The name of the promotion.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the store associated with the
+						promotion.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="version" type="xsd:integer" use="optional"/>
+		<xsd:attribute name="revision" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="PromotionIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Promotion identifier type definition.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The unique identifier of the promotion.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:PromotionExternalIdentifierType">
+                <xsd:annotation>
+                	<xsd:documentation>The external identifier of the promotion.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="RewardOptionIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Promotion reward option identifier type definition.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The unique identifier of this promotion reward option.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The external identifier of this promotion reward option.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+		<xsd:complexType name="PriceListIdentifierType">		
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a price list identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of price list.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:PriceListExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of a price list.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="PriceListExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The external identifier type of price list.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The name of the offer price.
+					</xsd:documentation>
+				</xsd:annotation>	
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the store own this PriceList.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>				
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner organization of the offer price.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>	
+
+<!-- 
+	Identifier types for the Attachment component
+-->
+
+	<xsd:complexType name="AttachmentExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition of a unique external identifier for an Attachment Target.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifying name for the Attachment Target.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the store that owns this attachment.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The owner of the Attachment Target.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>		
+	</xsd:complexType>
+	<xsd:complexType name="AttachmentIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID of the Attachment Target.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:AttachmentExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the Attachment Target.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ManagedDirectoryExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition of a unique external identifier for a Managed Directory.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifying name for the Managed Directory. If the full directory path 
+						is /A/B/C/D, then the Identifier is D.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ParentDirectoryPath" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The full parent directory path of the Managed Directory.  If the full directory path 
+						is /A/B/C/D, then the parent directory path is /A/B/C.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the store that owns this managed directory.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ManagedDirectoryIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID of the Managed Directory.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:ManagedDirectoryExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the Managed File Directory.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ManagedFileExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition of a unique external identifier for a Managed File.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="FileName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The file name of the Managed File. For example, if the full filepath is 
+						/A/B/C/D.gif, then the file name is D.gif.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="1" name="FilePath" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The file path of the Managed File. For example, if the full filepath is
+						/A/B/C/D.gif, then the file path is /A/B/C.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the store that owns this managed file.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ManagedFileIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID of the Managed File.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ExternalIdentifier" type="_wcf:ManagedFileExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the Managed File.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ContainerIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>
+				A type definition for a container identifier.
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The unique ID of the workspace.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:ContainerExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the workspace.
+					</xsd:documentation>
+				</xsd:annotation>	
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ContainerExternalIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>
+				A type definition for a container external identifier.
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the workspace.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Name for the container.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+        </xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					The member ID of the user that created the workspace.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="TaskGroupIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>
+				A type definition for a task group identifier.
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The unique ID of the task group.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:TaskGroupExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the task group.
+					</xsd:documentation>
+				</xsd:annotation>				
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="TaskGroupExternalIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>
+				A type definition for a task group external identifier.
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the task group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Name for the task group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ContainerIdentifier" type="_wcf:ContainerIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the workspace.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+        </xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="TaskIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>
+				A type definition for a task identifier.
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The unique ID of the task.
+					</xsd:documentation>
+				</xsd:annotation>			
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:TaskExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						External identifier for the task.
+					</xsd:documentation>
+				</xsd:annotation>					
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="TaskExternalIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation>
+				A type definition for a task external identifier.
+			</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the task.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TaskGroupIdentifier" type="_wcf:TaskGroupIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the task group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	<xsd:complexType name="PhysicalStoreIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of the physical store identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique ID of the physical store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the physical store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InventoryAvailabilityExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an external identifier for an InventoryAvailability.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="CatalogEntryIdentifier" type="_wcf:CatalogEntryIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The catalog entry identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element maxOccurs="1" minOccurs="0" name="OnlineStoreIdentifier" type="_wcf:StoreIdentifierType">
+					<xsd:annotation>
+						<xsd:documentation>The online store identifier.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element maxOccurs="1" minOccurs="0" name="PhysicalStoreIdentifier" type="_wcf:PhysicalStoreIdentifierType">
+					<xsd:annotation>
+						<xsd:documentation>The physical store identifier.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InventoryAvailabilityIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an InventoryAvailability identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The InventoryAvailability ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:InventoryAvailabilityExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the InventoryAvailability.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InventoryReceiptExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an external identifier for an inventory receipt.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="CatalogEntryIdentifier" type="_wcf:CatalogEntryIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The catalog entry identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+					<xsd:annotation>
+						<xsd:documentation>The store identifier.</xsd:documentation>
+					</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="FulfillmentCenterIdentifier" type="_wcf:FulfillmentCenterIdentifierType">	
+				<xsd:annotation>
+					<xsd:documentation>The fulfillment center identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="CreationTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Date and time the inventory record was created.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InventoryReceiptIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition of an inventory receipt identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The unique identifier of the inventory receipt.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:InventoryReceiptExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the inventory receipt.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ExpectedInventoryRecordExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an external identifier for an expected inventory record.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>			
+			<xsd:element maxOccurs="1" minOccurs="1" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+					<xsd:annotation>
+						<xsd:documentation>The store identifier.</xsd:documentation>
+					</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="VendorName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The vendor name.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="1" name="CreateDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Date and time the expected inventory record was created.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ExpectedInventoryRecordIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+				A type definition of an expected inventory receipt identifier.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The unique identifier of the expected inventory record.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:ExpectedInventoryRecordExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of the expected inventory record.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="QuoteIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an quote identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique quote ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalQuoteID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external quote ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GiftListExternalIdentifierType">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+    			<xsd:annotation>
+    				<xsd:documentation>The identifier that shoppers use to search for a gift list.</xsd:documentation>
+    			</xsd:annotation>
+      </xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+    			<xsd:annotation>
+    				<xsd:documentation>The store identifier indicating the store to which the gift list belongs.</xsd:documentation>
+    			</xsd:annotation>
+      </xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+	<xsd:complexType name="GiftListIdentifierType">
+        <xsd:annotation>
+        	<xsd:documentation/>
+        </xsd:annotation>
+        <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+                <xsd:annotation>
+                	<xsd:documentation>The internal unique ID of the gift list.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="GiftListExternalIdentifier" type="_wcf:GiftListExternalIdentifierType">
+                <xsd:annotation>
+                	<xsd:documentation>The external identifier to identify the gift list.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:complexType name="WalletExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a digital wallet's external identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>Identifier of the store in which the digital wallet is created.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Name of the digital wallet.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="ownerID" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Owner of the digital wallet.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>		
+	</xsd:complexType>
+
+	<xsd:complexType name="WalletIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a digital wallet's identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Internal identifier of the digital wallet.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:WalletExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>External identifier of the digital wallet.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<xsd:complexType name="WalletItemExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a wallet item's external identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="WalletIdentifier" type="_wcf:WalletIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>Identifier of the digital wallet to which the wallet item belongs.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="FolderIdentifier" type="_wcf:WalletItemIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>identifier of the wallet folder in which the wallet item is stored.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Name of the wallet item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Path" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Path of the wallet item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="WalletItemIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a wallet item's identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Internal identifier of the wallet item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:WalletItemExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>External identifier of the wallet item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PriceRuleIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:PriceRuleExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="PriceRuleExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FormulaIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique identifier of a formula.	</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:FormulaExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FormulaExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The unique external identifier of a formula.		</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PriceConstantIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:PriceConstantExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="PriceConstantExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation/>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogFilterIdentifierType">		
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a catalog filter identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of catalog filter.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogFilterExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of a catalog filter.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogFilterExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The external identifier type of catalog filter.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The name of the catalog filter.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the store owns this catalog filter.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogIdentifier" type="_wcf:CatalogIdentifierType"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	
+	<xsd:complexType name="CatalogGroupSelectionIdentifierType">		
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a catalog group selection identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of catalog group selection.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogGroupSelectionExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of catalog group selection.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogGroupSelectionExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The external identifier type of catalog group selection.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogFilterIdentifier" type="_wcf:CatalogFilterIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of catalog filter.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogGroupIdentifier" type="_wcf:CatalogGroupIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of selected catalog group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="CatalogEntrySelectionIdentifierType">		
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a catalog entry selection identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of catalog entry selection.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogEntrySelectionExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of catalog entry selection.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogEntrySelectionExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The external identifier type of catalog entry selection.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogFilterIdentifier" type="_wcf:CatalogFilterIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of catalog filter.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogEntryIdentifier" type="_wcf:CatalogEntryIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of selected catalog entry.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	<xsd:complexType name="CatalogFilterConditionGroupIdentifierType">		
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a condition group identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of condition group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogFilterConditionGroupExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of condition group.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogFilterConditionGroupExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The external identifier type of catalog group selection.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogGroupSelectionIdentifier" type="_wcf:CatalogGroupSelectionIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of catalog group selection.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the condition group.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+
+    <xsd:complexType name="CatalogFilterConditionIdentifierType">		
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a catalog filter condition identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of condition.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_wcf:CatalogFilterConditionExternalIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The external identifier of condition.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="CatalogFilterConditionExternalIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The external identifier type of catalog filter condition.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogFilterConditionGroupIdentifier" type="_wcf:CatalogFilterConditionGroupIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of catalog group selection.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="Identifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the condition.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+    
+</xsd:schema>

@@ -1,0 +1,90 @@
+ --=================================================================
+  --Licensed Materials - Property of IBM
+
+  --WebSphere Commerce
+
+  --(C) Copyright IBM Corp. 2011 All Rights Reserved.
+
+  --US Government Users Restricted Rights - Use, duplication or
+  --disclosure restricted by GSA ADP Schedule Contract with
+  --IBM Corp.
+ --=================================================================
+
+CREATE COMPUTE MODULE SSFSAPIsExport_sendShipmentDetails_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 CALL CopyMessageHeaders();
+		 CALL CopyEntireMessage();
+		
+	
+		DECLARE i INTEGER 1;
+		DECLARE count INTEGER;
+		
+		--SET OutputRoot.Properties.CodedCharSetId = 1208;
+ 		DECLARE vIdentitySourceType CHARACTER;
+ 		DECLARE vIdentitySourceToken CHARACTER;
+ 		DECLARE vIdentitySourcePassword CHARACTER;
+ 		
+ 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+	 	DECLARE wsse NAMESPACE 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
+	 
+		DECLARE ordNS NAMESPACE 'http://www.ibm.com/xmlns/prod/commerce/9/order';
+		DECLARE oagisNS NAMESPACE 'http://www.openapplications.org/oagis/9';
+		DECLARE wcfNS NAMESPACE 'http://www.ibm.com/xmlns/prod/commerce/9/foundation';
+		
+		
+	    SET OutputRoot.XMLNSC.ordNS:SyncOrder.(XMLNSC.NamespaceDecl)xmlns:ord = ordNS;
+	  	SET OutputRoot.XMLNSC.ordNS:SyncOrder.wcfNS:ApplicationArea.(XMLNSC.NamespaceDecl)xmlns:wcf = wcfNS;
+	  	SET OutputRoot.XMLNSC.ordNS:SyncOrder.ordNS:DataArea.oagisNS:Sync.(XMLNSC.NamespaceDecl)xmlns:oa = oagisNS;
+	
+		SET vIdentitySourceType = OutputRoot.Properties.IdentitySourceType;
+		SET vIdentitySourceToken = OutputRoot.Properties.IdentitySourceToken;
+		SET vIdentitySourcePassword = OutputRoot.Properties.IdentitySourcePassword;
+		
+		
+		
+		SET count = CARDINALITY(InputRoot.XMLNSC.ordNS:SyncOrder.ordNS:DataArea.ordNS:Order[]);
+		
+		WHILE i <= count DO 
+		  --use the default tooling-generated procedure for copying message headers 
+		  SET OutputRoot.XMLNSC = NULL; --clear XMLNSC
+		  SET OutputRoot.XMLNSC.ordNS:SyncOrder.wcfNS:ApplicationArea=InputRoot.XMLNSC.ordNS:SyncOrder.wcfNS:ApplicationArea;
+		  SET OutputRoot.XMLNSC.ordNS:SyncOrder.ordNS:DataArea.oagisNS:Sync=InputRoot.XMLNSC.ordNS:SyncOrder.ordNS:DataArea.oagisNS:Sync;
+		  SET OutputRoot.XMLNSC.ordNS:SyncOrder.ordNS:DataArea.ordNS:Order=InputRoot.XMLNSC.ordNS:SyncOrder.ordNS:DataArea.ordNS:Order[i];
+		  
+	
+			SET OutputRoot.SOAP.Header.wsse:Security.(SOAP.Attribute)soapenv:mustUnderstand = '1';
+		 	SET OutputRoot.SOAP.Header.wsse:Security.wsse:UsernameToken.wsse:Username = OutputRoot.Properties.IdentitySourceToken;
+		 	SET OutputRoot.SOAP.Header.wsse:Security.wsse:UsernameToken.wsse:Password = OutputRoot.Properties.IdentitySourcePassword;
+		 	SET OutputRoot.SOAP.Header.wsse:Security.wsse:UsernameToken.wsse:Password.(SOAP.Attribute)Type='http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText';
+			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
+		
+			PROPAGATE; 
+		  SET i = i+1; 
+		  
+		  --OutputRoot.Properties gets wiped out after Propagate. Need to reset.
+		  SET OutputRoot.Properties.IdentitySourceType = vIdentitySourceType;
+ 		  SET OutputRoot.Properties.IdentitySourceToken = vIdentitySourceToken;
+ 		  SET OutputRoot.Properties.IdentitySourcePassword = vIdentitySourcePassword; 
+ 		
+ 	
+		END WHILE; 
+		RETURN FALSE; -- prevent flow getting out normally.
+		
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I <= J DO --SOAP headers is being inserted after XMLNSC.
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+	
+END MODULE;

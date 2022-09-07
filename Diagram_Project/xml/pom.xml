@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"	>
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+  SET JAVA_HOME=C:\utils\Java\jdk1.8.0_102
+  SET M2_HOME=C:\utils\maven3\maven-3.3.1
+  SET PATH=C:\utils\maven3\maven-3.3.1\bin;%PATH%
+  -->
+  
+  <parent>
+    <groupId>org.sonarsource.sonarqube</groupId>
+    <artifactId>sonarqube</artifactId>
+    <version>6.3</version>    
+  </parent>
+  
+  <!--
+  SET JAVA_HOME=C:\utils\Java\jdk1.8.0_102
+  C:/"Program Files"/IBM/IIB/10.0.0.5/server/bin/mqsiprofile.cmd" 
+  -->
+  
+  <!-- docker stuff  
+  docker run -ti -=- network=root_sonarnet -v $(pwd):/root/src  newtmitch/sonar-scanner
+  docker run -ti -=-network=root_sonarnet -v $(pwd):/root/src  newtmitch/sonar-scanner  /bin/bash
+  -->
+  
+  
+  
+  <groupId>au.com.bettercodingtools.sonar.messagebrokersonarplugin</groupId>
+  <artifactId>MB-precise-sonarplugin</artifactId>
+
+
+  <packaging>sonar-plugin</packaging>  
+  <version>3.42-v6.7</version>
+
+  <name>Sonar Message Broker plugin</name>
+  <description>Enables analysis of Message Broker projects into Sonar</description>
+  
+  <organization>
+    <name>Richard Huegill</name>
+    <url>http://www.bettercodingtools.com</url>
+  </organization>
+
+  	<properties>
+		<license.owner>Richard Huegill</license.owner>
+		<sonar.version>6.0</sonar.version>
+		<sonar.pluginName>MB-Precise</sonar.pluginName>
+		<!-- sonar.pluginClass>au.com.englishlunch.messagebrokersonarplugin.MessageBrokerPlugin</sonar.pluginClass -->
+		<sonar.pluginClass>au.com.bettercodingtools.sonar.messagebrokersonarplugin.entry.MessageBrokerPlugin</sonar.pluginClass>
+	
+		<license.year>2017</license.year>
+		<!-- need to fix -->
+		<!-- license.name>Commercial</license.name -->
+		<license.mailto>info@bettercodingtools.com</license.mailto>
+
+		<sonar.sources>.</sonar.sources>	
+	    <sonar.jdbc.url>jdbc:postgresql://localhost/sonar_51_new</sonar.jdbc.url>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
+		<sonar.jdbc.driverClassName>org.postgresql.Driver</sonar.jdbc.driverClassName>	
+		<sonar.jdbc.schema>public</sonar.jdbc.schema>
+		<sonar.jdbc.username>sonar</sonar.jdbc.username>	
+		<sonar.jdbc.password>sonar</sonar.jdbc.password>
+	  
+	  <!-- sonar.language>mqmb</sonar.language -->	  
+	  <!-- sonar.sources>./ExampleMessageSplitter_Flows/mqsi/</sonar.sources -->
+	  <!-- sonar.sources>mqsi</sonar.sources -->
+
+	  	<downloadSources>true</downloadSources>
+  		<downloadJavadocs>true</downloadJavadocs>
+  		
+  		<JAVA_8_HOME>C:/utils/Java/jdk1.8.0_102</JAVA_8_HOME>
+
+  </properties>
+
+  
+  <dependencies>
+    <!--     
+    IMPORTANT : only dependencies with test scope can be added to plugins. 
+        -->
+
+    <!-- unit tests -->        
+    <!--  provided usually by sonar but velocity is conflicting during tests -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+           
+      <version>2.6</version>     
+    </dependency>
+
+                    
+    <dependency>
+	    <groupId>au.com.bettercodingtools.messagebrokertools</groupId>
+		<artifactId>mbcommon</artifactId>
+  		<version>1.2</version>
+	</dependency>
+	
+
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+		<scope>provided</scope>
+	</dependency>
+
+    
+    <!-- ============================================================== -->
+    
+    <!-- XML merging jars -->
+    <!-- EL4J core module. -->
+	<dependency>
+		<groupId>ch.elca.el4j.modules</groupId>
+		<artifactId>module-core</artifactId>
+		<version>3.1</version>
+		<exclusions>
+        	<exclusion>
+          		<groupId>org.slf4j</groupId>
+          		<artifactId>slf4j-log4j12</artifactId>
+        	</exclusion>
+        	<exclusion>
+          		<groupId>com.google.collections</groupId>
+          		<artifactId>google-collections</artifactId>
+        	</exclusion>        	
+      	</exclusions>
+	</dependency>
+
+	<!-- EL4J jmx support -->
+	<dependency>
+		<groupId>ch.elca.el4j.modules</groupId>
+		<artifactId>module-jmx</artifactId>
+		<version>3.1</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>ch.elca.el4j.modules</groupId>
+		<artifactId>module-xml_merge-common</artifactId>
+		<version>3.1</version>
+	</dependency>    
+	
+	<!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
+	<!-- force latest ?? -->
+	<dependency>
+    	<groupId>com.ibm.icu</groupId>
+    	<artifactId>icu4j</artifactId>
+    	<version>61.1</version>
+	</dependency>
+
+    <!-- ============================================================ -->
+    
+    
+    <!-- MQ -->
+    <dependency>
+    	<groupId>javax.jms</groupId>
+    	<artifactId>javax.jms-api</artifactId>
+    	<version>2.0.1</version>
+    	<!-- scope>provided</scope -->
+	</dependency>
+	
+    <dependency>
+		<groupId>javassist</groupId>
+  		<artifactId>javassist</artifactId>  		
+  		<version>3.12.1.GA</version>
+  		<!-- scope>provided</scope -->
+	</dependency>
+	
+    <!--  try the google one -->
+    <!-- 
+    <dependency>
+	    <groupId>org.jboss.forge.roaster</groupId>
+		<artifactId>roaster-api</artifactId>	
+		<version>2.19.0.Final</version>
+		<scope>provided</scope>
+	</dependency>
+	-->
+	<dependency>
+    	<groupId>com.google.code.javaparser</groupId>
+    	<artifactId>javaparser</artifactId>
+    	<version>1.0.11</version>
+    	<scope>provided</scope>
+	</dependency>		
+	
+    
+    <!--
+mvn install:install-file -DgroupId=ibm -DartifactId=com.ibm.mqjms -Dversion=6.0 -Dpackaging=jar -Dfile=C:\richard\projects\trunk_all\messagebrokersonarplugin\MQ\com.ibm.mqjms.jar 
+     -->
+     <dependency>
+    	<groupId>ibm</groupId>
+    	<artifactId>com.ibm.mqjms</artifactId>
+    	<version>6.0</version>
+    	<scope>compile</scope>
+	</dependency>
+    
+    <!-- ============================================================= -->
+	
+	<dependency>	
+		<groupId>org.sonarsource.sonarqube</groupId>
+		<version>6.0</version>
+		<artifactId>sonar-plugin-api</artifactId>
+		<scope>provided</scope>      
+	</dependency>
+	
+	<dependency>
+      <groupId>org.sonarsource.sslr-squid-bridge</groupId>
+      <artifactId>sslr-squid-bridge</artifactId>
+      <version>2.6.1</version>      
+      <exclusions>
+    	<exclusion>
+      		<groupId>org.codehaus.sonar</groupId>
+      		<artifactId>sonar-plugin-api</artifactId>
+    	</exclusion>    
+  	 </exclusions>
+    </dependency>
+    
+    <!--  dependency>
+      <groupId>org.sonarsource.sslr</groupId>
+      <artifactId>sslr-core</artifactId>      
+      <version>1.21</version>
+    </dependency -->
+    	
+    
+    
+    <dependency>
+    	<groupId>com.google.guava</groupId>
+    	<artifactId>guava</artifactId>
+    	<!--  version>10.0.1</version -->
+    	<version>19.0</version>
+  	</dependency>
+	
+	<!-- dependency>	
+		<groupId>org.codehaus.sonar</groupId>		
+		<version>5.1</version>
+		<artifactId>sonar-plugin-api</artifactId>
+		<scope>provided</scope>      
+	</dependency -->	
+	
+    <!-- dependency>	
+      <groupId>org.codehaus.sonar</groupId>	  
+      <artifactId>sonar-plugin-api</artifactId>      
+      <version>${sonar.version}</version>
+      <scope>provided</scope>      
+    </dependency -->
+	
+    <!-- dependency>
+      
+		<groupId>org.codehaus.sonar</groupId>
+		<artifactId>sonar-batch</artifactId>
+		<version>${sonar.version}</version>
+		<scope>test</scope>		
+	</dependency -->
+    <dependency>
+      <groupId>org.codehaus.sonar.plugins</groupId>
+      <artifactId>sonar-pmd-plugin</artifactId>
+      <type>sonar-plugin</type>
+      <!-- version>${sonar.version}</version -->
+      <version>3.3.2</version>
+      <scope>provided</scope>
+    </dependency>    
+	
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.7</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- new ish -->
+    <dependency>
+		<groupId>org.mockito</groupId>
+      	<artifactId>mockito-core</artifactId>
+      	<version>1.10.19</version>
+      	<scope>test</scope>
+    </dependency>
+    
+    
+    <dependency>
+		<groupId>xalan</groupId>
+		<artifactId>xalan</artifactId>
+		<version>2.7.1</version>
+	</dependency>
+	
+	<dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+    
+	<!-- dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>1.3.2</version>
+	</dependency -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>1.7.5</version>
+		<!-- scope>provided</scope -->
+	</dependency>
+	
+	<dependency>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+		<version>1.3.171</version>
+		<!-- scope>test</scope -->
+		<!-- scope>provided</scope -->
+	</dependency>
+	
+	<dependency>
+		<groupId>postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>9.1-901-1.jdbc4</version>
+		<!-- scope>provided</scope -->
+	</dependency>
+	
+	<!-- dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc7</artifactId>
+		<version>12.1.0.1</version>
+	</dependency -->
+	
+	<dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc6</artifactId>
+		<version>11.1.0.7.0</version>
+	</dependency>
+		
+	                                   
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr-runtime</artifactId>
+      <version>3.3</version>
+    </dependency>
+    
+    <dependency>
+		<groupId>org.apache.velocity</groupId>
+		<artifactId>velocity</artifactId>
+		<version>1.7</version>		
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.velocity</groupId>
+		<artifactId>velocity-tools</artifactId>
+		<version>2.0</version>
+	</dependency>
+	
+    <!-- dependency>
+		<groupId>org.springframework.ws</groupId>
+		<artifactId>spring-xml</artifactId>
+		<version>2.1.4.RELEASE</version>
+	</dependency -->
+	
+	<!--  ant tasks -->	
+	<dependency>
+		<groupId>org.apache.ant</groupId>
+		<artifactId>ant</artifactId>
+		<version>1.9.6</version>
+		<scope>provided</scope>
+	</dependency>
+        
+    <dependency>
+      <groupId>org.mozilla</groupId>
+      <artifactId>juniversalchardet</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+            
+    
+    <dependency>
+      <groupId>pmd</groupId>
+      <artifactId>pmd-mini</artifactId>
+      <version>4.2.5</version>
+      <exclusions>
+        <exclusion>
+          <groupId>jaxen</groupId>
+          <artifactId>jaxen</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>ant</groupId>
+          <artifactId>ant</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+        </exclusion>
+      </exclusions>
+      <!-- scope>provided</scope -->
+    </dependency>
+    
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.4.7</version>      
+      <!-- version>1.4.7</version -->
+      <!-- matches to what SONAR provides -->
+      <!-- mark as provided ?? -->
+      <!-- version>1.3.1</version -->      
+      <scope>compile</scope>      
+    </dependency>
+  
+    <!--  force inclusion -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstreamX</artifactId>
+      <version>1.4.7</version>      
+      <!-- version>1.4.7</version -->
+      <!-- matches to what SONAR provides -->
+      <!-- mark as provided ?? -->
+      <!-- version>1.3.1</version -->      
+      <!-- scope>compile</scope -->      
+    </dependency>
+    
+    
+    <!-- jpeg generation -->
+    <!-- dependency>
+    	<groupId>batik</groupId>
+		<artifactId>batik</artifactId>
+		<version>1.5</version>
+	</dependency -->
+	
+	<dependency>
+		<groupId>org.apache.xmlgraphics</groupId>
+		<artifactId>batik-codec</artifactId>
+		<version>1.7</version>
+		<exclusions>
+			<exclusion>
+				<groupId>org.apache.xmlgraphics</groupId>
+                <artifactId>batik-bridge</artifactId>
+			</exclusion>
+			
+			<exclusion>
+				<groupId>org.apache.xmlgraphics</groupId>
+                <artifactId>batik-awt-util</artifactId>
+			</exclusion>
+		</exclusions>				
+	</dependency>
+	
+	<dependency>
+		<groupId>org.apache.xmlgraphics</groupId>		
+		<version>1.7</version>
+		<artifactId>batik-extension</artifactId>
+	</dependency>		
+	
+	<dependency>
+		<groupId>org.apache.xmlgraphics</groupId>
+		<artifactId>batik-transcoder</artifactId>
+		<version>1.7</version>
+		<scope>compile</scope>
+        <exclusions>
+            <exclusion>
+                <artifactId>fop</artifactId>
+                <groupId>fop</groupId>
+            </exclusion>
+            <exclusion>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+			</exclusion>
+        </exclusions>
+	</dependency>	
+		 
+	
+	<!--
+	<dependency>
+	 	<groupId>crimson</groupId>
+		<artifactId>crimson</artifactId>
+		<version>1.1.3</version>
+	</dependency>
+	-->
+	
+	<dependency>
+		<groupId>org.apache.xmlgraphics</groupId>
+		<artifactId>xmlgraphics-commons</artifactId>
+		<version>1.5</version>
+	</dependency>
+	
+	
+	<!-- 
+    <dependency>
+		<groupId>batik</groupId>
+		<artifactId>batik-transcoder</artifactId>
+		<version>1.6-1</version>
+		<scope>compile</scope>
+        <exclusions>
+            <exclusion>
+                <artifactId>fop</artifactId>
+                <groupId>fop</groupId>
+            </exclusion>
+            <exclusion>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+			</exclusion>
+        </exclusions>
+	</dependency>
+	
+    <dependency>
+		<groupId>org.apache.xmlgraphics</groupId>
+		<artifactId>batik-codec</artifactId>
+        <version>1.6-1</version>
+        <exclusions>
+        	<exclusion>
+            	<groupId>org.apache.xmlgraphics</groupId>
+                <artifactId>batik-bridge</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	-->
+    
+    
+    <!-- version 7 -->
+    <!-- 
+<dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.7</version>
+  </dependency>
+
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.7</version>
+  </dependency>
+
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.7.7</version>
+  </dependency>
+
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <version>1.7.7</version>	  
+  </dependency>
+
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.7.7</version>
+  </dependency>
+  	-->
+  	
+  	<dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-ant-tasks</artifactId>
+      <version>2.1.3</version>
+  </dependency>
+  
+  
+  <!-- needed for 6.7 ?? -->
+  <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+      <scope>provided</scope>
+  </dependency>
+  	
+    
+    <!-- =============== -->
+    
+    
+  </dependencies>
+  
+  <build>
+	<pluginManagement>
+	  	<plugins>  
+	  		<plugin> 
+		         <groupId>org.apache.maven.plugins</groupId> 
+		         <artifactId>maven-eclipse-plugin</artifactId> 
+		         <version>2.9</version>
+		         <configuration>
+          			<downloadSources>true</downloadSources>
+          			<downloadJavadocs>true</downloadJavadocs>
+        	</configuration> 
+		    </plugin>		    		      
+		</plugins>
+  	</pluginManagement>
+    <plugins>    
+    	<!-- plugin>
+        	<groupId>com.mycila.maven-license-plugin</groupId>					 
+            <artifactId>maven-license-plugin</artifactId>
+			<version>2.11</version>
+            <configuration>
+	        	<header>src/license/header.txt</header>
+    	    </configuration>
+        </plugin -->
+		
+		<plugin>
+        	<groupId>com.mycila</groupId>					 
+            <artifactId>license-maven-plugin</artifactId>
+			<version>2.11</version>
+            <configuration>
+	        	<header>src/license/header.txt</header>
+    	    </configuration>
+        </plugin>
+				
+		
+		<!-- plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>animal-sniffer-maven-plugin</artifactId>
+			<version>1.9</version>
+			<configuration>
+				<signature>
+					<groupId>org.codehaus.mojo.signature</groupId>
+					<artifactId>java18</artifactId>
+					<version>1.0</version>
+				</signature>
+			</configuration>
+		</plugin -->
+                
+      	<plugin>
+        	<groupId>org.codehaus.mojo</groupId>
+        	<artifactId>minijar-maven-plugin</artifactId>        	
+        	<version>1.0-alpha-3</version>
+      	</plugin>
+      			
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<!-- version>2.3.2</version -->
+			<version>2.0.2</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>					
+				<executable>${JAVA_8_HOME}/bin/javac</executable>
+			</configuration>
+        </plugin>
+        
+
+        <!-- make a sample report -->
+        <!-- 
+        <plugin>
+  			<groupId>org.jacoco</groupId>
+  			<artifactId>jacoco-maven-plugin</artifactId>
+  			<version>0.7.5.201505241946</version>
+  			
+  			<executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals><goal>prepare-agent</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals><goal>report</goal></goals>
+                    </execution>
+                </executions>
+		</plugin>
+		-->
+        	
+        
+        <!--need to sort this out again -->  
+        <!--      
+        <plugin>
+            <groupId>com.pyx4me</groupId>
+            <artifactId>proguard-maven-plugin</artifactId>            
+            <version>2.0.4</version>
+            <executions>
+               <execution>
+                   <phase>package</phase>
+                   <goals><goal>proguard</goal></goals>
+               </execution>
+            </executions>
+            <configuration>
+                <options>
+                    <option>-keepattributes *Annotation*,SourceFile,LineNumberTable</option>
+                    <option>-dump class_files.txt</option>                    
+                    <option>-printmapping file_mapping.txt</option>
+                    <option>-dontskipnonpubliclibraryclasses</option>                    
+                    <option>-printseeds seeds.txt</option>
+                    <option>-keep class au.com.bettercodingtools.sonar.messagebrokersonarplugin.entry.** {   public protected private *; }</option>                    
+                </options>
+                <libs>
+                    <lib>${java.home}/lib/rt.jar</lib>
+                </libs>
+            </configuration>
+		</plugin>
+		-->
+		<!--
+		<option>-keep class oracle.** {   public protected private *; }</option>
+		-dump proguard/class_files.txt 
+		-printseeds proguard/seeds.txt 
+		-printusage proguard/unused.txt 
+		-printmapping proguard/mapping.txt 
+		-->
+		                 
+      	<!-- plugin>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-packaging-maven-plugin</artifactId>			
+			<version>1.9</version>
+			<extensions>true</extensions>
+			<configuration>      		
+				<pluginClass>${sonar.pluginClass}</pluginClass>
+				<pluginName>MB-Precise</pluginName>
+			</configuration>
+		</plugin -->
+				
+		<plugin>
+			<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+			<artifactId>sonar-packaging-maven-plugin</artifactId>
+			<!-- version>1.16</version -->
+			<version>1.17</version>
+			<extensions>true</extensions>
+			<configuration>
+				<!-- the entry-point class that extends org.sonar.api.SonarPlugin -->
+				<pluginClass>${sonar.pluginClass}</pluginClass>
+				<pluginName>MB-Precise</pluginName>
+          
+				<!-- advanced properties can be set here. See paragraph "Advanced Build Properties". -->
+			</configuration>
+		</plugin>
+      	
+      
+    </plugins>
+  </build>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <rulesets>
+            <!-- Two rule sets that come bundled with PMD -->
+            <ruleset>/rulesets/braces.xml</ruleset>
+            <ruleset>/rulesets/naming.xml</ruleset>
+            <!-- Custom complexity -->
+            <ruleset>/rulesets/codeSize.xml</ruleset>            
+            
+          </rulesets>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+  <!--
+			Repository for EL4J modules.
+			Needed for the intial download of this pom's parent pom.
+	-->
+  <!--	
+  <repositories>
+		
+        <repository>
+            <id>collectionspace-remote-repos</id>
+            <name>collectionspace-remote-repos</name>
+            <url>http://source.collectionspace.org:8081/artifactory/remote-repos</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>            
+        </repository>
+		<repository>
+            <id>libs-release-local</id>
+            <name>libs-release-local</name>
+            <url>http://source.collectionspace.org:8081/artifactory/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+		<repository>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<id>el4jReleaseRepositoryExternal</id>
+		<name>External release repository of the EL4J project</name>
+		<url>http://public-el4.elca-services.ch/el4j/maven2repository</url>
+	</repository>
+	</repositories>
+	-->  
+  
+</project>

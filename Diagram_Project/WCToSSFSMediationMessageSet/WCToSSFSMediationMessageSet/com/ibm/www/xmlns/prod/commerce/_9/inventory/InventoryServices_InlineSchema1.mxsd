@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:_inv="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			
+			<xsd:include schemaLocation="GetInventoryAvailability.mxsd"/>
+			<xsd:include schemaLocation="ShowInventoryAvailability.mxsd"/>
+			<xsd:include schemaLocation="ChangeInventoryAvailability.mxsd"/>
+			<xsd:include schemaLocation="RespondInventoryAvailability.mxsd"/>
+			<xsd:include schemaLocation="SyncInventoryAvailability.mxsd"/>
+			<xsd:include schemaLocation="ProcessInventoryRequirement.mxsd"/>
+			<xsd:include schemaLocation="AcknowledgeInventoryRequirement.mxsd"/>
+		</xsd:schema>

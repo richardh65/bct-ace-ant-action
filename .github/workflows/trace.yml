@@ -13,16 +13,24 @@ jobs:
     name: Run Unit tests under ACE
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
+      - name: Check out code repo
         uses: actions/checkout@v2
+        path: code
+
+      - name: checkout wiki
+        uses: actions/checkout@v3
+        with:
+          repository: ${{github.repository}}.wiki
+          path: wiki        
+
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
           image: richardh65/bct-tools:v4
           options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
-          run: |
+          run: |          
             pwd
-            whoami
+            cd code
             ls -la /opt/ibm/ace-12/server/bin/mqsipackagebar
             . /opt/ibm/ace-12/server/bin/mqsiprofile            
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml            
@@ -30,12 +38,39 @@ jobs:
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties
             ls -la 
             cat BCT_report.sarif
+            
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: BCT_report.sarif
+
+      - name: Generate diagrams
+        uses: addnab/docker-run-action@v3
+        with:
+          image: richardh65/bct-tools:v4
+          options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
+          run: |
+            pwd
+            ls -la
+            cd code
+            /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-diagram.properties
+            ls -la Github_diagrams
+
+      - name: wiki changes
+        run: |
+          cd wiki
+          mkdir diagrams
+          cp ../code/Github_diagrams/*.* Github_diagrams 
+          git config user.name testuser
+          git config user.email tetsuser@bct.com
+          git add Github_diagrams | true
+          git add -u
+          git commit -m "Updating diagrams"
+          git push
+
+
 
 
 

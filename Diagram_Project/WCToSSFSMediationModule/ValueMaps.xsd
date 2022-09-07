@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2011 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+-->
+
+<schema
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:mm="http://WCToSSFSMediationModule"
+	targetNamespace="http://WCToSSFSMediationModule"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+
+	<element name="ValueMaps" type="mm:ValueMapsType" />
+
+	<complexType name="ValueMapsType">
+		<sequence>
+			<element name="Map" type="mm:ValueMapType" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ValueMapType">
+		<sequence>
+			<element name="Entry" type="mm:ValueMapEntryType" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="name" type="string" use="required" />
+	</complexType>
+
+	<complexType name="ValueMapEntryType">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="key" type="string" use="required" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+</schema>

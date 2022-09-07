@@ -1,0 +1,1958 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2006, 2010 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--><!-- 
+	License information for this file is provided in the accompanying IBM_WebSphere_Commerce_XSD_LICENSE.txt file.
+	For support, more information, or to report implementation bugs, 
+	please contact the IBM WebSphere Commerce help: wchelp@ca.ibm.com 
+	
+	** Revision:  IBM_WebSphere_Commerce 1.0 **
+	
+	Copyright IBM (c) 2005-2006, All Rights Reserved
+	
+--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_ord" ecore:package="com.ibm.commerce.order.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_ord="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>This order XML schema file defines the Order noun.</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" schemaLocation="../foundation/CommonTypes.mxsd"/>
+    
+	<xsd:element name="Order" type="_ord:OrderType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the Order noun.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element fixed="7.0.0.0" name="OrderBODVersion" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>
+				The version of WebSphere Commerce when the noun was last changed.  
+				The value is set as the versionID attribute in the corresponding BODs.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="OrderType">
+
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderIdentifier" type="_wcf:OrderIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The order identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+			    <xsd:annotation>
+					<xsd:documentation>The store identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:Channel">
+			   <xsd:annotation>
+					<xsd:documentation>The channel.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" name="QuoteID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						This element is deprecated. The quote ID, from
+						which the order is created.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="QuoteIdentifier" type="_wcf:QuoteIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The quote identifier, from which the order is created.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="BuyerPONumber" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The buyer PO number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrganizationIdentifier" type="_wcf:OrganizationIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>Identifier of the buyer organization.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BuyerIdentifier" type="_wcf:PersonIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>Identifier of the customer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:CouponCode">
+				<xsd:annotation>
+					<xsd:documentation>The coupon codes.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:PromotionCode">
+				<xsd:annotation>
+					<xsd:documentation>The promotion codes entered.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:RewardOption">
+				<xsd:annotation>
+					<xsd:documentation>The promotion reward options.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="AdjustmentRequirement" type="_ord:AdjustmentRequirementType">
+				<xsd:annotation>
+					<xsd:documentation>Order level adjustment requirements.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderAmount">
+				<xsd:annotation>
+					<xsd:documentation>Total amount of the order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:UsableShippingAddress">
+				<xsd:annotation>
+					<xsd:documentation>Usable Shipping addresses for the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderPaymentInfo">
+				<xsd:annotation>
+					<xsd:documentation>Payment information of the order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:UsablePaymentInformation">
+				<xsd:annotation>
+					<xsd:documentation>The usable payment methods information for this order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderStatus">
+				<xsd:annotation>
+					<xsd:documentation>Status of the order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderEditor">
+				<xsd:annotation>
+					<xsd:documentation>Identifier of the CSR who is editing the order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BLockInfo" type="_ord:OrderBLockInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The block information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderDescription" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Description of the order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Comments" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Comments made by the customer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:CSRComments">
+				<xsd:annotation>
+					<xsd:documentation>Comments made by customer service representatives.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="LastUpdateDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Time the order was last updated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PlacedDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Time the order was placed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+	
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:OrderItem">
+				<xsd:annotation>
+					<xsd:documentation>The order items.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderNotificationInfo">
+				<xsd:annotation>
+					<xsd:documentation>Order notification info.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+                    	<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderShippingInfo">
+				<xsd:annotation>
+					<xsd:documentation>Order shipping info.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderScheduleInfo" type="_ord:OrderScheduleInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The information required if it's to be scheduled for the future.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderGiftInfo" type="_ord:GiftItemInfoType">
+				<xsd:annotation>
+					<xsd:documentation>Order Gift Info.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderTypeCode" type="_ord:OrderTypeCodeType">
+			</xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentInfo" type="_ord:ParentInfoType">
+			</xsd:element> 
+			<xsd:element maxOccurs="1" minOccurs="0" name="SubscriptionInfo" type="_wcf:SubscriptionInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The subscription information</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="orderVersion" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Order Version.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="shipAsComplete" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Whether the order should be shipped as complete.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:element name="CouponCode" type="_ord:CouponCodeType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of coupon codes.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CouponCodeType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Code" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The code of coupon.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="PromotionCode" type="_ord:PromotionCodeType">
+	        <xsd:annotation>
+					<xsd:documentation>The element definition of the promotion code.</xsd:documentation>
+				</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PromotionCodeType">
+		<xsd:annotation>
+			<xsd:documentation>The promotion codes entered.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Code" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The code of promotion.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+
+	</xsd:complexType>
+	
+    <xsd:element name="ChannelIdentifer" type="_ord:ChannelIdentiferType">
+    <xsd:annotation>
+					<xsd:documentation>The element definition of the channel identifier.</xsd:documentation>
+				</xsd:annotation>
+    </xsd:element>
+    
+	<xsd:complexType name="ChannelIdentiferType">
+		<xsd:sequence>
+	    	<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The business channel ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="ChannelName" type="_ord:ChannelNameType">
+				<xsd:annotation>
+					<xsd:documentation>The business channel Name.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+	   </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="Channel" type="_ord:ChannelType">
+	<xsd:annotation>
+					<xsd:documentation>The element definition of the channel.</xsd:documentation>
+				</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ChannelType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:ChannelIdentifer">
+			<xsd:annotation>
+					<xsd:documentation>The channel identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType">
+			<xsd:annotation>
+					<xsd:documentation>The channel description.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="ChannelNameType">
+	<xsd:annotation>
+					<xsd:documentation>The channel name.</xsd:documentation>
+				</xsd:annotation>
+		<xsd:union memberTypes="_ord:ChannelNameEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ChannelNameEnumerationType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Kiosk"/>
+			<xsd:enumeration value="Phone"/>
+			<xsd:enumeration value="Mail"/>
+			<xsd:enumeration value="Fax"/>
+			<xsd:enumeration value="e-mail"/>
+			<xsd:enumeration value="Electronic data feed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+	<xsd:element name="OrderAmount" type="_wcf:OrderChargesType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order's amount.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+
+	<xsd:element name="OrderPaymentInfo" type="_ord:OrderPaymentInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order's payment information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderPaymentInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order's payment information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:PaymentInstruction">
+				<xsd:annotation>
+					<xsd:documentation>The payment instructions.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Status" type="_ord:PaymentLifeCycleStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The payment life cycle status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:FinancialTransaction">
+				<xsd:annotation>
+					<xsd:documentation>The Financial Transactions.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="PaymentInstruction" type="_ord:PaymentInstructionType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of a payment instruction.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PaymentInstructionType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a payment instruction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BillingAddress" type="_wcf:ContactInfoType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Amount" type="_wcf:MonetaryAmountType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:PaymentMethod"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentTermConditionId" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="SequenceNumber" type="xsd:integer"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Priority" type="xsd:integer"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MaxAmount" type="_wcf:MonetaryAmountType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MinAmount" type="_wcf:MonetaryAmountType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="RefundAllowed" type="xsd:boolean"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentRule" type="xsd:string"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:ProtocolData"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Status" type="_ord:PaymentInstructionStatusType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="UsablePaymentInformation" type="_ord:PaymentInformationType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of usable payment information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PaymentInformationType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of payment information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:UsableBillingAddress"/>
+			<xsd:element maxOccurs="1" minOccurs="1" ref="_ord:PaymentMethod"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentTermConditionId" type="xsd:string"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:ProtocolData"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="PaymentMethod" type="_ord:PaymentMethodType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of payment method.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="PaymentMethodType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a payment method.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentMethodName" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+	<xsd:element name="ProtocolData" type="_ord:ProtocolDataType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of a protocol data entry.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ProtocolDataType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a protocol data entry.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	
+	<xsd:element name="BlockReason" type="_ord:BlockReasonType">
+	<xsd:annotation>
+					<xsd:documentation>The element definition of the block reason.</xsd:documentation>
+				</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="BlockReasonType">
+	<xsd:annotation>
+					<xsd:documentation>The type definition of the block reason.</xsd:documentation>
+				</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ReasonCode" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ReansonType" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="OrderBlockType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Comments" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The order block.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TimeBlocked" type="xsd:dateTime"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:BlockReason"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="resovled" type="xsd:boolean" use="optional"/>
+	</xsd:complexType>
+	
+	<xsd:element name="OrderStatus" type="_ord:OrderStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order's status.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order's status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Status" type="_ord:OrderLifeCycleStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The order status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BuyerApprovalStatus" type="_ord:BuyerApprovalStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The Buyer Approval Status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="prepareIndicator" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Whether the order has been prepared.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="editable" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Whether the order is editable.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="locked" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Order is locked.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="blocked" type="xsd:boolean" use="optional"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="OrderBLockInfoType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="OrderBlock" type="_ord:OrderBlockType">
+				<xsd:annotation>
+					<xsd:documentation>The order block.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		 
+	</xsd:complexType>
+	<xsd:simpleType name="BuyerApprovalStatusEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Indicates the buyer approval status of the order: Approved: Approved Rejected: Rejected PendingApproval:
+				Pending approval.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Approved"/>
+			<xsd:enumeration value="Rejected"/>
+			<xsd:enumeration value="PendingApproval"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BuyerApprovalStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Allows extension to the default approval status usage types.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:BuyerApprovalStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+		
+	<xsd:element name="ChangeReasonCode" type="_ord:ChangeReasonCodeType">
+	<xsd:annotation>
+					<xsd:documentation>The element definition of the order change reason.</xsd:documentation>
+				</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ChangeReasonCodeType">
+	<xsd:annotation>
+					<xsd:documentation>The type definition of the order change reason.</xsd:documentation>
+				</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ReasonCode" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="CSRComments" type="_ord:CSRCommentsType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of a comment made by a customer service representative.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CSRCommentsType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a comment made by a customer service representative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CreationDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Time the comment is created.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Comment" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The comment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:ChangeReasonCode">
+				<xsd:annotation>
+					<xsd:documentation>The order change reason code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:CSRIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>The customer service representative identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderVersion" type="xsd:string">
+			<xsd:annotation>
+					<xsd:documentation>The order version.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	<xsd:element name="OrderNotificationInfo" type="_ord:OrderNotificationInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order notification.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderNotificationInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order notification.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="EMail" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The Email address of the recipient of the notification message. 
+						Applicable for all message types.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>						
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="SMS" type="_wcf:MobilePhoneType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The phone number of the recipient of the notification message.
+						Applicable for all message types.						
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AllEMailsRecipient" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>Deprecated</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderReceivedEMailRecipient" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>Deprecated</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderCancelEMailRecipient" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>Deprecated</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderCancelForMerchantEMailRecipient" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>Deprecated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderChangedEMailRecipient" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>Deprecated</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ReleaseShipNotifyEMailRecipient" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>Deprecated</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MerchantNotify" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The value to indicate whether the merchant is notified when the order processing is complete.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShopperNotify" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The value to indicate whether the shopper is notified when the order processing is complete.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderSubmittedNotify" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The value to indicate whether the customer is notified when the order is successfully submitted for processing.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="OrderEditor" type="_wcf:PersonIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of Order Editor.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CSRIdentifier" type="_wcf:PersonIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of a customer service representative identifier.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="OrderItem" type="_ord:OrderItemType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of an order item.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="CatalogEntryIdentifier" type="_wcf:CatalogEntryIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of catalog entry identifier.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderItemType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of an order item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderItemIdentifier" type="_wcf:OrderItemIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The order item identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:CatalogEntryIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>The catalog entry identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ItemAttributes" type="_wcf:NameValuePairType">
+				<xsd:annotation>
+					<xsd:documentation>Product specific attributes for this item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:OrderItemComponent">
+				<xsd:annotation>
+					<xsd:documentation>Components of the product if it is a kit.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Quantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The quantity ordered.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ConfigurationID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The configuration ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderItemConfiguration" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Configuration details of a dynamic kit.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ContractIdentifier" type="_wcf:ContractIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The contract Identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OfferID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The offer ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="AdjustmentRequirement" type="_ord:AdjustmentRequirementType">
+				<xsd:annotation>
+					<xsd:documentation>Order item level adjustment requirements.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderItemAmount">
+				<xsd:annotation>
+					<xsd:documentation>Amounts of the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:UsableShippingAddress">
+				<xsd:annotation>
+					<xsd:documentation>Usable Shipping addresses for the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:UsableShippingMode">
+				<xsd:annotation>
+					<xsd:documentation>Usable Shipping modes for the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderItemShippingInfo">
+				<xsd:annotation>
+					<xsd:documentation>Shipping information of the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderItemStatus">
+				<xsd:annotation>
+					<xsd:documentation>Status of the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderItemFulfillmentInfo">
+				<xsd:annotation>
+					<xsd:documentation>Fulfillment information of the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:FulfillmentCenter">
+				<xsd:annotation>
+					<xsd:documentation>The fulfillment center.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CorrelationGroup" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>CorrelationGroup of the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderItemDescription" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Description of the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Comments" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Comments made by the customer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CreateDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Time the order item is created.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="LastUpdateDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Time the order item is last updated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="UsableShippingChargePolicy" type="_wcf:PolicyIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						This element is used to display all usable
+						shipping charge methods for an order item. Each
+						order item has multiple usable shipping charge
+						methods. Shopper can view and select one of them
+						for the current order item. Possible values can
+						be "Charge by seller" and "Charge by carrier".
+				  </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="GiftItemInfo" type="_ord:GiftItemInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The gift list info for the order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="OrderItemComponentIdentifier" type="_ord:OrderItemComponentIdentifierType">
+	<xsd:annotation>
+					<xsd:documentation>The element definition of the order item component.</xsd:documentation>
+				</xsd:annotation>
+	</xsd:element>
+    <xsd:complexType name="OrderItemComponentIdentifierType">
+		<xsd:annotation>
+	        <xsd:documentation>The type definition of an order item component identifier.</xsd:documentation>
+     	</xsd:annotation>
+        <xsd:sequence>
+        	<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+            	<xsd:annotation>
+                	<xsd:documentation>The order item component ID.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+	<xsd:element name="OrderItemComponent" type="_ord:OrderItemComponentType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of an order item component.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderItemComponentType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of an order item component.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:OrderItemComponentIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>The order item component identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:CatalogEntryIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>The catalog entry identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Quantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The quantity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UnitPrice" type="_wcf:UnitPriceType">
+				<xsd:annotation>
+					<xsd:documentation>The unit price.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ConfigurationID" type="xsd:string">
+			<xsd:annotation>
+					<xsd:documentation>The configuration ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="required" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Whether the order item component is required.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:element name="OrderItemAmount" type="_wcf:OrderItemChargesType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order item's amount.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+
+	<xsd:element name="OrderItemShippingInfo" type="_ord:OrderItemShippingInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order item's shipping information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="OrderItemShippingInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of shipping information of the order item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingAddress" type="_wcf:ContactInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The shipping address.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:ShippingMode">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingCarrierAccountNumber" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping carrier account number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingInstruction" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping instruction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="RequestedShipDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The requested ship date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShipTieCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The ship tie code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingChargePolicyID" type="xsd:string">
+				<xsd:annotation>
+                                        <xsd:documentation>The shipping charge policy ID. Deprecated and replaced by ShippingChargePolicy/UniqueID.</xsd:documentation>				
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PhysicalStoreIdentifier" type="_wcf:PhysicalStoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The pickup location of the order item if it is going to be picked up in-store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ShippingChargePolicy" type="_wcf:PolicyIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The shipping charge method used for this order item.
+						Possible values can be "Charge by seller" and "Charge by carrier".
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="expedite" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Whether shipping of the orderitem should be expedited.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:element name="FulfillmentCenter" type="_ord:FulfillmentCenterType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the fulfillment center.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="FulfillmentCenterType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the fulfillment center.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		    <xsd:element maxOccurs="1" minOccurs="0" name="FulfillmentCenterIdentifier" type="_wcf:FulfillmentCenterIdentifierType"/>
+		    <xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="UsableShippingMode" type="_ord:ShippingModeType">
+<xsd:annotation>
+			<xsd:documentation>Element definition of the usable shipping mode.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ShippingMode" type="_ord:ShippingModeType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the shipping mode.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ShippingModeIdentifier" type="_ord:ShippingModeIdentifierType">
+	<xsd:annotation>
+			<xsd:documentation>Element definition of the shipping mode identifier.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ShippingModeIdentifierType">
+	   <xsd:sequence>
+	   		<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode unique ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="_ord:ExternalShipModeIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>The external shipping mode identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ExternalShipModeIdentifier">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreUniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The store ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShipModeCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Carrier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode carrier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShippingModeType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the shipping mode.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:ShippingModeIdentifier"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="trackingURL" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="OrderItemStatus" type="_ord:OrderItemStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order item's status.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderItemStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order item's status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Status" type="_ord:OrderItemLifeCycleStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The order item status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="InventoryStatus" type="_ord:InventoryStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The inventory status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="FulfillmentStatus" type="_ord:FulfillmentStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The fufillment status.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+
+	<xsd:element name="OrderItemFulfillmentInfo" type="_ord:OrderItemFulfillmentInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order item's fulfillment information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderItemFulfillmentInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order item's fulfillment information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AvailableDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The expected available date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExpectedShipDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The expected ship date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TimeReleased" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The real release date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TimeShipped" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The real ship date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="InventoryStatusEnumerationType">
+	<xsd:annotation>
+			<xsd:documentation>The type definition of an order item's inventory status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Available"/>
+			<xsd:enumeration value="Unavailable"/>
+			<xsd:enumeration value="Future"/>
+			<xsd:enumeration value="Allocated"/>
+			<xsd:enumeration value="Unallocated"/>
+			<xsd:enumeration value="Backorderable"/>
+			<xsd:enumeration value="Backordered"/>
+			<xsd:enumeration value="Released"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="InventoryStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order item's inventory status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:InventoryStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="FulfillmentStatusEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order item's fulfillment status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Unreleased"/>
+			<xsd:enumeration value="Hold"/>
+			<xsd:enumeration value="Released"/>
+			<xsd:enumeration value="Shipped"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FulfillmentStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order item's fulfillment status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:FulfillmentStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+   
+
+
+    <xsd:simpleType name="OrderLifeCycleStatusEnumerationType">
+     <xsd:annotation>
+			<xsd:documentation>The type definition of an order life cycle status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="P">
+				<xsd:annotation>
+					<xsd:documentation>Order is shopping cart.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="E">
+				<xsd:annotation>
+					<xsd:documentation>Order is editing.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="X">
+				<xsd:annotation>
+					<xsd:documentation>Order is canceled.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="C">
+				<xsd:annotation>
+					<xsd:documentation>Payment is authorized.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="M">
+				<xsd:annotation>
+					<xsd:documentation>Order is submitted.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="L">
+				<xsd:annotation>
+					<xsd:documentation>Order is low inventory.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="B">
+				<xsd:annotation>
+					<xsd:documentation>Order is back ordered.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="A">
+				<xsd:annotation>
+					<xsd:documentation>Payment review is needed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="R">
+				<xsd:annotation>
+					<xsd:documentation>Order is released to fulfillment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="S">
+				<xsd:annotation>
+					<xsd:documentation>Order is shipped.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>			
+			<xsd:enumeration value="D">
+				<xsd:annotation>
+					<xsd:documentation>Order is deposited.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="F">
+				<xsd:annotation>
+					<xsd:documentation>Order is ready for remote fulfillment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="G">
+				<xsd:annotation>
+					<xsd:documentation>Order is pending remote fulfillment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="H">
+				<xsd:annotation>
+					<xsd:documentation>Order remote fulfillment failed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="W">
+				<xsd:annotation>
+					<xsd:documentation>Order is pending buyer approval.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="N">
+				<xsd:annotation>
+					<xsd:documentation>Order is rejected by buyer administrator.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>		
+		</xsd:restriction>
+	</xsd:simpleType>
+		<xsd:simpleType name="OrderLifeCycleStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order item's life cycle status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:OrderLifeCycleStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	  <xsd:simpleType name="OrderItemLifeCycleStatusEnumerationType">
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="P">
+				<xsd:annotation>
+					<xsd:documentation>Order item is in shopping cart.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="E">
+				<xsd:annotation>
+					<xsd:documentation>Order item is editing.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="X">
+				<xsd:annotation>
+					<xsd:documentation>Order item is canceled.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="C">
+				<xsd:annotation>
+					<xsd:documentation>Payment is authorized.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="M">
+				<xsd:annotation>
+					<xsd:documentation>Order item is submitted.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="L">
+				<xsd:annotation>
+					<xsd:documentation>Order item is low inventory.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="B">
+				<xsd:annotation>
+					<xsd:documentation>Order item is back ordered.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="A">
+				<xsd:annotation>
+					<xsd:documentation>Payment review is needed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="R">
+				<xsd:annotation>
+					<xsd:documentation>Order item is released to fulfillment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="S">
+				<xsd:annotation>
+					<xsd:documentation>Order item is shipped.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>			
+			<xsd:enumeration value="D">
+				<xsd:annotation>
+					<xsd:documentation>Order item is deposited.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="F">
+				<xsd:annotation>
+					<xsd:documentation>Order item is ready for remote fulfillment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="G">
+				<xsd:annotation>
+					<xsd:documentation>Order item is pending remote fulfillment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="H">
+				<xsd:annotation>
+					<xsd:documentation>Order item remote fulfillment failed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="W">
+				<xsd:annotation>
+					<xsd:documentation>Order item is pending buyer approval.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>	
+			<xsd:enumeration value="N">
+				<xsd:annotation>
+					<xsd:documentation>Order item is rejected by buyer administrator.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>		
+		</xsd:restriction>
+	</xsd:simpleType>
+ 
+	 <xsd:simpleType name="OrderItemLifeCycleStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an order item's life cycle status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:OrderItemLifeCycleStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaymentLifeCycleStatusEnumerationType">
+	<xsd:annotation>
+			<xsd:documentation>The type definition of payment life cycle status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Success"/>
+			<xsd:enumeration value="Failed"/>
+			<xsd:enumeration value="Pending"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+		 <xsd:simpleType name="PaymentLifeCycleStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of payment life cycle status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:PaymentLifeCycleStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+		  <xsd:simpleType name="PaymentInstructionStatusEnumerationType">
+		  <xsd:annotation>
+			<xsd:documentation>The type definition of payment instruction status. "New", "Valid", "Invalid" and "Closed" are values of payment instruction status in payment plug-in controller layer. "Success", "Failed" and "Pending" are values of payment instruction status in payment rules engine layer. The values "New", "Valid", "Invalid" and "Closed" are only for compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="New"/>
+			<xsd:enumeration value="Valid"/>
+			<xsd:enumeration value="Invalid"/>
+			<xsd:enumeration value="Closed"/>
+			<xsd:enumeration value="Success"/>
+			<xsd:enumeration value="Failed"/>
+			<xsd:enumeration value="Pending"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+    	
+	 <xsd:simpleType name="PaymentInstructionStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of payment instruction status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:PaymentInstructionStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	<xsd:element name="UsableBillingAddress" type="_wcf:ContactInfoIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of usable billing address.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="UsableShippingAddress" type="_wcf:ContactInfoIdentifierType">
+	<xsd:annotation>
+			<xsd:documentation>The element definition of usable shipping address.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+       	<xsd:complexType name="OrderScheduleInfoType">
+    	<xsd:annotation>
+			<xsd:documentation>The type definition of the information related to a scheduled order.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StartTime" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The scheduled time to submit the order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Interval" type="xsd:int">
+				<xsd:annotation>
+					<xsd:documentation>
+						The number of seconds between successive runs of this job. 
+						If this parameter is omitted, the job is only run once.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+    </xsd:complexType> 
+    
+    <xsd:element name="OrderShippingInfo" type="_ord:OrderShippingInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the order shipping information.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="OrderShippingInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order shipping information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingAddress" type="_wcf:ContactInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The shipping address.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:ShippingMode">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="RequestedShipDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The requested ship date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" name="PhysicalStoreIdentifier" type="_wcf:PhysicalStoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The pickup location of the order if it is going to be picked up in-store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GiftItemType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a gift item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="CatalogEntryIdentifier" type="_wcf:CatalogEntryIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The catalog entry identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Quantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>Quantity of the item. Note: Currently only integer quantity with uom as 'C62' is supported.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="GiftItem" type="_ord:GiftItemType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition for GiftItem.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="GiftSetSpecification" type="_ord:GiftSetSpecificationType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition for GiftSetSpecification.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="RewardSpecificationType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a promotion reward option
+				specification.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:GiftSetSpecification">
+				<xsd:annotation>
+					<xsd:documentation>This element defines the specification of
+						gift
+						items.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>User data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RewardChoiceType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a promotion reward option
+				choice.
+		
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:GiftSet">
+				<xsd:annotation>
+					<xsd:documentation>Free gift item set that is selected by a
+						shopper.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>User data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="RewardSpecification" type="_ord:RewardSpecificationType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition for RewardSpecification.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="GiftSet" type="_ord:GiftSetType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition for GiftSet.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="RewardChoice" type="_ord:RewardChoiceType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition for RewardChoice
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="GiftSetSpecificationType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a gift set
+				specification.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="MaximumQuantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The maximum quantity of items allowed. Note: Currently only integer quantity with uom as 'C62' is supported.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:GiftItem">
+				<xsd:annotation>
+					<xsd:documentation>Gift item information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GiftSetType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a free gift item set.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_ord:GiftItem">
+				<xsd:annotation>
+					<xsd:documentation>Gift item information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RewardOptionType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a promotion reward option type.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="RewardOptionIdentifier" type="_wcf:RewardOptionIdentifierType">
+			</xsd:element>
+
+            <xsd:element maxOccurs="1" minOccurs="0" name="Adjustment" type="_wcf:AdjustmentType">
+            	<xsd:annotation>
+            		<xsd:documentation>The promotion information associated with this reward option.</xsd:documentation>
+            	</xsd:annotation>
+      </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="_ord:RewardChoice">
+				<xsd:annotation>
+					<xsd:documentation>
+						This element represents the shopper selection
+						based on the option specification.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:RewardSpecification">
+				<xsd:annotation>
+					<xsd:documentation>
+						This element represents the option specification
+						for shopper to choice from.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>User data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+	
+    <xsd:element name="RewardOption" type="_ord:RewardOptionType"/>
+    
+    <xsd:complexType name="AdjustmentRequirementType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the adjustment requirement information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="AdjustmentUsage" type="_ord:AdjustmentUsageType">
+				<xsd:annotation>
+					<xsd:documentation>Different kinds of usages,for exmaple, price adjustment, shipping adjustment. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="AdjustmentCategory" type="_ord:AdjustmentCategoryType">
+				<xsd:annotation>
+					<xsd:documentation>Different kinds of price adjustment,for exmaple, percentage off, fixed amount off or fixed cost off. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AdjustmentValue" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The price adjustment value.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="0" name="Comments" type="_wcf:DescriptionType">
+				<xsd:annotation>
+					<xsd:documentation>The comments for this price adjustment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="AdjustmentCategoryEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of different kinds of adjustment categories.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="PercentOffAdjustment"/>
+			<xsd:enumeration value="FixedAmountOffAdjustment"/>
+			<xsd:enumeration value="FixedCostAdjustment"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AdjustmentCategoryType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>Allows extension to the default adjustment categories.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:AdjustmentCategoryEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="AdjustmentUsageEnumerationType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>Indicates how usage of the adjustment:
+					Price:  Price adjustment
+					Shipping : Shipping adjustment
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+	            <xsd:enumeration value="Price"/>
+	            <xsd:enumeration value="Shipping"/>
+		</xsd:restriction>
+	</xsd:simpleType>	
+	<xsd:simpleType name="AdjustmentUsageType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>Allows extension to the default adjustment usage types.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:AdjustmentUsageEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>	
+	<xsd:complexType name="GiftItemInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of gift list infomation for the order item.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="GiftListIdentifier" type="_wcf:GiftListIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The Gift List identifier the gift item belongs to.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="GiftMessage" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>A message from the gift giver to the gift registrant.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShipToRegistrant" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation>Ships the gift item to registrant directly or not.</xsd:documentation>
+				</xsd:annotation> 
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+    <xsd:simpleType name="OrderTypeCodeType">
+    	<xsd:annotation>
+			<xsd:documentation>The order type.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:OrderTypeEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="OrderTypeEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The enumeration of the order types.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">		
+			<xsd:enumeration value="STD"/>
+			<xsd:enumeration value="QUT"/>
+			<xsd:enumeration value="PRL"/>
+			<xsd:enumeration value="SRL"/>
+			<xsd:enumeration value="TMP"/>
+			<xsd:enumeration value="QUK"/>
+			<xsd:enumeration value="ORD"/>
+			<xsd:enumeration value="QOT"/>
+			<xsd:enumeration value="REC"/>
+			<xsd:enumeration value="SUB"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ParentInfoType">
+		<xsd:annotation>
+			<xsd:documentation>The parent order or parent order item of this order.</xsd:documentation>
+		</xsd:annotation>		
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentOrderIdentifier" type="_wcf:OrderIdentifierType">
+				<xsd:annotation>
+			    	<xsd:documentation>The identifier of the parent order.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentOrderItemIdentifier" type="_wcf:OrderItemIdentifierType">
+				<xsd:annotation>
+			    	<xsd:documentation>The identifier of the parent order items.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="RelationTypeCode" type="_ord:RelationTypeCodeType">
+				<xsd:annotation>
+			    	<xsd:documentation>The relation type with the parent order or order item.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="RelationTypeCodeType">
+		<xsd:annotation>
+			<xsd:documentation>The type of the relation between parent order(item) and the child order .</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:RelationTypeEnumerationType _wcf:EnumerationExtensionType"/>		
+	</xsd:simpleType>
+	<xsd:simpleType name="RelationTypeEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The enumeration of the relation types.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">				
+			<xsd:enumeration value="REC"/>
+			<xsd:enumeration value="SUB"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+		<xsd:element name="FinancialTransaction" type="_ord:FinancialTransactionType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of a financial transaction.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="FinancialTransactionType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a financial transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_ord:FinancialTransactionIdentifier">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TransactionType" type="_ord:TransactionTypeType">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="RequestAmount" type="_wcf:MonetaryAmountType">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Status" type="_ord:FinancialTransactionStatusType">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ReasonCode" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ResponseCode" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ReferenceNumber" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="trackingID" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MerchantOrderNumber" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AvsCode" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentInstructionID" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="RequestTime" type="xsd:dateTime">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="LastUpdate" type="xsd:dateTime">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExpirationTime" type="xsd:dateTime">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="PaymentProtocolData" type="_ord:ProtocolDataType">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="TransactionExtensionData" type="_ord:ProtocolDataType">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="TransactionTypeType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of financial transaction type.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:TransactionTypeEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="TransactionTypeEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of financial transaction type. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Approve"/>
+			<xsd:enumeration value="Deposit"/>
+			<xsd:enumeration value="ApproveAndDeposit"/>
+			<xsd:enumeration value="Credit"/>
+			<xsd:enumeration value="ReverseApprove"/>
+			<xsd:enumeration value="ReverseDeposit"/>
+			<xsd:enumeration value="ReverseCredit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+
+	<xsd:simpleType name="FinancialTransactionStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of financial transaction status.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_ord:FinancialTransactionStatusEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="FinancialTransactionStatusEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of financial transaction status. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="New"/>
+			<xsd:enumeration value="Pending"/>
+			<xsd:enumeration value="Success"/>
+			<xsd:enumeration value="Failed"/>
+			<xsd:enumeration value="Canceled"/>			
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="FinancialTransactionIdentifier" type="_ord:FinancialTransactionIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the financial transaction identifier.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="FinancialTransactionIdentifierType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The financial transaction unique ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExternalIdentifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The external financial transaction identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

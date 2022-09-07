@@ -1,0 +1,11 @@
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <InputMessage timestamp="1488543319751" nodeId="FCMComposite_1_1" name="User 2" id="1488543319751-90">
+        <plainText>%3CUser%3E%3CUserNumber%3E2%3C%2FUserNumber%3E%3C%2FUser%3E</plainText>
+    </InputMessage>
+    <InputMessage timestamp="1488543335332" nodeId="FCMComposite_1_1" name="User 3" id="1488543335332-111">
+        <plainText>%3CUser%3E%3CUserNumber%3E3%3C%2FUserNumber%3E%3C%2FUser%3E</plainText>
+    </InputMessage>
+    <InputMessage timestamp="1487957632457" nodeId="FCMComposite_1_1" name="User 1" id="1487957632457-212">
+        <plainText>%3CUser%3E%3CUserNumber%3E1%3C%2FUserNumber%3E%3C%2FUser%3E</plainText>
+    </InputMessage>
+</MessagePool>

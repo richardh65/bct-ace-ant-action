@@ -1,0 +1,363 @@
+
+
+CREATE FILTER MODULE afegir1_Filter
+     CREATE FUNCTION Main() RETURNS BOOLEAN
+     BEGIN
+          DECLARE MSG_SRC CHAR ;
+		  
+		  CASE
+		  WHEN versionRef>= 1 THEN
+			SET Environment.Fault.faultcode='soapenv:Client';
+		  WHEN versionRef<1.2 THEN
+			SET Environment.Fault.faultcode='soapenv:Sender';
+		  END CASE;
+		  
+		  
+		  SET OutputLocalEnvironment.Destination.MQ.DestinationData[I].queueName = Environment.IMI.Query[I].ColaSalidaPet ;
+
+          SET MSG_SRC = cast(substring(Root.BLOB.BLOB FROM 2 FOR 1) \\
+               as CHAR CCSID Root.MQMD.CodedCharSetId);
+			   
+		  IF ( MSG_CODE>=1 ) THEN
+                  RETURN TRUE ;
+          END IF ;			   
+
+          IF ( MSG_SRC = 'A' ) THEN
+                  RETURN TRUE ;
+          END IF ;
+		  
+		  IF ( MSG_SRC = X'41' ) THEN
+			RETURN TRUE ;
+
+		set OutputRoot.XMLNSC.msg.c = '33333';			
+			
+          RETURN FALSE ;
+     END ;
+END MODULE ;
+
+CREATE COMPUTE MODULE DecideOnQuery
+  CREATE FUNCTION Main() RETURNS BOOLEAN
+  BEGIN
+    SET OutputRoot = InputRoot;
+    IF InputRoot.XML.PassengerQuery.ReservationNumber <> '' THEN
+      SET OutputLocalEnvironment.Destination.RouterList.DestinationData[1].labelname = 'SinglePassenger';
+    ELSE
+      SET OutputLocalEnvironment.Destination.RouterList.DestinationData[1].labelname = 'AllReservations';
+    END IF;
+    RETURN TRUE;
+  END;
+ END MODULE;
+ 
+ 
+CREATE COMPUTE MODULE DESTINOS_ERROR
+     DECLARE NomCuaPaperera EXTERNAL character ;
+ CREATE FUNCTION Main() RETURN BOOLEAN
+ BEGIN
+     SET OutputLocalEnvironment.Destination.MQ.DestinationData[I].queueName = NomCuaPaperera ; 
+ END;
+ END MODULE;
+ 
+ 
+  CREATE COMPUTE MODULE GirayDesvia_Compute
+     CREATE FUNCTION Main() RETURNS BOOLEAN
+     BEGIN
+          CALL CopyMessageHeaders();
+          -- CALL CopyEntireMessage();
+
+          set OutputRoot.XMLNSC.msg.a = InputRoot.XML.msg.b ;
+          set OutputRoot.XMLNSC.msg.b = InputRoot.XML.msg.a ;
+
+          set OutputRoot.XMLNSC.msg.c = '33333' ;
+		  
+		  if ( Environment.AKI.CuaDeEntrada IS NOT NULL ) then
+
+      if ( Environment.AKI.CuaDeEntrada = 'MQ01.J2EE.TO.HUB.LOCAL' ) then
+           PROPAGATE TO TERMINAL 'out1' ;
+      else
+           if ( Environment.AKI.CuaDeEntrada = 'MQ01.J2EE01.TO.HUB.LOCAL' ) then
+                PROPAGATE TO TERMINAL 'out2' ;
+           else
+                PROPAGATE TO TERMINAL 'out3' ;
+           end if ;
+      end if ;
+	  
+	  
+	  SET OutputRoot = InputRoot;
+ PROPAGATE;
+ SET OutputRoot = InputRoot;
+ PROPAGATE TO TERMINAL 'out1';
+ SET OutputRoot = InputRoot;
+ PROPAGATE TO LABEL 'ThirdCopy';
+ 
+ 
+  SET OutputRoot = InputRoot;
+ PROPAGATE DELETE NONE;
+ PROPAGATE TO TERMINAL 'out1' DELETE NONE;
+ PROPAGATE TO LABEL 'ThirdCopy';
+ 
+ 
+  SET OutputRoot = InputRoot;
+ PROPAGATE DELETE NONE;
+ PROPAGATE DELETE NONE;
+ 
+ SET OutputRoot = InputRoot;
+ PROPAGATE DELETE NONE;
+ PROPAGATE DELETE NONE;
+ PROPAGATE;
+ RETURN FALSE;
+ 
+ SET OutputRoot.MQMD.Expiry = MQEI_UNLIMITED ;
+ 
+ 
+ 
+ 
+	  
+ end if ;
+
+          RETURN TRUE;
+     END;
+END MODULE;
+
+ CREATE FUNCTION Other() RETURNS BOOLEAN
+ BEGIN
+
+ declare q0 NAMESPACE 'http://wsServer.myfirst.com/' ;
+SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:soap12 = q0 ;
+ 
+ SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:ns1 = 'http://a/b/c/myNamespace'; 
+ 
+   SET OutputRoot = InputRoot ; /* copy entire message */
+
+   DECLARE now CHARACTER;
+   SET now = CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSS');
+
+   SET OutputLocalEnvironment.Wildcard.WildcardMatch = now ;
+   
+   SET OutputLocalEnvironment.Destination.SOAP.Request.Operation = 'myOperation' ;
+   
+   declare q0 NAMESPACE 'http://wsServer.myfirst.com/' ;
+   
+   declare q1 NAMESPACE 'http://tod.ws.com/' ;
+   
+   
+    CASE ws_num
+
+        WHEN '1' THEN -- <Mensaje> <Evento> EVENT/WS </Evento> <wsn> 1 </wsn> </Mensaje>
+
+            declare q0 NAMESPACE 'http://wsServer.myfirst.com/' ;
+            SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:q0 = 'http://wsServer.myfirst.com/' ; 
+            SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = 'http://localhost:8080/wsServer_hello' ;
+            SET OutputLocalEnvironment.Destination.SOAP.Request.Operation = 'getGreeting' ;
+            set OutputRoot.SOAP.Body.q0:getGreeting.arg0 = 'sebas using 1st web service' ;
+			
+        WHEN '2' THEN -- <Mensaje> <Evento> EVENT/WS </Evento> <wsn> 2 </wsn> </Mensaje>
+
+            declare q1 CHARACTER ;
+            set q1 = 'http://tod.ws.com/' ; -- 1st param, namespace
+            declare operacion CHARACTER ; 
+            set operacion = 'say_TOD' ;     -- 2nd param, operation
+
+            SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:q1 = q1 ;
+            SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = 'http://localhost:8181/TOD_server' ; -- 3rd param, url
+            SET OutputLocalEnvironment.Destination.SOAP.Request.Operation = operacion ;
+
+            CREATE LASTCHILD OF OutputRoot.SOAP.Body NAMESPACE q1 NAME operacion ; 
+            set OutputRoot.SOAP.Body.*.arg0 =  'sebas using 2nd web service' ;
+					
+	end case;
+	
+	CALL CopyMessageHeaders();
+		
+		-- Add recipient information to the EmailOutputHeader
+		SET OutputRoot.EmailOutputHeader.To  = '<recipient email address>';
+		SET OutputRoot.EmailOutputHeader.Cc  = '<recipient email address>';
+		SET OutputRoot.EmailOutputHeader.Bcc = '<recipient email address>';
+
+		-- Add sender information to EmailOutputHeader
+		SET OutputRoot.EmailOutputHeader.From       = '<sender email address>';
+		SET OutputRoot.EmailOutputHeader."Reply-To" = '<reply email address>';
+
+		-- Add subject to EmailOutputHeader
+		SET OutputRoot.EmailOutputHeader.Subject = 'Replaced by ESQL compute node.';
+
+		-- Add SMTP server information to the LocalEnvironment
+		SET OutputLocalEnvironment.Destination.Email.SMTPServer ='<smtp.server:port>';
+
+		-- Create a new message body, which will be sent as the main text of the email.
+		SET OutputRoot.BLOB.BLOB = CAST( 'This is the new text for the body of the email.' AS BLOB CCSID 1208 ) ;  		
+
+		RETURN TRUE;
+		
+   RETURN TRUE;
+ END;
+ 
+ CREATE COMPUTE MODULE BPA_mf_Compute
+  CREATE FUNCTION Main() RETURNS BOOLEAN
+  BEGIN
+    SET OutputRoot = InputRoot ; /* copy entire message */
+
+    DECLARE now CHARACTER;
+    SET now = CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMdd-HHmmssSSS');
+
+    SET OutputLocalEnvironment.Wildcard.WildcardMatch = now ;
+
+    RETURN TRUE;
+  END;
+ 
+ CREATE FUNCTION Other3() RETURNS BOOLEAN
+    BEGIN
+        CALL CopyMessageHeaders();
+        -- Capture the request as an output message
+        SET "OutputRoot"."Properties"."MessageDomain" = 'XML';
+        SET "OutputRoot"."MQMD"."Format"              = MQFMT_STRING;
+        SET "OutputRoot"."XML"."TimeoutRequest"       = "InputLocalEnvironment"."TimeoutRequest";
+        RETURN TRUE;
+    END;
+ 
+ CREATE PROCEDURE overrideDefaultSOAPRequestURL ( IN LocalEnvironment REFERENCE, IN newUrl char ) BEGIN
+  /*******************************************************************************
+  * Change the URL to which the SOAPRequest or SOAPAsyncRequest node sends the request.
+  * 
+  * IN LocalEnvironment: the LocalEnvironment to be modified. 
+  * IN newURL: the URL to which to send the request.
+  *
+  *******************************************************************************/
+  SET OutputLocalEnvironment.Destination.SOAP.Request.Transport.HTTP.WebServiceURL = newUrl ;
+END;
+
+
+CREATE FILTER MODULE cyclon_Filter
+
+    CREATE FUNCTION Main() RETURNS BOOLEAN
+    BEGIN
+
+        DECLARE MSG_SRC CHAR ;
+        SET MSG_SRC = substring(Root.XMLNSC.mimsg.a FROM 2 FOR 1) ; // Sebas
+
+         IF ( MSG_SRC = 'e' ) THEN RETURN TRUE ;
+             END IF ;
+
+        RETURN FALSE ;
+
+    END;
+
+END MODULE;
+
+
+CREATE COMPUTE MODULE cyclon_Compute
+    CREATE FUNCTION Main() RETURNS BOOLEAN
+    BEGIN
+
+        CALL CopyMessageHeaders();
+
+        set OutputRoot.XMLNSC.mimsg.a = InputRoot.XML.mimsg.b ;     // aqui es fa
+        set OutputRoot.XMLNSC.mimsg.b = InputRoot.XML.mimsg.a ;     // el "encreuament" !
+        set OutputRoot.XMLNSC.mimsg.c = '33333' ;
+
+        RETURN TRUE;
+    END;
+
+    CREATE PROCEDURE CopyMessageHeaders() BEGIN
+        DECLARE I INTEGER;
+        DECLARE J INTEGER;
+        SET I = 1;
+        SET J = CARDINALITY(InputRoot.*[]);
+        WHILE I < J DO
+            SET OutputRoot.*[I] = InputRoot.*[I];
+            SET I = I + 1;
+        END WHILE;
+    END;
+
+    CREATE PROCEDURE CopyEntireMessage() BEGIN
+        SET OutputRoot = InputRoot;
+    END;
+
+END MODULE;
+
+CREATE COMPUTE MODULE cnt_flow_Compute 
+    CREATE FUNCTION Main() RETURNS BOOLEAN 
+    BEGIN 
+        CALL CopyEntireMessage(); 
+        set OutputRoot.XMLNSC.cap = '33333';     -- <msg><a>a</a><b>bb</b></msg><cap>33333</cap>
+        set OutputRoot.XMLNSC.msg.cap = '33333'; -- <msg><a>a</a><b>bb</b><cap>33333</cap></msg>
+        
+        RETURN TRUE; 
+    END; 
+ END MODULE;
+ 
+ 
+ DECLARE sebas       SHARED Integer 17 ;
+DECLARE Initialized SHARED BOOLEAN FALSE ;
+
+-- input msg
+
+CREATE COMPUTE MODULE cache_flow_Compute
+
+    CREATE FUNCTION Main() RETURNS BOOLEAN
+    BEGIN
+
+        IF NOT Initialized THEN
+            BEGIN ATOMIC
+                SET Initialized = TRUE ;
+                SET sebas = 17 ;
+            end;
+        END IF ; 
+
+        BEGIN ATOMIC
+            set sebas = sebas + 1 ;
+        END ;
+      
+        CALL CopyEntireMessage() ; 
+        set OutputRoot.XMLNSC.cap = sebas ;                    --
+        set OutputRoot.XMLNSC.cul = cast(sebas as character) ; -- Output
+		
+		
+		SET Environment.IMI.Query[] =
+      ( SELECT
+
+           D1.ID_ENT         AS EntornoDst,
+           D1.QUEUE_DST_DFT  AS ColaSalidaDft,
+           D1.QUEUE_DST_PET  AS ColaSalidaPet,
+           D1.PATH_MOD_SVR   AS PathModSvr,
+           D1.TIPO_MOD_SVR   AS TipoSvr,
+           D1.NOMBRE_CLASE   AS Nom_Clase,
+           D1.NOMBRE_METODO  AS Nom_Metode
+
+      FROM Database.BROKER.TBL_DST_LIST AS D1 WHERE D1.ID_SERVEI = SRV_TMP ) ;
+	  
+	  IF ( Environment.NumDestinos = 0 ) THEN
+     THROW USER EXCEPTION MESSAGE 2950
+     VALUES ( 'Not found Service Code (' || InputRoot.MQRFH2.usr.COD_SERVEI || ') in table "DESTINOS_APLICACION".' ) ;
+	 ELSE
+	 SET OutputRoot.MRM = inv;
+ Set Environment.inv = inv;
+ PROPAGATE;
+	 END IF;
+ ELSE
+        
+        RETURN TRUE;
+    END;
+
+    CREATE PROCEDURE CopyEntireMessage() BEGIN
+        SET OutputRoot = InputRoot ;
+    END;
+
+END MODULE;
+ 
+ CREATE COMPUTE MODULE PingResponder_Compute
+ CREATE FUNCTION Main() RETURNS BOOLEAN
+ BEGIN
+ CALL CopyMessageHeaders();
+ -- CALL CopyEntireMessage();
+ -- Create new response body
+ SET OutputRoot.XMLNSC.PingResponse.Text = InputRoot.XML.Ping.Text;
+ SET OutputRoot.XMLNSC.PingResponse.ReceivedTime = CURRENT_TIMESTAMP;
+ 
+ SET OutputRoot.XMLNSC.newmsg.aa = InputRoot.XMLNSC.msg.a;
+    SET OutputRoot.XMLNSC.newmsg.bb = InputRoot.XMLNSC.msg.b;
+    SET OutputRoot.XMLNSC.newmsg.cc = InputRoot.XMLNSC.msg.c;
+
+ 
+ RETURN TRUE;
+ END;
+ 

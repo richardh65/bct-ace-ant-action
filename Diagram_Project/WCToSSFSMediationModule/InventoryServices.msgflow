@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmJMSClientInput.msgnode="ComIbmJMSClientInput.msgnode" xmlns:ComIbmJMSClientOutput.msgnode="ComIbmJMSClientOutput.msgnode" xmlns:ComIbmJMSHeader.msgnode="ComIbmJMSHeader.msgnode" xmlns:ComIbmJMSMQTransform.msgnode="ComIbmJMSMQTransform.msgnode" xmlns:ComIbmMQGet.msgnode="ComIbmMQGet.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmRoute.msgnode="ComIbmRoute.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode"
+    xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ComIbmXslMqsi.msgnode="ComIbmXslMqsi.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_InventoryServices_InventoryServicesFlow1.msgflow="gen/InventoryServices_InventoryServicesFlow1.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="InventoryServices.msgflow"
+    nsPrefix="InventoryServices.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="InventoryServices" bundleName="InventoryServices" pluginId="WCToSSFSMediationModule"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WCToSSFSMediationModule/icons/full/obj16/InventoryServices.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WCToSSFSMediationModule/icons/full/obj30/InventoryServices.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmJMSClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="1101,81" destinationQueueName="SSFSAPIsImport_SEND_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageType="jms_text">
+        <translation xmi:type="utility:ConstantString" string="JMS Output"/>
+        <longDescription xmi:type="utility:ConstantString" string="Send the request with xml message to the queue which will then be picked up by the backend OMS (Sterling)"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="29,121" wsdlFileName="WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/InventoryServices.wsdl" selectedPortType="InventoryServicesPortType" selectedBinding="InventoryServices" selectedPort="InventoryServices" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory" useHTTPTransport="true" urlSelector="/webapp/wcs/component/inventory/services/InventoryServices" messageSetProperty="WCToSSFSMediationMessageSet"
+          parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
+        <longDescription xmi:type="utility:ConstantString" string="Soap over http(s). Node created from wsdl file in the MessageSet project. Listen for request (see Http Transport tab)."/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="1398,653" allowMTOM="true">
+        <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSHeader.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="530,113" jmsHeaderOptions="Add header" jmsDeliveryMode="Non_Persistent" jmsExpiration="0" jmsPriority="4">
+        <translation xmi:type="utility:ConstantString" string="FindInventory_SetFunctionName"/>
+        <longDescription xmi:type="utility:ConstantString" string="Add message selector (Application Properties Tab) which is used by the backend OMS (Sterling) to differentiate different request."/>
+        <application_Property name="TargetFunctionName" value="findInventory"/>
+        <nsMappingTable nsPrefix="BOD" namespace="http://www.openapplications.org/oagis/9"/>
+        <nsMappingTable nsPrefix="_inv" namespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="61,645" sourceQueueName="SSFSAPIsImport_RECEIVE_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" propertySelector="SubFlowName='WC_findInventory'">
+        <translation xmi:type="utility:ConstantString" string="FindInventory"/>
+        <longDescription xmi:type="utility:ConstantString" string="Retreives message from queue. Message selector used to filter message"/>
+      </nodes>
+      <nodes xmi:type="gen_InventoryServices_InventoryServicesFlow1.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="197,144">
+        <translation xmi:type="utility:ConstantString" string="InventoryServices"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Extracts message body from the SOAP message"/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow extracts the body out of the SOAP message, has one output node per operation. This was generated by a WSDL file drag and drop operation."/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQGet.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="498,650" queueName="SSFSMediation_LocalStorage_D" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" transactionMode="automatic" copyMessage="copyEntireMessage" getWithMessageID="true" outputDataLocation="OutputRoot.XMLNSC.Promise.context.correlation" resultDataLocation="ResultRoot.XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="GetExpressionFromMQ"/>
+        <longDescription xmi:type="utility:ConstantString" string="Get Expression from the queue and put it in the Message"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="1396,136" queueManagerName="MB7QMGR" queueName="SSFSMediation_LocalStorage_D" transactionMode="no" persistenceMode="no" messageContext="passIdentity">
+        <translation xmi:type="utility:ConstantString" string="MQ Output"/>
+        <longDescription xmi:type="utility:ConstantString" string="Stores MQ message to local queue"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSHeader.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="483,231" jmsHeaderOptions="Add header" jmsDeliveryMode="Non_Persistent" jmsExpiration="0" jmsPriority="4">
+        <translation xmi:type="utility:ConstantString" string="ReserveAvailableInventory_SetFunctionName"/>
+        <longDescription xmi:type="utility:ConstantString" string="Add message selector (Application Properties Tab) which is used by the backend OMS (Sterling) to differentiate different request."/>
+        <application_Property name="TargetFunctionName" value="reserveAvailableInventory"/>
+        <nsMappingTable nsPrefix="BOD" namespace="http://www.openapplications.org/oagis/9"/>
+        <nsMappingTable nsPrefix="_inv" namespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRoute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="376,182" distributionMode="first">
+        <outTerminals terminalNodeID="Match" dynamic="true" label="Match"/>
+        <outTerminals terminalNodeID="ReserveInventory" dynamic="true" label="ReserveInventory"/>
+        <outTerminals terminalNodeID="CancelInventoryReservation" dynamic="true" label="CancelInventoryReservation"/>
+        <translation xmi:type="utility:ConstantString" string="ActionCodeFilter"/>
+        <longDescription xmi:type="utility:ConstantString" string="Route message according to Action Code"/>
+        <filterTable filterPattern="$Root/XMLNSC/_inv:ProcessInventoryRequirement/_inv:DataArea/Act:Process/Act:ActionCriteria/Act:ActionExpression/@actionCode='ReserveInventory'" routingOutputTerminal="ReserveInventory"/>
+        <filterTable filterPattern="$Root/XMLNSC/_inv:ProcessInventoryRequirement/_inv:DataArea/Act:Process/Act:ActionCriteria/Act:ActionExpression/@actionCode='CancelInventoryReservation'" routingOutputTerminal="CancelInventoryReservation"/>
+        <nsMappingTable nsPrefix="Act" namespace="http://www.openapplications.org/oagis/9"/>
+        <nsMappingTable nsPrefix="_inv" namespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="543,277" stylesheetName="xslt/custom/ProcessInventoryRequirementToReserveAvailableInventoryInput.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208" validateTiming="complete">
+        <translation xmi:type="utility:ConstantString" string="ProcessInventoryRequirementToReserveAvailableInventoryInput_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_19" location="613,355" stylesheetName="xslt/custom/ProcessInventoryRequirementToMultiApiInput.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="ProcessInventoryRequirementToMultiApiInput_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSHeader.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_21" location="468,383" jmsHeaderOptions="Add header" jmsDeliveryMode="Non_Persistent" jmsExpiration="0" jmsPriority="4">
+        <translation xmi:type="utility:ConstantString" string="MultiApi_SetFunctionName"/>
+        <longDescription xmi:type="utility:ConstantString" string="Add message selector (Application Properties Tab) which is used by the backend OMS (Sterling) to differentiate different request."/>
+        <application_Property name="TargetFunctionName" value="multiApi"/>
+        <nsMappingTable nsPrefix="BOD" namespace="http://www.openapplications.org/oagis/9"/>
+        <nsMappingTable nsPrefix="_inv" namespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_25" location="20,774" sourceQueueName="SSFSAPIsImport_RECEIVE_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" propertySelector="SubFlowName='WC_reserveAvailableInventory'">
+        <translation xmi:type="utility:ConstantString" string="ReserveAvailableInventory"/>
+        <longDescription xmi:type="utility:ConstantString" string="Retreives message from queue. Message selector used to filter message"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="75,867" sourceQueueName="SSFSAPIsImport_RECEIVE_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" propertySelector="SubFlowName='WC_multiApi'">
+        <translation xmi:type="utility:ConstantString" string="MultiApi"/>
+        <longDescription xmi:type="utility:ConstantString" string="Retreives message from queue. Message selector used to filter message"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_22" location="782,866" stylesheetName="xslt/custom/MultiApiOutputToAcknowledgeInventoryRequirement.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="MultiApi_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="663,60" stylesheetName="GetInventoryAvailabilityToFindInventoryInput.xsl" stylesheetPath="xslt/custom/" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="GetInventoryAvailabilityToFindInventoryInput_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_23" location="686,647" stylesheetName="xslt/custom/FindInventoryOutputToShowInventoryAvailability.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="FindInventoryToShowInventoryAvailability_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_24" location="610,775" stylesheetName="xslt/custom/ReserveAvailableInventoryOutputToAcknowledgeInventoryRequirement.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="ReserveAvailableInventoryToAcknowledgeInventoryRequirement_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="108,145" pattern="Current date is ${CURRENT_DATE} : ${EXTRACT(HOUR FROM CURRENT_TIMESTAMP)}:${EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)}&#xA;&#xA;Message passed through with the following fields:&#xA;Operation is ${Body.Context.operation}&#xA;Message body  is ${Body.Body}">
+        <translation xmi:type="utility:ConstantString" string="TraceInput1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_26" location="806,143" pattern="Current date is ${CURRENT_DATE} : ${EXTRACT(HOUR FROM CURRENT_TIMESTAMP)}:${EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)}&#xA;&#xA;Message passed through with the following fields:&#xA;Message body  is ${Root.XMLNSC}">
+        <translation xmi:type="utility:ConstantString" string="Trace_GetInventoryAvailabilityToFindInventoryInput"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_28" location="739,207" pattern="Current date is ${CURRENT_DATE} : ${EXTRACT(HOUR FROM CURRENT_TIMESTAMP)}:${EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)}&#xA;&#xA;Message passed through with the following fields:&#xA;Message body  is ${Root.XMLNSC}">
+        <translation xmi:type="utility:ConstantString" string="Trace_ProcessInventoryRequirementToReserveAvailableInventoryInput"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_29" location="829,414" pattern="Current date is ${CURRENT_DATE} : ${EXTRACT(HOUR FROM CURRENT_TIMESTAMP)}:${EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)}&#xA;&#xA;Message passed through with the following fields:&#xA;Message body  is ${Root.XMLNSC}">
+        <translation xmi:type="utility:ConstantString" string="Trace_ProcessInventoryRequirementToMultiApiInput"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSMQTransform.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="1146,109">
+        <translation xmi:type="utility:ConstantString" string="JMS MQ Transform"/>
+        <longDescription xmi:type="utility:ConstantString" string="Adds MQ headers"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_31" location="1249,128" computeExpression="esql://routine/#InventoryServices_SetMQProperties.Main">
+        <translation xmi:type="utility:ConstantString" string="SetMQProperties"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_32" location="918,23" computeExpression="esql://routine/#SSFSAPIsUtil_SetSOAPReplyIdToJMSCorrelId.Main">
+        <translation xmi:type="utility:ConstantString" string="SetSOAPReplyIdToJMSCorrelId"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_33" location="200,639" computeExpression="esql://routine/#SSFSAPIsUtil_SetJMSMsgIdToJMSCorrelId.Main">
+        <translation xmi:type="utility:ConstantString" string="SetJMSMsgIdToJMSCorrelId"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSMQTransform.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_34" location="368,646">
+        <translation xmi:type="utility:ConstantString" string="JMS MQ Transform1"/>
+        <longDescription xmi:type="utility:ConstantString" string="Converts MsgId to the correct format"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_38" location="1193,292" destinationQueueName="SSFSAPIsImport_SEND_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageType="jms_text">
+        <translation xmi:type="utility:ConstantString" string="JMS Output1"/>
+        <longDescription xmi:type="utility:ConstantString" string="Send the request with xml message to the queue which will then be picked up by the backend OMS (Sterling)"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_39" location="1196,651" computeExpression="esql://routine/#SSFSAPIsUtil_PutSOAPReplyId.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="PutSOAPReplyId"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_40" location="992,305" computeExpression="esql://routine/#SSFSAPIsUtil_SetSOAPReplyIdToJMSCorrelId.Main">
+        <translation xmi:type="utility:ConstantString" string="SetSOAPReplyIdToJMSCorrelId1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_41" location="525,3" computeExpression="esql://routine/#InventoryServices_SetExpressionToLocalEnviornment.Main">
+        <translation xmi:type="utility:ConstantString" string="SetExpressionToLocalEnviornment"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSMQTransform.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="1081,683">
+        <translation xmi:type="utility:ConstantString" string="JMS MQ Transform2"/>
+        <longDescription xmi:type="utility:ConstantString" string="Converts MsgId to the correct format"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="944,717" computeExpression="esql://routine/#SSFSAPIsUtil_SetJMSMsgIdToJMSCorrelId.Main">
+        <translation xmi:type="utility:ConstantString" string="SetJMSMsgIdToJMSCorrelId1"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="ReserveInventory" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_21" sourceNode="FCMComposite_1_2" sourceTerminalName="CancelInventoryReservation" targetTerminalName="InTerminal.in">
+        <bendPoints>59,105,-88,-84</bendPoints>
+      </connections>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_22" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_27" targetNode="FCMComposite_1_24" sourceNode="FCMComposite_1_25" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_31" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_20" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_31" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_30" targetNode="FCMComposite_1_33" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_32" targetNode="FCMComposite_1_34" sourceNode="FCMComposite_1_33" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_33" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_34" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_34" targetNode="FCMComposite_1_23" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_43" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_39" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_44" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_49" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.GetInventoryAvailability" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_52" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.ProcessInventoryRequirement" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_54" targetNode="FCMComposite_1_38" sourceNode="FCMComposite_1_40" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_63" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_41" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_64" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_32" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_39" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_39" sourceNode="FCMComposite_1_23" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_24" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_22" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_41" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_32" sourceNode="FCMComposite_1_26" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_26" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_28" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_18" targetNode="FCMComposite_1_40" sourceNode="FCMComposite_1_28" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_21" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_29" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_40" sourceNode="FCMComposite_1_29" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

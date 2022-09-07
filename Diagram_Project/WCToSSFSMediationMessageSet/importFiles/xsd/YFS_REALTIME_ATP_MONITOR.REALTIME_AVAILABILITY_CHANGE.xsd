@@ -1,0 +1,3037 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.sterlingcommerce.com/documentation/YFS/REALTIME_ATP_MONITOR/REALTIME_AVAILABILITY_CHANGE"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:yfc="http://www.sterlingcommerce.com/documentation/YFS/REALTIME_ATP_MONITOR/REALTIME_AVAILABILITY_CHANGE" xmlns:yfctype="http://www.sterlingcommerce.com/documentation/types">
+    <xsd:annotation
+        yfc:fileName="YFS_REALTIME_ATP_MONITOR.REALTIME_AVAILABILITY_CHANGE.xsd" yfc:rootElement="AvailabilityChange">
+        <xsd:appinfo source="yfc:structure">
+            <AvailabilityChange hasAttributes="Y">
+                <Item hasAttributes="Y">
+                    <ItemAttributeGroupTypeList>
+                        <ItemAttributeGroupType hasAttributes="Y">
+                            <ItemAttributeGroupList>
+                                <ItemAttributeGroup hasAttributes="Y">
+                                    <ItemAttributeList>
+                                    <ItemAttribute hasAttributes="Y">
+                                    <Attribute hasAttributes="Y">
+                                    <DerivedFromAttribute hasAttributes="Y"/>
+                                    <AttributeReference hasAttributes="Y"/>
+                                    <AttributeAllowedValueList>
+
+                                    <AttributeAllowedValue hasAttributes="Y"/>
+                                    </AttributeAllowedValueList>
+                                    </Attribute>
+                                    <AssignedValueList>
+                                    <AssignedValue hasAttributes="Y"/>
+                                    </AssignedValueList>
+                                    </ItemAttribute>
+                                    </ItemAttributeList>
+                                    <ItemAttrGroupLocaleList hasAttributes="Y">
+                                    <ItemAttrGroupLocale hasAttributes="Y"/>
+                                    </ItemAttrGroupLocaleList>
+                                </ItemAttributeGroup>
+                            </ItemAttributeGroupList>
+                            <ItemAttrGrpTypeLocaleList hasAttributes="Y">
+                                <ItemAttrGrpTypeLocale hasAttributes="Y"/>
+                            </ItemAttrGrpTypeLocaleList>
+                        </ItemAttributeGroupType>
+                    </ItemAttributeGroupTypeList>
+                    <InheritedAttributes>
+                        <InheritedAttribute hasAttributes="Y"/>
+                    </InheritedAttributes>
+                    <AssetList hasAttributes="Y">
+                        <Asset hasAttributes="Y">
+                            <AssetLocaleList hasAttributes="Y">
+                                <AssetLocale hasAttributes="Y"/>
+                            </AssetLocaleList>
+                        </Asset>
+                    </AssetList>
+                    <ItemLocaleList hasAttributes="Y">
+                        <ItemLocale hasAttributes="Y">
+                            <PrimaryInformation hasAttributes="Y"/>
+                        </ItemLocale>
+                    </ItemLocaleList>
+                    <WIPCostFactorPurpose hasAttributes="Y"/>
+                    <PrimaryInformation hasAttributes="Y"/>
+                    <InventoryParameters hasAttributes="Y"/>
+                    <ClassificationCodes hasAttributes="Y"/>
+                    <HazmatInformation hasAttributes="Y"/>
+                    <ItemServiceSkillList>
+                        <ItemServiceSkill hasAttributes="Y"/>
+                    </ItemServiceSkillList>
+                    <ItemAliasList>
+                        <ItemAlias hasAttributes="Y"/>
+                    </ItemAliasList>
+                    <ItemExclusionList>
+                        <ItemExclusion hasAttributes="Y"/>
+                    </ItemExclusionList>
+                    <AdditionalAttributeList>
+                        <AdditionalAttribute hasAttributes="Y"/>
+                    </AdditionalAttributeList>
+                    <LanguageDescriptionList>
+                        <LanguageDescription hasAttributes="Y"/>
+                    </LanguageDescriptionList>
+                    <Components>
+                        <Component hasAttributes="Y"/>
+                    </Components>
+                    <InventoryTagAttributes hasAttributes="Y"/>
+                    <AlternateUOMList>
+                        <AlternateUOM hasAttributes="Y"/>
+                    </AlternateUOMList>
+                    <ItemInstructionList>
+                        <ItemInstruction hasAttributes="Y"/>
+                    </ItemInstructionList>
+                    <ItemOptionList>
+                        <ItemOption hasAttributes="Y"/>
+                    </ItemOptionList>
+                    <ItemServiceAssocList>
+                        <ItemServiceAssoc hasAttributes="Y">
+                            <ItemServiceAssocSkillList>
+                                <ItemServiceAssocSkill hasAttributes="Y"/>
+                            </ItemServiceAssocSkillList>
+                        </ItemServiceAssoc>
+                    </ItemServiceAssocList>
+                    <ServiceActivities>
+                        <ServiceActivity hasAttributes="Y">
+                            <ServiceActivityInstructions>
+                                <ServiceActivityInstruction hasAttributes="Y"/>
+                            </ServiceActivityInstructions>
+                        </ServiceActivity>
+                    </ServiceActivities>
+                    <CategoryList>
+                        <Category hasAttributes="Y"/>
+                    </CategoryList>
+                    <ChildItemList>
+                        <ChildItem hasAttributes="Y"/>
+                    </ChildItemList>
+                </Item>
+            </AvailabilityChange>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:import
+        namespace="http://www.sterlingcommerce.com/documentation/types" schemaLocation="datatypes.xsd"/>
+    <xsd:element name="AvailabilityChange" type="yfc:AvailabilityChangeXSDType">
+        <xsd:annotation yfc:tableName="YFS_INVENTORY_ALERTS">
+            <xsd:documentation>Stores information on inventory alerts raised by the system.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="AvailabilityChangeXSDType">
+        <xsd:all>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:Item"/>
+        </xsd:all>
+        <xsd:attribute name="AgentCriteriaId"
+            type="yfctype:AgentCriteriaId" use="optional">
+            <xsd:annotation yfc:columnName="AGENT_CRITERIA_ID" yfc:tableName="YFS_AGENT_CRITERIA">
+                <xsd:documentation>
+                    <div>
+				AgentCriteriaId used during the monitoring process. 
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="AlertLevel" type="yfctype:Text-20" use="optional">
+            <xsd:annotation yfc:columnName="ALERT_LEVEL" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Level of alert raised.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="AlertQuantity" type="yfctype:Quantity" use="optional">
+            <xsd:annotation yfc:columnName="ALERT_QUANTITY" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>
+                    <div>
+				Alert quantity for the alert level specified in the monitor rule.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="AlertRaisedOn" type="yfctype:TimeStamp" use="optional">
+            <xsd:annotation yfc:columnName="ALERT_RAISED_ON" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Date alert was raised.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="AlertType" type="yfctype:Text-40" use="optional">
+            <xsd:annotation yfc:columnName="ALERT_TYPE" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>
+                    <div>
+				Values: REALTIME_ONHAND value represents alert raised for onhand inventory and REALTIME_FUTURE_MAX value represents alert raised for maximum future inventory within the horizon.  Alerts are only raised with <code>AlertType</code> REALTIME_FUTURE_MAX if the <code>OnhandAvailableQuantity</code> falls below the quantity configured for alert level 3.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="DistributionRuleId"
+            type="yfctype:DistributionRuleId" use="optional">
+            <xsd:annotation yfc:columnName="DISTRIBUTION_RULE_ID" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Distribution group for which the alert has been raised.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="FirstFutureAvailableDate"
+            type="yfctype:Date" use="optional">
+            <xsd:annotation yfc:columnName="FIRST_FUTURE_AVAILABLE_DATE" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Earliest date when any future inventory will be available.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="FutureAvailableDate" type="yfctype:Date" use="optional">
+            <xsd:annotation yfc:columnName="FUTURE_AVAILABLE_DATE" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Date when the maximum future inventory will be available.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="FutureAvailableQuantity"
+            type="yfctype:Quantity" use="optional">
+            <xsd:annotation yfc:columnName="FUTURE_AVAILABLE_QUANTITY" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Maximum future inventory available quantity within the monitoring period.  The end of the monitoring period is determined by the lead time override (if specifies) in the monitor rule or the lead time of the monitoring item.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="IsDefaultDistributionGroup"
+            type="yfctype:Flag" use="optional">
+            <xsd:annotation
+                yfc:columnName="IS_DEFAULT_DISTRIBUTION_GROUP" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>
+                    <div>
+				Values: Y value represents alert was raised by RealtimeAvailabilityMonitor Agent.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="MonitorOption"
+            type="yfctype:Integer4AgentCriteria" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Monitor option of the agent which raised the event.
+				Values: 1-ActivityBased  2-QuickSync  3-FullSync.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="Node" type="yfctype:ShipNode" use="optional">
+            <xsd:annotation yfc:columnName="SHIP_NODE" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>
+                    <div>
+				Monitored node that the inventory information belongs to.  If <code>ShipNode</code> value is Null, it means that the inventory picture belongs to the default distribution group of the item.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="OnhandAvailableDate" type="yfctype:Date" use="optional">
+            <xsd:annotation yfc:columnName="ONHAND_AVAILABLE_DATE" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Date when on-hand inventory quantity is available.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="OnhandAvailableQuantity"
+            type="yfctype:Quantity" use="optional">
+            <xsd:annotation yfc:columnName="ONHAND_AVAILABLE_QUANTITY" yfc:tableName="YFS_INVENTORY_ALERTS">
+                <xsd:documentation>Total on-hand inventory available quantity.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:element name="Item">
+        <xsd:annotation yfc:tableName="YFS_ITEM">
+            <xsd:documentation>The table stores product information.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemAttributeGroupTypeList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:InheritedAttributes"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AssetList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemLocaleList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:WIPCostFactorPurpose"/>
+                <xsd:element maxOccurs="1" minOccurs="0" name="PrimaryInformation">
+                    <xsd:annotation yfc:tableName="YFS_ITEM">
+                        <xsd:documentation>The table stores product information.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:attribute name="AllowGiftWrap"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="ALLOW_GIFT_WRAP" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates that the item can be gift wrapped.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="AssumeInfiniteInventory"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="ASSUME_INFINITE_INVENTORY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether an item is assumed to be always available. Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="BundleFulfillmentMode"
+                            type="yfctype:Text-2" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="BUNDLE_FULFILLMENT_MODE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The way in which the bundle will be fulfilled. It can be Ship Together(01), Ship Independent(00), or Deliver Together(02) for Bundle Item. Default value is Ship Together(01) for Bundle Item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="BundlePricingStrategy" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="BUNDLE_PRICE_STRAT" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Determines how a bundle will be priced. A bundle can by priced by PARENT (only the parent's price is used), COMP (only the components' prices are used), or ALL (both parent's and components' prices are used). Default: PARENT.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                                <xsd:restriction base="yfctype:BundlePricingStrategy">
+                                    <xsd:enumeration value="PARENT"/>
+                                    <xsd:enumeration value="COMP"/>
+                                    <xsd:enumeration value="ALL"/>
+                                    <xsd:enumeration value=""/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="CapacityPerOrderedQty"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="CAPACITY_PER_ORDERED_QTY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The capacity per ordered quantity.  Used to compute required capacity based on line ordered quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="CapacityQuantityStrategy"
+                            type="yfctype:Text-20" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="CAPACITY_QUANTITY_STRATEGY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field determines how the capacity quantity is arrived at for provided and delivery services from the inventory quantity.   Valid values: ORD - Based on the ordered service quantity; ASSOC - Based on the service and product association.  Default value: ORD.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ColorCode"
+                            type="yfctype:Text-40" use="optional">
+                            <xsd:annotation yfc:columnName="COLOR_CODE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field describes color code for the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ComputedUnitCost"
+                            type="yfctype:UnitPrice" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="COMPUTED_UNIT_COST" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The computed standard cost of the item. This will be set when createItem/ modifyItem API is called specifically with computeUnitCost flag as Y and item unit cost is calculated based on REPLACEMENT COST.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ConfigurationKey"
+                            type="yfctype:Key" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="CONFIGURATION_KEY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>A reference to the BOM XML if the item is pre-configured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ConfigurationModelName"
+                            type="yfctype:Text-254" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="CONFIG_MODEL_NAME" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The configuration model name for this item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ConfiguredModelKey"
+                            type="yfctype:Key" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="CONFIGURED_MODEL_KEY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The key of the configured model for a configurable item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="CostCurrency"
+                            type="yfctype:Currency" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="COST_CURRENCY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The currency in which the item's cost is defined.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="CountryOfOrigin"
+                            type="yfctype:Country" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="COUNTRY_OF_ORIGIN" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The item's country of origin/manufacture.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="CreditWOReceipt"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="CREDIT_WO_RECEIPT" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates if credit may be provided with out receipts on return of an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="DefaultProductClass"
+                            type="yfctype:ProductClass" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="DEFAULT_PRODUCT_CLASS" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The default product class of an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="Description"
+                            type="yfctype:ItemDesc" use="optional">
+                            <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The description of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="DisplayItemDescription"
+                            type="yfctype:String" use="optional">
+                            <xsd:annotation>
+                                <xsd:documentation>User defined description of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="EffectiveEndDate" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="EFFECTIVE_END_DATE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Defines the end time when the item is valid.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                                <xsd:union>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="yfctype:Date"/>
+                                    </xsd:simpleType>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value=""/>
+                                    </xsd:restriction>
+                                    </xsd:simpleType>
+                                </xsd:union>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="EffectiveStartDate" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="EFFECTIVE_START_DATE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Defines the start time when the item is valid.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                                <xsd:union>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="yfctype:Date"/>
+                                    </xsd:simpleType>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value=""/>
+                                    </xsd:restriction>
+                                    </xsd:simpleType>
+                                </xsd:union>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="ExtendedDescription"
+                            type="yfctype:Text-2000" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="EXTENDED_DESCRIPTION" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The extended multi-line description of the Item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="FixedCapacityQtyPerLine"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="FIXED_CAPACITY_QTY_PER_LINE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The fixed capacity quantity will be assumed irrespective of the inventory quantity for the line shipped with this item when the strategy is fixed.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="FixedPricingQtyPerLine"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="FIXED_PRICING_QTY_PER_LINE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The fixed pricing quanity per line. Fixed pricing quantity will be assumed irrespective of the inventory quantity for the line shipped with this item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ImageID" type="yfctype:Key" use="optional">
+                            <xsd:annotation yfc:columnName="IMAGE_ID" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Unique ID of the image in the external location.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ImageLabel"
+                            type="yfctype:Text-200" use="optional">
+                            <xsd:annotation yfc:columnName="IMAGE_LABEL" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Label of the image.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ImageLocation"
+                            type="yfctype:URL" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IMAGE_LOCATION" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>External location of the image.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="InvoiceBasedOnActuals"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="INVOICE_BASED_ON_ACTUALS" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether invoicing is done based on actual weight to support catch weight items.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="InvolvesSegmentChange"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="INVOLVES_SEGMENT_CHANGE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether an item performs segment change.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsAirShippingAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_AIR_SHIPPING_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Indicates if item can be shipped by air. Default value: Y.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsConfigurable"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_CONFIGURABLE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates that the item is a configurable item. A configurable item can either be a bundle or a physical kit. A configurable bundle item offers a number of different options from which a customer can select before buying the product. Components for a bundle are not specified in the catalog as the actual components will be determined by the user when an order is placed. A physical kit must always be pre-configured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsDeliveryAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_DELIVERY_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether the delivery method DEL is allowed for item. Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute
+                            name="IsEligibleForShippingDiscount" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_ELIGIBLE_FOR_SHIP_DISC" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Determines whether the item is eligible for shipping discounts. Default Value: Y.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                                <xsd:restriction base="yfctype:Flag">
+                                    <xsd:enumeration value=""/>
+                                    <xsd:enumeration value="N"/>
+                                    <xsd:enumeration value="Y"/>
+                                </xsd:restriction>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsForwardingAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_FORWARDING_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates if the item can be forwarded for zone skipping.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsFreezerRequired"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_FREEZER_REQUIRED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Indicates if item requires freezer for transportation. Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsHazmat"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation yfc:columnName="IS_HAZMAT" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Indicates if item is hazardous material.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsModelItem"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_MODEL_ITEM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates that the item is an item with variations (formerly known as a model item). An item with variations represents a group of items with similar set of attributes.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsParcelShippingAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_PARCEL_SHIPPING_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether the item can be shipped through parcel service. Default value: Y.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsPickupAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_PICKUP_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether the delivery method PICK is allowed for item. Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsPreConfigured"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_PRE_CONFIGURED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates that the configurable item is pre-configured with selected options. If a bundle is pre-configured, the bundle or physical components that represent the selected option will be available in the catalog. For a pre-configured physical kit, only the physical kit will be available as the item in the catalog.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsProcurementAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_PROCUREMENT_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates if the item can be procured for zone skipping.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsReturnService"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_RETURN_SERVICE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether this provided or delivery service item is to be associated only to a return document.  Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsReturnable"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_RETURNABLE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether this product item is returnable. Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsShippingAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_SHIPPING_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether the delivery method SHP is allowed for item. Default value: N.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsSoldSeparately"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_SOLD_SEPARATELY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Indicates if the item can be sold separately. If N, then the item must be part of a bundle or kit. Valid Values: 'Y' or 'N'.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsStandaloneService"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_STANDALONE_SERVICE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether a PS Item is standalone and does not require associations with product lines for it to be included on an order line.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsSubOnOrderAllowed"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="IS_SUB_ON_ORDER_ALLOWED" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Indicates if during scheduling an order, substitution is allowed or not. If Y, schedule will automatically attempt to substitute an item with preferred or regular substitute.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="IsValid"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation>
+                                <xsd:documentation>This flag indicates whether the item is valid.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ItemType"
+                            type="yfctype:Text-40" use="optional">
+                            <xsd:annotation yfc:columnName="ITEM_TYPE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The generic type of an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="Keywords"
+                            type="yfctype:Text-1000" use="optional">
+                            <xsd:annotation yfc:columnName="KEYWORDS" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>A field used to specify keywords to be associated with the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="KitCode"
+                            type="yfctype:EnumKitCode" use="optional">
+                            <xsd:annotation yfc:columnName="KIT_CODE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field indicates the kit code for this item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ManufacturerItem"
+                            type="yfctype:Text-100" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MANUFACTURER_ITEM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The identifier used by a manufacturer to identify an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ManufacturerItemDesc"
+                            type="yfctype:Text-255" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MANUFACTURER_ITEM_DESC" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The description of an item, from a manufacturer's view point.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ManufacturerName"
+                            type="yfctype:Text-50" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MANUFACTURER_NAME" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The manufacturer of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="MasterCatalogID"
+                            type="yfctype:ID-40" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MASTER_CATALOG_ID" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The master catalog to which an item belongs.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="MaxOrderQuantity"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MAX_ORDER_QUANTITY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The maximum order quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="MinOrderQuantity"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MIN_ORDER_QUANTITY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The minimum order quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="MinimumCapacityQuantity"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MINIMUM_CAPACITY_QUANTITY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This is the minimum capacity quantity which will be assumed when  the inventory quantity of the line to arrive at the capacity quantity when the strategy is to arrive at the capacity quantity by association with product line.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ModelItemUnitOfMeasure"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="MODEL_ITEM_UOM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field describes the unit of measure of the item with variations.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="NumSecondarySerials"
+                            type="yfctype:Digit" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="NUM_SECONDARY_SERIALS" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The number of secondary serial numbers applicable for a serialized item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="OrderingQuantityStrategy"
+                            type="yfctype:Text-20" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="ORDERING_QUANTITY_STRATEGY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field determines how the ordered quantity is arrived at for a service line.  Valid values: ENT - Based on the entered value on the order line; PROD - Based on the associated product line.  Default value: ENT.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="PricingQuantityConvFactor"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="PRICING_QUANTITY_CONV_FACTOR" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The pricing quantity conversion factor. This conversion factor is multiplied with the inventory quantity of the line to arrive at this pricing quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="PricingQuantityStrategy"
+                            type="yfctype:Text-20" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="PRICING_QUANTITY_STRATEGY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field determines how the pricing quantity is arrived at when different from the inventory quantity.   Valid values: IQTY - Based on the inventory quantity.  Default value: IQTY.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="PricingUOM"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation yfc:columnName="PRICING_UOM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The pricing unit of measure, if different from the inventory unit of measure.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="PricingUOMStrategy"
+                            type="yfctype:Text-20" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="PRICING_UOM_STRATEGY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field determines how the pricing unit of measure is defaulted for the item. It could be same as the inventory UOM or could be different.  Valid values: INV - Same as the inventory UOM; ALT - Different from the inventory UOM.  Default value: INV.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="PrimaryEnterpriseCode"
+                            type="yfctype:OrgCode" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="PRIMARY_ENTERPRISE_CODE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The primary enterprise associated with an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="PrimarySupplier"
+                            type="yfctype:OrgCode" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="PRIMARY_SUPPLIER" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The primary supplier. This will have the primary supplier organization code for the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ProductLine"
+                            type="yfctype:Text-100" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="PRODUCT_LINE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The product line associated with the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="RequiresProdAssociation"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="REQUIRES_PROD_ASSOCIATION" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>IThis flag indicates whether the item must be associated to an order line having a group code of PROD. Applicable for service items which must be associated to a Product order line.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ReturnWindow" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="RETURN_WINDOW" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The number of days after which return may not be accepted. Default value: 0.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                                <xsd:union>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="yfctype:NumberOfDays"/>
+                                    </xsd:simpleType>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value=""/>
+                                    </xsd:restriction>
+                                    </xsd:simpleType>
+                                </xsd:union>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="RunQuantity"
+                            type="yfctype:Quantity" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="RUN_QUANTITY" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The run quantity indicates the multiple of quantity in which a work order gets created. This field is valid only for service items.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="SerializedFlag"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="SERIALIZED_FLAG" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether an item is serialized.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ServiceTypeID"
+                            type="yfctype:Text-24" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="SERVICE_TYPE_ID" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The service type associated to this service item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute
+                            name="ShipmentConsolidationWindow" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="SHP_CONSOL_WINDOW" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>Indicates the number of days an item can be delayed after it becomes available to be consolidated to a single shipment. Used by scheduling when shipment/cost optimization is considered.</xsd:documentation>
+                            </xsd:annotation>
+                            <xsd:simpleType>
+                                <xsd:union>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="yfctype:NumberOfDays"/>
+                                    </xsd:simpleType>
+                                    <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                    <xsd:enumeration value=""/>
+                                    </xsd:restriction>
+                                    </xsd:simpleType>
+                                </xsd:union>
+                            </xsd:simpleType>
+                        </xsd:attribute>
+                        <xsd:attribute name="ShortDescription"
+                            type="yfctype:Text-100" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The short description of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="SizeCode"
+                            type="yfctype:Text-40" use="optional">
+                            <xsd:annotation yfc:columnName="SIZE_CODE" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field describes the size code of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="Status"
+                            type="yfctype:EnumShortStatus" use="optional">
+                            <xsd:annotation yfc:columnName="STATUS" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This field indicates the status of an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="TaxableFlag"
+                            type="yfctype:Flag" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="TAXABLE_FLAG" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>This flag indicates whether an item is taxable.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitCost"
+                            type="yfctype:UnitPrice" use="optional">
+                            <xsd:annotation yfc:columnName="UNIT_COST" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The cost of one unit of an item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitHeight"
+                            type="yfctype:Dimension" use="optional">
+                            <xsd:annotation yfc:columnName="UNIT_HEIGHT" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The height of one unit of item quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitHeightUOM"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="UNIT_HEIGHT_UOM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The unit of measure in which item height is measured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitLength"
+                            type="yfctype:Dimension" use="optional">
+                            <xsd:annotation yfc:columnName="UNIT_LENGTH" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The length of one unit of item quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitLengthUOM"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="UNIT_LENGTH_UOM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The unit of measure in which an item length is measured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitVolume"
+                            type="yfctype:Dimension" use="optional">
+                            <xsd:annotation>
+                                <xsd:documentation>Calculated volume of one unit of item quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitVolumeUOM"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation>
+                                <xsd:documentation>Unit of measure in which the item volume is measured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitWeight"
+                            type="yfctype:Dimension" use="optional">
+                            <xsd:annotation yfc:columnName="UNIT_WEIGHT" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The weight of one unit of item quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitWeightUOM"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="UNIT_WEIGHT_UOM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The unit of measure in which the item weight is measured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitWidth"
+                            type="yfctype:Dimension" use="optional">
+                            <xsd:annotation yfc:columnName="UNIT_WIDTH" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The width of one unit of item quantity.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="UnitWidthUOM"
+                            type="yfctype:UOM" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="UNIT_WIDTH_UOM" yfc:tableName="YFS_ITEM">
+                                <xsd:documentation>The unit of measure in which an item's width is measured.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:InventoryParameters"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ClassificationCodes"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:HazmatInformation"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemServiceSkillList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemAliasList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemExclusionList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AdditionalAttributeList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:LanguageDescriptionList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:Components"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:InventoryTagAttributes"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AlternateUOMList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemInstructionList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemOptionList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemServiceAssocList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ServiceActivities"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:CategoryList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ChildItemList"/>
+            </xsd:all>
+            <xsd:attribute name="CanUseAsServiceTool"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="CAN_USE_AS_SERVICE_TOOL" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indicates whether this item is configured to be a service tool.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="GlobalItemID"
+                type="yfctype:GlobalItemID" use="optional">
+                <xsd:annotation yfc:columnName="GLOBAL_ITEM_ID" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The unique global identifier used to cross reference an item with another catalog organization.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="InheritAttributesFromClassification"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>If the InheritAttributesFromClassification flag is passed as Y and the value of the item attribute is not defined at item level, the system will try to find the value from the classification definition for the ClassificationPurposeCode - 'Inherited Item Attributes'.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsItemSuperseded" type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+					This flag indicates if this item has been superseded. 
+					<br/>Valid Values: <b>
+                            <code>Y</code>
+                        </b>, <b>
+                            <code>N</code>
+                        </b>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemGroupCode"
+                type="yfctype:ItemGroupCode" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_GROUP_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The item group code. Used to identify if the item is a Product, Provided Service, Provided Service Option, Delivery Service or Delivery Service Option.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemID" type="yfctype:ItemID" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ID" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The unique identifier for the item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The primary key for the YFS_ITEM table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="MaxModifyTS" use="optional">
+                <xsd:annotation yfc:columnName="MAX_MODIFYTS" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This field indicates the maximum modify timestamp of this item and its related entities.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:TimeStamp"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="OrganizationCode"
+                type="yfctype:OrgCode" use="required">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The organization code whose product information is being stored.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ProductClass"
+                type="yfctype:ProductClass" use="optional">
+                <xsd:annotation yfc:columnName="PRODUCT_CLASS" yfc:tableName="YFS_INVENTORY_ITEM">
+                    <xsd:documentation>The product class for this inventory item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SubCatalogOrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="SUB_CAT_ORG_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The sub-catalog organization that maintains the item definition.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UnitOfMeasure" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The unit of measure for item quantity.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttributeGroupTypeList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemAttributeGroupType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttributeGroupType">
+        <xsd:annotation yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+            <xsd:documentation>This table stores item attribute group types.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemAttributeGroupList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemAttrGrpTypeLocaleList"/>
+            </xsd:all>
+            <xsd:attribute name="ClassificationPurposeCode"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation
+                    yfc:columnName="CLASSIFICATION_PURPOSE_CODE" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>The classification purpose this group type is associated with.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Description" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>The description of this group type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsForMaintenance" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_FOR_MAINTENANCE" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>This flag indicates whether the item attribute group type can be assigned to a category hierarchy of maintenance. Valid values : Y/N.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsForSelling" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_FOR_SELLING" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>This flag indicates whether the item attribute group type can be assigned to a category hierarchy of selling. Valid values : Y/N.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsSingleGroup" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_SINGLE_GROUP" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>Indicates that this group type will only have a single group defined.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsValidForCategory" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_VALID_FOR_CATEGORY" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>This flag indicates whether the item attribute group type can be assigned to categories. Valid values : Y/N.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsValidForClassification"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation
+                    yfc:columnName="IS_VALID_FOR_CLASSIFICATION" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>This flag indicates whether the item attribute group type can be assigned to classifications. Valid values : Y/N. If value is 'Y', then CLASSIFICATION_PURPOSE is required for selecting classification.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupType"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_GROUP_TYPE" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>The group type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupTypeKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTR_GROUP_TYPE_KEY" yfc:tableName="YFS_ITEM_ATTR_GROUP_TYPE">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_ATTR_GROUP_TYPE.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttributeGroupList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemAttributeGroup"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttributeGroup">
+        <xsd:annotation yfc:tableName="YFS_ITEM_ATTR_GROUP">
+            <xsd:documentation>This table stores specification group definitions.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemAttributeList"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemAttrGroupLocaleList"/>
+            </xsd:all>
+            <xsd:attribute name="ItemAttributeGroupDescription"
+                type="yfctype:FreeText-100" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTR_GROUP_DESCRIPTION" yfc:tableName="YFS_ITEM_ATTR_GROUP">
+                    <xsd:documentation>The description of this item attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupID"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_GROUP_ID" yfc:tableName="YFS_ITEM_ATTR_GROUP">
+                    <xsd:documentation>The identification of the item attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_GROUP_KEY" yfc:tableName="YFS_ITEM_ATTR_GROUP">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_ATTR_GROUP.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupPath"
+                type="yfctype:Text-800" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTRIBUTE_GROUP_PATH" yfc:tableName="YFS_ITEM_ATTR_GROUP">
+                    <xsd:documentation>The path of the attribute group within the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ParentItemAttributeGroupKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="PARENT_ITEM_ATTR_GRP_KEY" yfc:tableName="YFS_ITEM_ATTR_GROUP">
+                    <xsd:documentation>The primary key of the parent item attribute group of this item attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SequenceNo" use="optional">
+                <xsd:annotation yfc:columnName="SEQUENCE_NO" yfc:tableName="YFS_ITEM_ATTR_GROUP">
+                    <xsd:documentation>The sequence of the item attribute group within the item attribute group type.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Count"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttributeList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemAttribute"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttribute">
+        <xsd:annotation yfc:tableName="YFS_ITEM_ATTR">
+            <xsd:documentation>This table stores item attribute definition for each item attribute group.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:Attribute"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AssignedValueList"/>
+            </xsd:all>
+            <xsd:attribute name="AttributeDomainID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_DOMAIN_ID" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The unique identification of the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeGroupID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_GROUP_ID" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The unique identification of the attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="CategoryKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="CATEGORY_KEY" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The category that this attribute is assigned to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsInherited" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_INHERITED" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>This flag indicates whether the assignment is based on inheritance of the attribute assigned to the upper level category.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsKeyAttribute" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_KEY_ATTR" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>This flag indicates that the item attribute is a key attribute for the item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeDescription"
+                type="yfctype:FreeText-100" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_DESCRIPTION" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The description of specification attribute on an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_GROUP_KEY" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The specification group that this specification attribute belongs to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupType"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_GROUP_TYPE" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The item attribute group type this attribute belongs to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_KEY" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_ATTR.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeName"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_NAME" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The name of the item attribute that the specification attribute represents.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SequenceNo"
+                type="yfctype:ShorterNumber" use="optional">
+                <xsd:annotation yfc:columnName="SEQUENCE_NO" yfc:tableName="YFS_ITEM_ATTR">
+                    <xsd:documentation>The sequence of the specifcation attribute within the specification group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Value" type="yfctype:String" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>
+										The associated value of <code>ItemAttributeName</code> for this item.
+									</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Attribute">
+        <xsd:annotation yfc:tableName="YFS_ATTRIBUTE">
+            <xsd:documentation>This table stores attribute definitions. Attributes represent characteristics of entities and can be assigned to an attribute group.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:DerivedFromAttribute"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AttributeReference"/>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AttributeAllowedValueList"/>
+            </xsd:all>
+            <xsd:attribute name="AllowMultipleValues"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="ALLOW_MULTIPLE_VALUES" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>This flag indicates whether multiple values are allowed to be assigned for this attribute. Default value: "N".</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AllowedValueLength" use="optional">
+                <xsd:annotation yfc:columnName="ALLOWED_VALUE_LENGTH" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The maximum length allowed for a value of Data Type = 'TEXT'. If not passed, the maximum length allowed is 200.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:MaxRecordCount"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeDomainID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_DOMAIN_ID" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The unique identification of the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeGroupID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_GROUP_ID" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The unique identification of the attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeID" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_ID" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The unique identifier of the attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_KEY" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The primary key for the YFS_ATTRIBUTE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributePostFix"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_POST_FIX" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The post fix to be applied to the value of this attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="DataType"
+                type="yfctype:EnumAttributeDataType" use="optional">
+                <xsd:annotation yfc:columnName="DATA_TYPE" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The data type allowed for the value of the attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="DerivedFromAttributeKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="DERIVED_FROM_ATTR_KEY" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The primary key of the attribute record from which this attribute is derived.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsAllowedValueDefined"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation
+                    yfc:columnName="IS_ALLOWED_VALUE_DEFINED" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>This flag indicates whether a set of allowed values are defined for this attribute. Default value: "N".</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsValueMandatory" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_VALUE_MANDATORY" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>This flag indicates whether this attribute requires a mandatory selection of value when assigned to an item. Default value: "N".</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LongDescription"
+                type="yfctype:Text-255" use="optional">
+                <xsd:annotation yfc:columnName="LONG_DESCRIPTION" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The detailed description of the  attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The organization that maintains the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SequenceNo" use="optional">
+                <xsd:annotation yfc:columnName="SEQ_NO" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The sequence of this attribute within the attribute group.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Count"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="ShortDescription"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The short description of the  attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="DerivedFromAttribute">
+        <xsd:annotation yfc:tableName="YFS_ATTRIBUTE">
+            <xsd:documentation>This table stores attribute definitions. Attributes represent characteristics of entities and can be assigned to an attribute group.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="AttributeDomainID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_DOMAIN_ID" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The unique identification of the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeGroupID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_GROUP_ID" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The unique identification of the attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeID" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_ID" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The unique identifier of the attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_KEY" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The primary key for the YFS_ATTRIBUTE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The organization that maintains the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShortDescription"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ATTRIBUTE">
+                    <xsd:documentation>The short description of the  attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AttributeReference">
+        <xsd:annotation yfc:tableName="YFS_ATTRIBUTE_REFERENCE">
+            <xsd:documentation>This table stores references of predefined attribute definition to fields of YFS_ITEM or item alias name.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="AttributeKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_KEY" yfc:tableName="YFS_ATTRIBUTE_REFERENCE">
+                    <xsd:documentation>The attribute that this reference field is assigned to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeReferenceKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_REFERENCE_KEY" yfc:tableName="YFS_ATTRIBUTE_REFERENCE">
+                    <xsd:documentation>The primary key attribute of YFS_ATTRIBUTE_REFERENCE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ReferenceName" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="REFERENCE_NAME" yfc:tableName="YFS_ATTRIBUTE_REFERENCE">
+                    <xsd:documentation>The reference name that the predefined attribute represents. If the tablename is 'YFS_ITEM', then this field contains the XML name of the field that the attribute represents. If the tablename is 'YFS_ITEM_ALIAS', then this field contains the item alias name that the attribute represents.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TableName" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="TABLE_NAME" yfc:tableName="YFS_ATTRIBUTE_REFERENCE">
+                    <xsd:documentation>The name of the database table that contains the field assigned to a predefined attribute definition. Valid values : 'YFS_ITEM' or 'YFS_ITEM_ALIAS'.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AttributeAllowedValueList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:AttributeAllowedValue"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AttributeAllowedValue">
+        <xsd:annotation yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+            <xsd:documentation>This table stores allowed values of attribute definition.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="AttributeAllowedValueKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATTR_ALLOWED_VALUE_KEY" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The primary key for the YFS_ATTR_ALLOWED_VALUE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_KEY" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The attribute that the allowed value belongs to.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsDefaultValue" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_DEFAULT_VALUE" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>This flag indicates whether this value is the default value of the attribute. Default value: "N".</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LongDescription"
+                type="yfctype:Text-255" use="optional">
+                <xsd:annotation yfc:columnName="LONG_DESCRIPTION" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The detailed description of the  allowed value.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="NumericStep" use="optional">
+                <xsd:annotation yfc:columnName="NUMERIC_STEP" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The incremental step of the allowed value within the numeric value range. For instance, if the numeric value range is from 0 to 100 and the numeric step is 5, the allowed values are 0, 5, 10, 15, 20, 25, etc.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Number"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="SequenceNo" type="yfctype:Count" use="optional">
+                <xsd:annotation yfc:columnName="SEQ_NO" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The sequence of the allowed value within the attribute definition.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShortDescription"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The short description of the  allowed value.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Value" type="yfctype:Text-200" use="optional">
+                <xsd:annotation yfc:columnName="VALUE" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The allowed value of the attribute that a user is entitled to assign. For an attribute of Numeric or Decimal Datatype, this value may be a list of values and/or a range of values. Each value in the list may be separated by a ';'. A range must be specified by two values separated by a '-'.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AssignedValueList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:AssignedValue"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AssignedValue">
+        <xsd:annotation yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+            <xsd:documentation>
+                <div>
+				The attributes in this element are the values stored as <code>AdditionalAttribute</code> records for the <code>ItemAttribute</code> record under which it appears. For an <code>Attribute</code> configured as a derived attribute, the <code>Value</code> is the configured value for the derived attribute. The value itself is not assigned to the category. <code>IsInherited</code> flag will not appear for a derived attribute.
+				</div>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="DoubleValue" use="optional">
+                <xsd:annotation yfc:columnName="DOUBLE_VALUE" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>The value of the assigned attribute whose data type is 'DECIMAL'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Number"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="IntegerValue" use="optional">
+                <xsd:annotation yfc:columnName="INTEGER_VALUE" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>The value of the assigned attribute whose data type is 'INTEGER'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Number20"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="IsInherited" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_INHERITED" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>This field indicates whether the assignment of attribute value as additional attribute was based on inheritance. For ParentTable='YFS_CATEGORY', a value of 'Y' indicates that the assignment is based on inheritance of the value assigned to the upper level category. For ParentTable='YFS_ITEM', a value of 'Y' indicates that the assignment is based on inheritance of the value assigned to the category to which the item belongs.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LongDescription"
+                type="yfctype:Text-255" use="optional">
+                <xsd:annotation yfc:columnName="LONG_DESCRIPTION" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The detailed description of the  allowed value.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShortDescription"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ATTR_ALLOWED_VALUE">
+                    <xsd:documentation>The short description of the  allowed value.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Value" type="yfctype:Text-2000" use="optional">
+                <xsd:annotation yfc:columnName="VALUE" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>Value of the attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttrGroupLocaleList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemAttrGroupLocale"/>
+            </xsd:sequence>
+            <xsd:attribute name="TotalNumberOfRecords"
+                type="yfctype:Count" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Number of Records in the DB satisfying the passed criteria.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttrGroupLocale">
+        <xsd:annotation yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+            <xsd:documentation>This table is used to store localized information for the related attribute group in different locales.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="Country" type="yfctype:Country" use="optional">
+                <xsd:annotation yfc:columnName="COUNTRY" yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+                    <xsd:documentation>The country associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttrGroupKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ATTR_GROUP_KEY" yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+                    <xsd:documentation>The reference key to the YFS_ITEM_ATTR_GROUP table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttrGroupLocaleKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTR_GROUP_LOCALE_KEY" yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+                    <xsd:documentation>The primary key of the YFS_ITEM_ATTR_GROUP_LOCALE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttributeGroupDescription"
+                type="yfctype:FreeText-100" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTR_GROUP_DESCRIPTION" yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+                    <xsd:documentation>The description of this item attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Language" type="yfctype:Text-10" use="optional">
+                <xsd:annotation yfc:columnName="LANGUAGE" yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+                    <xsd:documentation>The language associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Variant" type="yfctype:Text-20" use="optional">
+                <xsd:annotation yfc:columnName="VARIANT" yfc:tableName="YFS_ITEM_ATTR_GROUP_LOCALE">
+                    <xsd:documentation>The variant associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttrGrpTypeLocaleList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemAttrGrpTypeLocale"/>
+            </xsd:sequence>
+            <xsd:attribute name="TotalNumberOfRecords"
+                type="yfctype:Count" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Number of Records in the DB satisfying the passed criteria.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAttrGrpTypeLocale">
+        <xsd:annotation yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+            <xsd:documentation>This table is used to store localized information for the related item attribute group type in different locales.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="Country" type="yfctype:Country" use="optional">
+                <xsd:annotation yfc:columnName="COUNTRY" yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+                    <xsd:documentation>The country associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Description" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+                    <xsd:documentation>The description of this group type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttrGroupTypeKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTR_GROUP_TYPE_KEY" yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+                    <xsd:documentation>The reference key to the YFS_ITEM_ATTR_GROUP_TYPE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemAttrGrpTypeLocaleKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ITEM_ATTR_GRP_TYPE_LOCALE_KEY" yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+                    <xsd:documentation>The primary key of the YFS_ITEM_ATTR_GRP_TYPE_LOCALE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Language" type="yfctype:Text-10" use="optional">
+                <xsd:annotation yfc:columnName="LANGUAGE" yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+                    <xsd:documentation>The language associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Variant" type="yfctype:Text-20" use="optional">
+                <xsd:annotation yfc:columnName="VARIANT" yfc:tableName="YFS_ITEM_ATTR_GRP_TYPE_LOCALE">
+                    <xsd:documentation>The variant associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InheritedAttributes">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:InheritedAttribute"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InheritedAttribute">
+        <xsd:complexType>
+            <xsd:attribute name="InheritedFrom" type="yfctype:Text-1000" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Value of the Column is obtained from this classification location.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsInherited" type="yfctype:Flag" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>
+                        <div>Indicate that the value of attribute is inherited from classification.
+								<br/>Valid Values: <b>
+                                <code>Y</code>
+                            </b> or <b>
+                                <code>N</code>
+                            </b>
+                        </div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Name" type="yfctype:Text-24" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Column name of the attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Value" type="yfctype:Text-40" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Value of the columns specified in Name attribute</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AssetList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:Asset"/>
+            </xsd:sequence>
+            <xsd:attribute name="TotalNumberOfRecords"
+                type="yfctype:Count" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Number of Records in the DB satisfying the passed criteria.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Asset">
+        <xsd:annotation yfc:tableName="YFS_ASSET">
+            <xsd:documentation>This table stores Asset information such as images, audio, datasheets, video, and URLs. Assets can be used to further describe Items, Categories, Attributes, and Attribute Allowed Values.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AssetLocaleList"/>
+            </xsd:all>
+            <xsd:attribute name="AssetID" type="yfctype:ID-40" use="optional">
+                <xsd:annotation yfc:columnName="ASSET_ID" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>The unique identifier for the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AssetKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ASSET_KEY" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>Primary key attribute of YFS_ASSET.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ContentID" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="CONTENT_ID" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>Unique ID of the asset in the external location.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ContentLocation" type="yfctype:URL" use="optional">
+                <xsd:annotation yfc:columnName="CONTENT_LOCATION" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>External location of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ContentSize" type="yfctype:Text-200" use="optional">
+                <xsd:annotation yfc:columnName="CONTENT_SIZE" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>Size of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Description" type="yfctype:Text-500" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>Description of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Label" type="yfctype:Text-200" use="optional">
+                <xsd:annotation yfc:columnName="LABEL" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>Label of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Type" type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="TYPE" yfc:tableName="YFS_ASSET">
+                    <xsd:documentation>Type of asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AssetLocaleList">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:AssetLocale"/>
+            </xsd:all>
+            <xsd:attribute name="TotalNumberOfRecords"
+                type="yfctype:Count" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Number of Records in the DB satisfying the passed criteria.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AssetLocale">
+        <xsd:annotation yfc:tableName="YFS_ASSET_LOCALE">
+            <xsd:documentation>This table is used to store localized information for the related asset in different locales.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="AssetKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ASSET_KEY" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>The reference key to the YFS_ASSET table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AssetLocaleKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ASSET_LOCALE_KEY" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>The primary key of the YFS_ASSET_LOCALE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ContentID" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="CONTENT_ID" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>Unique ID of the asset in the external location.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ContentLocation" type="yfctype:URL" use="optional">
+                <xsd:annotation yfc:columnName="CONTENT_LOCATION" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>External location of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Country" type="yfctype:Country" use="optional">
+                <xsd:annotation yfc:columnName="COUNTRY" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>The country associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Description" type="yfctype:Text-500" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>Description of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Label" type="yfctype:Text-200" use="optional">
+                <xsd:annotation yfc:columnName="LABEL" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>Label of the asset.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Language" type="yfctype:Text-10" use="optional">
+                <xsd:annotation yfc:columnName="LANGUAGE" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>The language associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Variant" type="yfctype:Text-20" use="optional">
+                <xsd:annotation yfc:columnName="VARIANT" yfc:tableName="YFS_ASSET_LOCALE">
+                    <xsd:documentation>The variant associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemLocaleList">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ItemLocale"/>
+            </xsd:all>
+            <xsd:attribute name="TotalNumberOfRecords"
+                type="yfctype:Count" use="optional">
+                <xsd:annotation>
+                    <xsd:documentation>Number of Records in the DB satisfying the passed criteria.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemLocale">
+        <xsd:annotation yfc:tableName="YFS_ITEM_LOCALE">
+            <xsd:documentation>The table is used to store localized information for the related item in different locales.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" name="PrimaryInformation">
+                    <xsd:annotation yfc:tableName="YFS_ITEM_LOCALE">
+                        <xsd:documentation>The table is used to store localized information for the related item in different locales.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+                        <xsd:attribute name="Description"
+                            type="yfctype:ItemDesc" use="optional">
+                            <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ITEM_LOCALE">
+                                <xsd:documentation>The description of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                        <xsd:attribute name="ShortDescription"
+                            type="yfctype:Text-100" use="optional">
+                            <xsd:annotation
+                                yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ITEM_LOCALE">
+                                <xsd:documentation>The short description of the item.</xsd:documentation>
+                            </xsd:annotation>
+                        </xsd:attribute>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:all>
+            <xsd:attribute name="Country" type="yfctype:Country" use="optional">
+                <xsd:annotation yfc:columnName="COUNTRY" yfc:tableName="YFS_ITEM_LOCALE">
+                    <xsd:documentation>The country associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM_LOCALE">
+                    <xsd:documentation>The reference key to the YFS_ITEM table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemLocaleKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_LOCALE_KEY" yfc:tableName="YFS_ITEM_LOCALE">
+                    <xsd:documentation>The primary key of the YFS_ITEM_LOCALE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Language" type="yfctype:Text-10" use="optional">
+                <xsd:annotation yfc:columnName="LANGUAGE" yfc:tableName="YFS_ITEM_LOCALE">
+                    <xsd:documentation>The language associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Variant" type="yfctype:Text-20" use="optional">
+                <xsd:annotation yfc:columnName="VARIANT" yfc:tableName="YFS_ITEM_LOCALE">
+                    <xsd:documentation>The variant associated with the locale.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="WIPCostFactorPurpose">
+        <xsd:annotation yfc:tableName="YFS_COST_FACTOR_GROUP">
+            <xsd:documentation>This table stores information about cost factor groups defined in the system. Cost factor group are defined by the enterprise organization.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="CostFactorGroupKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="COST_FACTOR_GROUP_KEY" yfc:tableName="YFS_COST_FACTOR_GROUP">
+                    <xsd:documentation>Primary key for the YFS_COST_FACTOR_GROUP table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="CostFactorGroupName"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="COST_FACTOR_GROUP_NAME" yfc:tableName="YFS_COST_FACTOR_GROUP">
+                    <xsd:documentation>Name of the Cost Factor Group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InventoryParameters">
+        <xsd:annotation yfc:tableName="YFS_ITEM">
+            <xsd:documentation>The table stores product information.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ATPRule" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ATP_RULE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The available to promise rule to be used for the item to determine availability.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AdvanceNotificationTime" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ADVANCE_NOTIFICATION_TIME" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The advance notification time for this item. Communication to ship the order to shipping node/supplier is made at most this many days before the expected shipment date. Used during the release process. Default value: 0.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:NumberOfDays"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="DefaultExpirationDays"
+                type="yfctype:NumberOfDays" use="optional">
+                <xsd:annotation yfc:columnName="DEFAULT_EXPIRATION_DAYS" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The default for number of days after which an item would expire.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="FutureSafetyFactorPercentage" use="optional">
+                <xsd:annotation
+                    yfc:columnName="FUTURE_SAFETY_FACTOR_PCT" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The future safety factor percentage of this item.  The FutureSafetyFactorPercentage will be excluded from the actual future availability of the item if the scheduling rule, node type, and supply type are configured to apply future safety factor.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Percentage"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="InventoryMonitorRule"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="INVENTORY_MONITOR_RULE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The monitoring rule that will be used by the availability monitor.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsFifoTracked" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_FIFO_TRACKED" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indicates whether an item is FIFO tracked. Default value: N.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsItemBasedAllocationAllowed"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_IBA_ALLOWED" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indicates whether the item is allowed for Item Based Allocation process.  Default value: Y.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsSerialTracked" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_SERIAL_TRACKED" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indicates whether an item is to be serial tracked in inventory.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LeadTime" use="optional">
+                <xsd:annotation yfc:columnName="LEAD_TIME" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The lead time for getting the product delivered. Purchase order placed today will arrive after this many days at the warehouse. Default value: 0.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:NumberOfDays"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="MaximumNotificationTime" use="optional">
+                <xsd:annotation yfc:columnName="MAX_NOTIFICATION_TIME" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The maximum notification time for this item. Communication to ship the order to shipping node/supplier is made at most this many shipping calendar hours before the expected shipment date. Used during the release process. Default value: 0.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:NumberOfHours"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="MinNotificationTime" use="optional">
+                <xsd:annotation yfc:columnName="MIN_NOTIFICATION_TIME" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The minimum notification time for this item. Communication to ship the order should be made at least this many days before the expected shipment date. Used to determine the earliest ship date on the line. Default value: 0.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:NumberOfDays"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="NodeLevelInventoryMonitorRule"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="NODE_LEVEL_INV_MONITOR_RULE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The monitoring rule that will be used by the real-time availability monitor for node-level monitoring.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OnhandSafetyFactorPercentage" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ONHAND_SAFETY_FACTOR_PCT" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The on-hand safety factor percentage of this item.  The OnhandSafetyFactorPercentage will be excluded from the actual on-hand availability of the item if the scheduling rule, node type, and supply type are configured to apply on-hand safety factor.   OnhandSafetyFactorPercentage will be used only when OnhandSafetyFactorQuantity is not specified.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Percentage"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="OnhandSafetyFactorQuantity" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ONHAND_SAFETY_FACTOR_QTY" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The on-hand safety factor quantity of this item.  The OnhandSafetyFactorQuantity will be excluded from the actual on-hand availability of the item if the scheduling rule, node type, and supply type are configured to apply on-hand safety factor.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Quantity"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="ProcessingTime"
+                type="yfctype:NumberOfDays" use="optional">
+                <xsd:annotation yfc:columnName="PROCESSING_TIME" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This field is currently not used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TagControlFlag"
+                type="yfctype:EnumTagControlFlag" use="optional">
+                <xsd:annotation yfc:columnName="TAG_CONTROL_FLAG" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This field indicates whether an item is tag controlled. Inventory module uses this flag to determine if additional inventory attributes need to be stored for the item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TagReqAtReceipt" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="TAG_REQ_AT_RECEIPT" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This field is currently not used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TagReqAtShipment" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="TAG_REQ_AT_SHIPMENT" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This field is currently not used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TimeSensitive" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="TIME_SENSITIVE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indiactes whether the item is time-sensitive. Inventory module uses this to determine if inventory is dated. Default value: N.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UseUnplannedInventory"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="USE_UNPLANNED_INV" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indicates whether the item is allowed to use unplanned inventory. Default value: N.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ClassificationCodes">
+        <xsd:annotation yfc:tableName="YFS_ITEM">
+            <xsd:documentation>The table stores product information.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="CommodityCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="COMMODITY_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The commodity code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ECCNNo" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ECCN_NO" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The ECCN number of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="HarmonizedCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="HARMONIZED_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The harmonized code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="HazmatClass" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="HAZMAT_CLASS" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The hazardous material classification code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Model" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="MODEL" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This field describes the identifier of the item with variations to which this item belongs.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="NAICSCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="NAICS_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The NAICS code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="NMFCClass" type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="NMFC_CLASS" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The NMFC class of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="NMFCCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="NMFC_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The NMFC code for an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OperationalConfigurationComplete"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation
+                    yfc:columnName="OPERATIONAL_CONFIG_COMPLETE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>This flag indicates whether the operational configuration is complete.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="PickingType" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="PICKING_TYPE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The picking type code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="PostingClassification"
+                type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="POSTING_CLASSIFICATION" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The posting classification. This will have the item grouping value for the Financial Ledger groups.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Schedule_B_Code" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="SCHEDULE_B_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The schedule B code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="StorageType" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="STORAGE_TYPE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The storage type code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TaxProductCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="TAX_PRODUCT_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The tax product code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UNSPSC" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="UNSPSC" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The UNSPSC code of an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="VelocityCode"
+                type="yfctype:VelocityCode" use="optional">
+                <xsd:annotation yfc:columnName="VELOCITY_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The velocity code.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="HazmatInformation">
+        <xsd:annotation yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+            <xsd:documentation>This table stores hazardous material compliance data as published by the US Department of Transportation (DOT). This data is pertinent to code of federal regulations as formulated by the US Department of Transportation (DOT).</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="CargoAir" type="yfctype:Text-15" use="optional">
+                <xsd:annotation yfc:columnName="CARGO_AIR" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the max quantity that can be shipped while shipping via cargo aircraft.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Exception" type="yfctype:Text-15" use="optional">
+                <xsd:annotation yfc:columnName="EXCEPTION" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the packing exceptions while shipping the hazardous material.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="HazardClass" type="yfctype:ID-15" use="optional">
+                <xsd:annotation yfc:columnName="HAZARD_CLASS" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the category of a hazard assigned to a hazardous material. Its value ranges from 1 to 9.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="HazmatComplianceKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="HAZMAT_COMPLIANCE_KEY" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>The primary key for the YFS_HAZMAT_COMPLIANCE table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Label" type="yfctype:Text-30" use="optional">
+                <xsd:annotation yfc:columnName="LABEL" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the label code.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="PackingGroup" type="yfctype:Text-5" use="optional">
+                <xsd:annotation yfc:columnName="PACKING_GROUP" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Packing Groups (PG) indicate the degree of danger of a hazardous material within its hazard class or division and relate to the strength of packaging required for shipment. It can take values Packing Group I - high danger, Packing Group II - medium danger, Packing Group III - low danger.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="PassengerAir" type="yfctype:Text-15" use="optional">
+                <xsd:annotation yfc:columnName="PASSENGER_AIR" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the max quantity that can be shipped while shipping via passenger aircraft or rail.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ProperShippingName"
+                type="yfctype:Text-512" use="optional">
+                <xsd:annotation yfc:columnName="PROPER_SHIPPING_NAME" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the proper shipping name or description of hazardous material.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="QtyBulk" type="yfctype:Text-15" use="optional">
+                <xsd:annotation yfc:columnName="QTY_BULK" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the max quantity that can be shipped while shipping bulk.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="QtyNonBulk" type="yfctype:Text-15" use="optional">
+                <xsd:annotation yfc:columnName="QTY_NON_BULK" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the max quantity that can be shipped while shipping non bulk.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SortOrder"
+                type="yfctype:Integer4AgentCriteria" use="optional">
+                <xsd:annotation yfc:columnName="SORT_ORDER" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Unique number to identify a hazardous substance. The difference between the preceding and the succeeding sort order value equals to five. This is to accommodate new hazardous materials.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SpecialProvisions"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SPECIAL_PROVISIONS" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the special provisions to be provided while shipping the hazardous material.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Symbols" type="yfctype:Text-8" use="optional">
+                <xsd:annotation yfc:columnName="SYMBOLS" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Indicates the symbol of hazardous material.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UNNumber" type="yfctype:ID-10" use="optional">
+                <xsd:annotation yfc:columnName="UN_NUMBER" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>UN numbers are four-digit numbers that identify hazardous substances and products (such as explosives and poisonous materials) of commercial importance. This is widely used in international commerce, for instance to label the contents of shipping containers.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Vessel" type="yfctype:Text-5" use="optional">
+                <xsd:annotation yfc:columnName="VESSEL" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Specifies where the cargo is stowed on a vessel.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="VesselSP" type="yfctype:ID-35" use="optional">
+                <xsd:annotation yfc:columnName="VESSEL_SP" yfc:tableName="YFS_HAZMAT_COMPLIANCE">
+                    <xsd:documentation>Specifies other stowage plans.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemServiceSkillList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemServiceSkill"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemServiceSkill">
+        <xsd:annotation yfc:tableName="YFS_ITEM_SERVICE_SKILL">
+            <xsd:documentation>This table stores Service Skill information for the service item.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="Description"
+                type="yfctype:FreeText-100" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_SERVICE_SKILL">
+                    <xsd:documentation>Description of the Service Skill.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceSkillId" type="yfctype:ID-40" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_SKILL_ID" yfc:tableName="YFS_ITEM_SERVICE_SKILL">
+                    <xsd:documentation>Identifier of a Service Skill.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAliasList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemAlias"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemAlias">
+        <xsd:annotation yfc:tableName="YFS_ITEM_ALIAS">
+            <xsd:documentation>This table is used to cross-reference item id of one organization to another. It also stores all aliases for an item. One of the aliases can be designated as a "cross-referencing" alias.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="AliasName" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ALIAS_NAME" yfc:tableName="YFS_ITEM_ALIAS">
+                    <xsd:documentation>Alias type. For example, UPC, EAN, MFG. CODE.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AliasValue" type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="ALIAS_VALUE" yfc:tableName="YFS_ITEM_ALIAS">
+                    <xsd:documentation>Alias value for the corresponding alias name.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemExclusionList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemExclusion"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemExclusion">
+        <xsd:annotation yfc:tableName="YFS_ITEM_EXCLUSION">
+            <xsd:documentation>This table stores exclusion codes associated with an item. It can be used to store list of countries, customers etc that are excluded from ordering an item.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ExclusionCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="EXCLUSION_CODE" yfc:tableName="YFS_ITEM_EXCLUSION">
+                    <xsd:documentation>Exclusion code for an item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AdditionalAttributeList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:AdditionalAttribute"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AdditionalAttribute">
+        <xsd:annotation yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+            <xsd:documentation>Stores dynamic attributes attached with an entity. Currently used to store additional attributes for item and category entities.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="AdditionalAttributeKey"
+                type="yfctype:Key" use="optional">
+                <xsd:annotation
+                    yfc:columnName="ADDITIONAL_ATTRIBUTE_KEY" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>Primary key attribute of YFS_ADDITIONAL_ATTRIBUTE.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeDomainID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_DOMAIN_ID" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>The unique identification of the attribute domain.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="AttributeGroupID"
+                type="yfctype:GroupName" use="optional">
+                <xsd:annotation yfc:columnName="ATTRIBUTE_GROUP_ID" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>The unique identification of the attribute group.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="DoubleValue" use="optional">
+                <xsd:annotation yfc:columnName="DOUBLE_VALUE" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>The value of the assigned attribute whose data type is 'DECIMAL'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Number"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="IntegerValue" use="optional">
+                <xsd:annotation yfc:columnName="INTEGER_VALUE" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>The value of the assigned attribute whose data type is 'INTEGER'.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:union>
+                        <xsd:simpleType>
+                            <xsd:restriction base="yfctype:Number20"/>
+                        </xsd:simpleType>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value=""/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:union>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="IsInherited" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_INHERITED" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>This field indicates whether the assignment of attribute value as additional attribute was based on inheritance. For ParentTable='YFS_CATEGORY', a value of 'Y' indicates that the assignment is based on inheritance of the value assigned to the upper level category. For ParentTable='YFS_ITEM', a value of 'Y' indicates that the assignment is based on inheritance of the value assigned to the category to which the item belongs.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Name" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="NAME" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>Name of the dynamic attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Value" type="yfctype:Text-2000" use="optional">
+                <xsd:annotation yfc:columnName="VALUE" yfc:tableName="YFS_ADDITIONAL_ATTRIBUTE">
+                    <xsd:documentation>Value of the attribute.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LanguageDescriptionList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:LanguageDescription"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LanguageDescription">
+        <xsd:annotation yfc:tableName="YFS_LANGUAGE_DESCRIPTION">
+            <xsd:documentation>This table stores description in different languages.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="Description" type="yfctype:Text-200" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_LANGUAGE_DESCRIPTION">
+                    <xsd:documentation>A localized description.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ExtendedDescription"
+                type="yfctype:Text-2000" use="optional">
+                <xsd:annotation yfc:columnName="EXTENDED_DESCRIPTION" yfc:tableName="YFS_LANGUAGE_DESCRIPTION">
+                    <xsd:documentation>An extended localized description.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LocaleCode" type="yfctype:Locale" use="optional">
+                <xsd:annotation yfc:columnName="LOCALE_CODE" yfc:tableName="YFS_LANGUAGE_DESCRIPTION">
+                    <xsd:documentation>Locale for which the extended description is stored.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ShortDescription"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_LANGUAGE_DESCRIPTION">
+                    <xsd:documentation>Short description.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Components">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:Component"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Component">
+        <xsd:annotation yfc:tableName="YFS_KIT_ITEM">
+            <xsd:documentation>A Component Definition</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ComponentDescription"
+                type="yfctype:ItemDesc" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Description of the Component Item</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ComponentItemGroupCode"
+                type="yfctype:ItemGroupCode" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_GROUP_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Item Group Code for the Component Item</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ComponentItemID" type="yfctype:ItemID" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ID" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Along with ComponentOrganizationCode and ComponentUnitOfMeasure, it identifies a component item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ComponentItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Component item's primary key</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ComponentKitCode"
+                type="yfctype:EnumKitCode" use="optional">
+                <xsd:annotation yfc:columnName="KIT_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Item Kit Code for the Component Item</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ComponentOrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Organization that maintains catalog</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ComponentUnitOfMeasure"
+                type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>Unit of measure for the Component Item</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_KIT_ITEM">
+                    <xsd:documentation>An item for which components are defined.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="KitQuantity" type="yfctype:Quantity" use="optional">
+                <xsd:annotation yfc:columnName="KIT_QUANTITY" yfc:tableName="YFS_KIT_ITEM">
+                    <xsd:documentation>Amount of a component item that is contained in a parent item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InventoryTagAttributes">
+        <xsd:annotation yfc:tableName="YFS_ITEM_TAG">
+            <xsd:documentation>This table stores and defines the Tag Identifier and Tag Descriptor attributes for Tag Controlled Items.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="BatchNo" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="BATCH_NO" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Identifier or a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 02 - Use as Tag Identifier, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>An item for which inventory attributes are defined.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemTagKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_TAG_KEY" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_TAG.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LotAttribute1" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="LOT_ATTRIBUTE1" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LotAttribute2" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="LOT_ATTRIBUTE2" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LotAttribute3" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="LOT_ATTRIBUTE3" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LotKeyReference" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="LOT_KEY_REFERENCE" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LotNumber" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="LOT_NUMBER" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Identifier or a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 02 - Use as Tag Identifier, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ManufacturingDate"
+                type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="LOT_MANUFACTURE_DATE" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="RevisionNo" type="yfctype:Text-2" use="optional">
+                <xsd:annotation yfc:columnName="REVISION_NO" yfc:tableName="YFS_ITEM_TAG">
+                    <xsd:documentation>Specify whether this attibute can be used as a Tag Identifier or a Tag Descriptor.  Valid values:  01 - Use as Tag Descriptor, 02 - Use as Tag Identifier, 03 - Not Use.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AlternateUOMList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:AlternateUOM"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="AlternateUOM">
+        <xsd:annotation yfc:tableName="YFS_ITEM_UOM">
+            <xsd:documentation>All alternate UOM for an item are maintained in this table.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="Height" type="yfctype:Dimension" use="optional">
+                <xsd:annotation yfc:columnName="HEIGHT" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Height of an item with this alternate UOM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="HeightUOM" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="HEIGHT_UOM" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Unit of measure in which item height is measured.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="IsOrderingUOM" type="yfctype:Flag" use="optional">
+                <xsd:annotation yfc:columnName="IS_ORDERING_UOM" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Indicates if UOM can be used as ordering unit of measure.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Item for which alternate UOM is being maintained.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemUOMKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_UOM_KEY" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_UOM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Length" type="yfctype:Dimension" use="optional">
+                <xsd:annotation yfc:columnName="LENGTH" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Length of an item for with alternate UOM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="LengthUOM" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="LENGTH_UOM" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Unit of measure in which an item length is measured.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Quantity"
+                type="yfctype:ConversionQuantity" use="optional">
+                <xsd:annotation yfc:columnName="QUANTITY" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Conversion quantity to the inventory UOM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UnitOfMeasure" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Alternate UOM applicable for the Item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Weight" type="yfctype:Dimension" use="optional">
+                <xsd:annotation yfc:columnName="WEIGHT" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Weight of an item with this alternate UOM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="WeightUOM" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="WEIGHT_UOM" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Unit of measure in which a package's weight is measured.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="Width" type="yfctype:Dimension" use="optional">
+                <xsd:annotation yfc:columnName="WIDTH" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Width of an item for with alternate UOM.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="WidthUOM" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="WIDTH_UOM" yfc:tableName="YFS_ITEM_UOM">
+                    <xsd:documentation>Unit of measure in which an item's width is measured.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemInstructionList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemInstruction"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemInstruction">
+        <xsd:annotation yfc:tableName="YFS_ITEM_INSTRUCTION">
+            <xsd:documentation>This table stores all instructions pertaining to the item.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="InstructionCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="INSTRUCTION_CODE" yfc:tableName="YFS_ITEM_INSTRUCTION">
+                    <xsd:documentation>Standard pre-defined instruction code as defined by the catalog organization.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="InstructionText"
+                type="yfctype:FreeInstructionText" use="optional">
+                <xsd:annotation yfc:columnName="INSTRUCTION_TEXT" yfc:tableName="YFS_ITEM_INSTRUCTION">
+                    <xsd:documentation>Free form instruction text for the given instruction type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="InstructionType" type="yfctype:ID-10" use="optional">
+                <xsd:annotation yfc:columnName="INSTRUCTION_TYPE" yfc:tableName="YFS_ITEM_INSTRUCTION">
+                    <xsd:documentation>Instruction type as defined by the catalog organization.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemInstructionKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_INSTRUCTION_KEY" yfc:tableName="YFS_ITEM_INSTRUCTION">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_INSTRUCTION.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM_INSTRUCTION">
+                    <xsd:documentation>Item for which instructions are maintained.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SeqNo" type="yfctype:Count" use="optional">
+                <xsd:annotation yfc:columnName="SEQ_NO" yfc:tableName="YFS_ITEM_INSTRUCTION">
+                    <xsd:documentation>Instruction SequenceNo for a given instruction type.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemOptionList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemOption"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemOption">
+        <xsd:annotation yfc:tableName="YFS_ITEM_OPTION">
+            <xsd:documentation>This table stores all valid options for a provided service or delivery service item.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM_OPTION">
+                    <xsd:documentation>Item for which Item Option is being maintained.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemOptionKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_OPTION_KEY" yfc:tableName="YFS_ITEM_OPTION">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_OPTION.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OptionItemId" type="yfctype:ItemID" use="optional">
+                <xsd:annotation yfc:columnName="OPTION_ITEM_ID" yfc:tableName="YFS_ITEM_OPTION">
+                    <xsd:documentation>The unique ideintifier for an Item Option that is associated to a provided service or delivery service item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OptionUOM" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="OPTION_UOM" yfc:tableName="YFS_ITEM_OPTION">
+                    <xsd:documentation>UOM Of the Item Option that is associated to a provided service or delivery service item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemServiceAssocList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemServiceAssoc"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemServiceAssoc">
+        <xsd:annotation yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+            <xsd:documentation>All valid provided service items and delivery service associated to an item are maintained in this table.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="1" ref="yfc:ItemServiceAssocSkillList"/>
+            </xsd:all>
+            <xsd:attribute name="CategoryKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="CATEGORY_KEY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Classification to which the services are being associated.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="HoldSchedTillCompletion"
+                type="yfctype:Flag" use="optional">
+                <xsd:annotation
+                    yfc:columnName="HOLD_SCHED_TILL_COMPLETION" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Flag to indicate whether to hold the schedule for the line containing provided service or delivery service item till line containing the parent item has been shipped.  This value will be copied over to YFS_ORDER_PROD_SER_ASSOC table when the association is used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Item for which service association is being maintained.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemServiceAssocKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_SERVICE_ASSOC_KEY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Primary key attribute of YFS_ITEM_SERVICE_ASSOC.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="PricingProductQuantity"
+                type="yfctype:Quantity" use="optional">
+                <xsd:annotation
+                    yfc:columnName="PRICING_PRODUCT_QUANTITY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Pricing Quantity for item used in this association.  This value will be copied over to YFS_ORDER_PROD_SER_ASSOC table when the association is used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="PricingServiceQuantity"
+                type="yfctype:Quantity" use="optional">
+                <xsd:annotation
+                    yfc:columnName="PRICING_SERVICE_QUANTITY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Pricing Quantity for service used in this association.  This value will be copied over to YFS_ORDER_PROD_SER_ASSOC table when the association is used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ProductQuantity"
+                type="yfctype:Quantity" use="optional">
+                <xsd:annotation yfc:columnName="PRODUCT_QUANTITY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Quantity for item used in this association.  This value will be copied over to YFS_ORDER_PROD_SER_ASSOC table when the association is used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceItemDesc"
+                type="yfctype:Text-100" use="optional">
+                <xsd:annotation yfc:columnName="SHORT_DESCRIPTION" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The short description of the item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceItemGroupCode"
+                type="yfctype:Text-20" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_ITEM_GROUP_CODE" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>ItemGroupCode for the service or delivery item.  Valid values are PS - Provided Service, DS - Delivery Service.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceItemId" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_ITEM_ID" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Provided service or delivery service item associated as option when selling the parent item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceQuantity"
+                type="yfctype:Quantity" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_QUANTITY" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Quantity for service used in this association.  This value will be copied over to YFS_ORDER_PROD_SER_ASSOC table when the association is used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceUOM" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_UOM" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>UOM of the provided service or delivery service item associated to the parent item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="TimeOffsetInMinutes"
+                type="yfctype:NumberOfHours" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_TIME_OFFSET" yfc:tableName="YFS_ITEM_SERVICE_ASSOC">
+                    <xsd:documentation>Specifies the service time offset between services in Hours.  This value will be copied over to YFS_ORDER_PROD_SER_ASSOC table when the association is used.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemServiceAssocSkillList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ItemServiceAssocSkill"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ItemServiceAssocSkill">
+        <xsd:annotation yfc:tableName="YFS_ITEM_SERVICE_ASSC_SKILL">
+            <xsd:documentation>This table stores Service Skill information for the service item association.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="Description"
+                type="yfctype:FreeText-100" use="optional">
+                <xsd:annotation yfc:columnName="DESCRIPTION" yfc:tableName="YFS_SERVICE_SKILL">
+                    <xsd:documentation>Description of the Service Skill.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ServiceSkillId" type="yfctype:ID-40" use="optional">
+                <xsd:annotation yfc:columnName="SERVICE_SKILL_ID" yfc:tableName="YFS_ITEM_SERVICE_ASSC_SKILL">
+                    <xsd:documentation>Identifier of a Service Skill.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ServiceActivities">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ServiceActivity"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ServiceActivity">
+        <xsd:annotation yfc:tableName="YFS_SERVICE_ACTIVITY">
+            <xsd:documentation>This entity stores the list of activities involved in providing a particular service.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:ServiceActivityInstructions"/>
+            </xsd:all>
+            <xsd:attribute name="ActivityCode" type="yfctype:Text-40" use="optional">
+                <xsd:annotation yfc:columnName="ACTIVITY_CODE" yfc:tableName="YFS_SERVICE_ACTIVITY">
+                    <xsd:documentation>
+                        <div>
+					Specifies the activity to be performed for the item.
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ActivitySeqNo" type="yfctype:Count" use="optional">
+                <xsd:annotation yfc:columnName="ACTIVITY_SEQ_NO" yfc:tableName="YFS_SERVICE_ACTIVITY">
+                    <xsd:documentation>
+                        <div>
+					Attribute to specify the Sequence Number in which the Instruction should be performed.
+					</div>
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ServiceActivityInstructions">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ServiceActivityInstruction"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ServiceActivityInstruction">
+        <xsd:annotation yfc:tableName="YFS_SERVICE_ACTIVITY_INSTR">
+            <xsd:documentation>This entity stores the list of instructions for the service activities involved in providing a particular service.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="InstructionText"
+                type="yfctype:InstructionText" use="optional">
+                <xsd:annotation yfc:columnName="INSTRUCTION_TEXT" yfc:tableName="YFS_INSTRUCTION_DETAIL">
+                    <xsd:documentation>Free-form text indicating any additional information related to the instruction type or otherwise.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="InstructionURL" type="yfctype:URL" use="optional">
+                <xsd:annotation yfc:columnName="INSTRUCTION_URL" yfc:tableName="YFS_INSTRUCTION_DETAIL">
+                    <xsd:documentation>The URL relating to and/or containing the instructions.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="SequenceNo" type="yfctype:Count" use="required">
+                <xsd:annotation yfc:columnName="SEQUENCE_NO" yfc:tableName="YFS_INSTRUCTION_DETAIL">
+                    <xsd:documentation>You could have an instruction exceeding the limits of a single record. Sequence number is used to provide a way to store a link between such instructions.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="CategoryList">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:Category"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Category">
+        <xsd:annotation yfc:tableName="YFS_CATEGORY">
+            <xsd:documentation>This table stores item category master information.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="CategoryID" type="yfctype:ID-40" use="optional">
+                <xsd:annotation yfc:columnName="CATEGORY_ID" yfc:tableName="YFS_CATEGORY">
+                    <xsd:documentation>The unique identifier for this category.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="CategoryKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="CATEGORY_KEY" yfc:tableName="YFS_CATEGORY">
+                    <xsd:documentation>The primary key for the YFS_CATEGORY table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="CategoryPath" type="yfctype:Text-800" use="optional">
+                <xsd:annotation yfc:columnName="CATEGORY_PATH" yfc:tableName="YFS_CATEGORY">
+                    <xsd:documentation>The path for the category.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_CATEGORY">
+                    <xsd:documentation>The code for the organization this category is associated with.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ChildItemList">
+        <xsd:annotation>
+            <xsd:documentation>
+                <div>
+					A list of child items of an item with variations.
+					</div>
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" minOccurs="0" ref="yfc:ChildItem"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ChildItem">
+        <xsd:annotation yfc:tableName="YFS_ITEM">
+            <xsd:documentation>The table stores product information.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="ItemGroupCode"
+                type="yfctype:ItemGroupCode" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_GROUP_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The item group code. Used to identify if the item is a Product, Provided Service, Provided Service Option, Delivery Service or Delivery Service Option.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemID" type="yfctype:ItemID" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_ID" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The unique identifier for the item.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="ItemKey" type="yfctype:Key" use="optional">
+                <xsd:annotation yfc:columnName="ITEM_KEY" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The primary key for the YFS_ITEM table.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="OrganizationCode"
+                type="yfctype:OrgCode" use="optional">
+                <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The organization code whose product information is being stored.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="UnitOfMeasure" type="yfctype:UOM" use="optional">
+                <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_ITEM">
+                    <xsd:documentation>The unit of measure for item quantity.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

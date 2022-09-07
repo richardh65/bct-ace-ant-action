@@ -1,0 +1,61 @@
+
+
+Importing file: C:\IBM\WCDE_ENT70\components\sterling-integration\wid\WCToSSFSMediationModule\wsdl\WCToSSFSMediationModule_WCInventoryServicesExport.wsdl
+
+BIP0224W The message set has no XML Wire Format layer defined. Only the logical information will appear in the model.
+Copying source WSDL WCToSSFSMediationModule_WCInventoryServicesExport.wsdl to WCToSSFSMediationModule_WCInventoryServicesExport.wsdl.
+Copying source WSDL InventoryServices.wsdl to InventoryServices.wsdl.
+The WSDL import will proceed with bindings InventoryServices, WCInventoryServicesExport_InventoryServicesPortTypeHttpBinding.
+Creating wsdl schema document for file:///C:/IBM/WCDE_ENT70/components/sterling-integration/wid/WCToSSFSMediationModule/wsdl/WCToSSFSMediationModule_WCInventoryServicesExport.wsdl.
+Parsing wsdl binding {http://www.ibm.com/xmlns/prod/commerce/9/inventory/Binding}WCInventoryServicesExport_InventoryServicesPortTypeHttpBinding.
+Parsing wsdl binding input GetInventoryAvailability.
+Parsing wsdl binding output GetInventoryAvailability.
+Parsing wsdl binding input ChangeInventoryAvailability.
+Parsing wsdl binding output ChangeInventoryAvailability.
+Parsing wsdl binding input SyncInventoryAvailability.
+Parsing wsdl binding output SyncInventoryAvailability.
+Parsing wsdl binding input ProcessInventoryRequirement.
+Parsing wsdl binding output ProcessInventoryRequirement.
+Processing doc style for operation GetInventoryAvailability.
+Processing doc style for operation ChangeInventoryAvailability.
+Processing doc style for operation SyncInventoryAvailability.
+Processing doc style for operation ProcessInventoryRequirement.
+Populating WSDL schema WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/binding/WCToSSFSMediationModule_WCInventoryServicesExport.mxsd.
+Removing unnecessary import statement with namespace http://www.w3.org/XML/1998/namespace from schema file:/C:/Users/Administrator/IBM/wmbt70/workspace/WCToSSFSMediationMessageSet/WCToSSFSMediationMessageSet/org/xmlsoap/schemas/soap/envelope/soapenv11.mxsd.  This statement was not resolved and is never used.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/binding/WCToSSFSMediationModule_WCInventoryServicesExport.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/InventoryServices_InlineSchema1.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/GetInventoryAvailability.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/Meta.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/Fields.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/unqualifieddatatypes/_11/UnqualifiedDataTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/codelists/CodeLists.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/currencycode/_54217/_2001/CodeList_CurrencyCode_ISO_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/languagecode/_5639/_1988/CodeList_LanguageCode_ISO_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/ianamimemediatypes/_2003/CodeList_MIMEMediaTypeCode_IANA_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/unitcode/_66411/_2001/CodeList_UnitCode_UNECE_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/qualifieddatatypes/_11/QualifiedDataTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/InventoryAvailability.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/CommonTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/CommerceFoundation.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/IdentifierTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/BaseTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/ShowInventoryAvailability.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/ChangeInventoryAvailability.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/RespondInventoryAvailability.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/SyncInventoryAvailability.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/ProcessInventoryRequirement.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/InventoryRequirement.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/Order.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/inventory/AcknowledgeInventoryRequirement.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/InventoryServices_InlineSchema2.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/ConfirmBOD.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/BOD.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/Components.mxsd in the workspace.
+
+Elapsed time processing this message definition file: 92.877 seconds
+Number of warnings for this message definition file: 1
+
+
+Number of files processed: 1
+
+

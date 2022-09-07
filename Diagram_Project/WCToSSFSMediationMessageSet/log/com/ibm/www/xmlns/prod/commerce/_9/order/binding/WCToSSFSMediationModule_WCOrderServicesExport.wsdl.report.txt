@@ -1,0 +1,79 @@
+
+
+Importing file: C:\IBM\WCDE_ENT70\components\sterling-integration\wid\WCToSSFSMediationModule\wsdl\WCToSSFSMediationModule_WCOrderServicesExport.wsdl
+
+BIP0224W The message set has no XML Wire Format layer defined. Only the logical information will appear in the model.
+Copying source WSDL OrderServices.wsdl to OrderServices.wsdl.
+Copying source WSDL WCToSSFSMediationModule_WCOrderServicesExport.wsdl to WCToSSFSMediationModule_WCOrderServicesExport.wsdl.
+The WSDL import will proceed with bindings OrderServices, WCOrderServicesExport_OrderServicesPortTypeHttpBinding.
+Creating wsdl schema document for file:///C:/IBM/WCDE_ENT70/components/sterling-integration/wid/WCToSSFSMediationModule/wsdl/WCToSSFSMediationModule_WCOrderServicesExport.wsdl.
+Parsing wsdl binding {http://www.ibm.com/xmlns/prod/commerce/9/order/Binding}WCOrderServicesExport_OrderServicesPortTypeHttpBinding.
+Parsing wsdl binding input GetOrder.
+Parsing wsdl binding output GetOrder.
+Parsing wsdl binding input ProcessOrder.
+Parsing wsdl binding output ProcessOrder.
+Parsing wsdl binding input ChangeOrder.
+Parsing wsdl binding output ChangeOrder.
+Parsing wsdl binding input SyncOrder.
+Parsing wsdl binding output SyncOrder.
+Parsing wsdl binding input GetQuote.
+Parsing wsdl binding output GetQuote.
+Parsing wsdl binding input ProcessQuote.
+Parsing wsdl binding output ProcessQuote.
+Parsing wsdl binding input ChangeQuote.
+Parsing wsdl binding output ChangeQuote.
+Parsing wsdl binding input SyncQuote.
+Parsing wsdl binding output SyncQuote.
+Processing doc style for operation GetOrder.
+Processing doc style for operation ProcessOrder.
+Processing doc style for operation ChangeOrder.
+Processing doc style for operation SyncOrder.
+Processing doc style for operation GetQuote.
+Processing doc style for operation ProcessQuote.
+Processing doc style for operation ChangeQuote.
+Processing doc style for operation SyncQuote.
+Populating WSDL schema WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/binding/WCToSSFSMediationModule_WCOrderServicesExport.mxsd.
+Removing unnecessary import statement with namespace http://www.w3.org/XML/1998/namespace from schema file:/C:/Users/Administrator/IBM/wmbt70/workspace/WCToSSFSMediationMessageSet/WCToSSFSMediationMessageSet/org/xmlsoap/schemas/soap/envelope/soapenv11.mxsd.  This statement was not resolved and is never used.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/binding/WCToSSFSMediationModule_WCOrderServicesExport.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/OrderServices_InlineSchema1.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/GetOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/Meta.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/Fields.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/unqualifieddatatypes/_11/UnqualifiedDataTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/codelists/CodeLists.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/currencycode/_54217/_2001/CodeList_CurrencyCode_ISO_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/languagecode/_5639/_1988/CodeList_LanguageCode_ISO_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/ianamimemediatypes/_2003/CodeList_MIMEMediaTypeCode_IANA_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/unitcode/_66411/_2001/CodeList_UnitCode_UNECE_7_04.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/qualifieddatatypes/_11/QualifiedDataTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/Order.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/CommonTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/CommerceFoundation.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/IdentifierTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/foundation/BaseTypes.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/ShowOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/ProcessOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/AcknowledgeOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/ChangeOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/RespondOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/SyncOrder.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/GetQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/Quote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/ShowQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/ProcessQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/AcknowledgeQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/ChangeQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/RespondQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/SyncQuote.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/OrderServices_InlineSchema2.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/ConfirmBOD.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/BOD.mxsd in the workspace.
+Creating file WCToSSFSMediationMessageSet/org/openapplications/www/oagis/_9/Components.mxsd in the workspace.
+
+Elapsed time processing this message definition file: 123.456 seconds
+Number of warnings for this message definition file: 1
+
+
+Number of files processed: 1
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://WCToSSFSMediationModule"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="CorrelationContextType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Expression"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MonitorOption"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

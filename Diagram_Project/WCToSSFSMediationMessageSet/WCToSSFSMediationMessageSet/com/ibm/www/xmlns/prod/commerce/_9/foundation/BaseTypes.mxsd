@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!--********************************************************************--><!--  Licensed Materials - Property of IBM                              --><!--                                                                    --><!--  WebSphere Commerce                                                --><!--                                                                    --><!--  (c) Copyright IBM Corp. 2006                                      --><!--                                                                    --><!--  US Government Users Restricted Rights - Use, duplication or       --><!--  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. --><!--                                                                    --><!--********************************************************************--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_wcf" ecore:package="com.ibm.commerce.foundation.common.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This XML schema file defines the common elements and types shared by the
+			entire schema.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="NameValuePairType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a NameValuePair.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name of the NameValuePair.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UserDataType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a user data area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="UserDataField" type="_wcf:NameValuePairType">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="UserData" type="_wcf:UserDataType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of a user data area.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:complexType name="QuantityType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a quantity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:annotation>
+				<xsd:documentation>The quantity value.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="xsd:double">
+				<xsd:attribute name="uom" type="_wcf:UnitOfMeasureType" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The unit of measure.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MonetaryAmountType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a monetary amount.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:annotation>
+				<xsd:documentation>The value.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:extension base="xsd:decimal">
+				<xsd:attribute name="currency" type="_wcf:CurrencyType" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The currency.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="UnitPriceType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a unit price.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Price" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The unit price in default currency.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="AlternativeCurrencyPrice" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The unit price in other currencies.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Quantity" type="_wcf:QuantityType">
+				<xsd:annotation>
+					<xsd:documentation>The quantity of a unit.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="UnitOfMeasureType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of unit of measure.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="LanguageType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of Language
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="CurrencyType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of Currency code as per ISO 4217 standards.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="EnumerationExtensionType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of enumeration extension
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:pattern value="x[0-9A-Za-z][0-9A-Za-z_.]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+	<xsd:complexType name="DescriptionType">
+        <xsd:annotation>
+        	<xsd:documentation>The type definition of Description.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="language" type="_wcf:LanguageType"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>	
+
+	<xsd:simpleType name="CharType">
+		<xsd:annotation>
+			<xsd:documentation>
+				An type definition for a Character.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://WCToSSFSMediationModule"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="InventoryAvailabilityCSVType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="PartNumber"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="OnlineStoreUniqueID"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="PhysicalStoreIdentifier"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="InventoryStatus"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AvailableQuantity"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AvailableQuantityUOM"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AvailabilityTime"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="AvailabilityOffset"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="LastUpdate"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ContextStoreId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Field1"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Field2"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Field3"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory/Binding" xmlns:Port_0="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:ns1="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:ns2="http://www.openapplications.org/oagis/9" xmlns:this="http://www.ibm.com/xmlns/prod/commerce/9/inventory/Binding" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="../../../../../../../../../org/xmlsoap/schemas/soap/envelope/soapenv11.mxsd"/>
+  <xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../../../../../org/openapplications/www/oagis/_9/InventoryServices_InlineSchema2.mxsd"/>
+  <xsd:import namespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory" schemaLocation="../InventoryServices_InlineSchema1.mxsd"/>
+
+<!-- BEGIN Global group petaining to all wsdl:message definitions -->
+<!-- END Global group -->
+
+
+<!-- BEGIN Message Definitions for the wsdl:operations  -->
+<!-- END Message Definitions -->
+
+
+</xsd:schema>

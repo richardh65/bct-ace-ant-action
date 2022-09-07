@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2008, 2009 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_ord" ecore:package="com.ibm.commerce.order.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_ord="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This file contains all type definitions that make up a quote.
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="Order.mxsd"/>
+	
+	<xsd:import namespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" schemaLocation="../foundation/CommonTypes.mxsd"/>	
+	
+	<xsd:element fixed="7.0.0.0" name="QuoteBODVersion" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>
+				The version of WebSphere Commerce when the noun was last changed.  
+				The value is set as the versionID attribute in the corresponding BODs.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="Quote" type="_ord:QuoteType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the quote.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+	
+	<xsd:complexType name="QuoteType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a quote.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="QuoteIdentifier" type="_wcf:QuoteIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The quote identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ExpirationDate" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>The expiration date of the quote.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderTemplate" type="_ord:OrderType">
+				<xsd:annotation>
+					<xsd:documentation>The order template.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

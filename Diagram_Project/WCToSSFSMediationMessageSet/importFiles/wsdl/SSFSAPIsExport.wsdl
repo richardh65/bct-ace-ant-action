@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="SSFSAPIsExport" targetNamespace="http://WCToSSFSMediationModule/SSFSAPIsExport" xmlns:bons1="http://www.sterlingcommerce.com/documentation/YFS/getOrderDetails/output" xmlns:bons2="http://www.sterlingcommerce.com/documentation/YDM/getShipmentDetails/output" xmlns:bons3="http://www.sterlingcommerce.com/documentation/YFS/REALTIME_ATP_MONITOR/REALTIME_AVAILABILITY_CHANGE" xmlns:tns="http://WCToSSFSMediationModule/SSFSAPIsExport" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://WCToSSFSMediationModule/SSFSAPIsExport">
+            <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YDM/getShipmentDetails/output" schemaLocation="YDM_getShipmentDetails_output.xsd"/>
+            <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/REALTIME_ATP_MONITOR/REALTIME_AVAILABILITY_CHANGE" schemaLocation="YFS_REALTIME_ATP_MONITOR.REALTIME_AVAILABILITY_CHANGE.xsd"/>
+            <xsd:import namespace="http://www.sterlingcommerce.com/documentation/YFS/getOrderDetails/output" schemaLocation="YFS_getOrderDetails_output.xsd"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="sendOrderDetailsRequestMsg">
+    <wsdl:part element="bons1:Order" name="Order"/>
+  </wsdl:message>
+    <wsdl:message name="sendShipmentDetailsRequestMsg">
+    <wsdl:part element="bons2:Shipment" name="Shipment"/>
+  </wsdl:message>
+    <wsdl:message name="sendAvailabilityChangeRequestMsg">
+    <wsdl:part element="bons3:AvailabilityChange" name="AvailabilityChange"/>
+  </wsdl:message>
+    <wsdl:portType name="SSFSAPIsExport">
+    <wsdl:operation name="sendOrderDetails">
+      <wsdl:input message="tns:sendOrderDetailsRequestMsg" name="sendOrderDetailsRequest"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendShipmentDetails">
+      <wsdl:input message="tns:sendShipmentDetailsRequestMsg" name="sendShipmentDetailsRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="sendAvailabilityChange">
+      <wsdl:input message="tns:sendAvailabilityChangeRequestMsg" name="sendAvailabilityChangeRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

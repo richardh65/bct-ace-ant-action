@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <MQInputMessage timestamp="1446842914330" nodeId="FCMComposite_1_1" name="Chocolate Order" id="1446842914329-7">
+        <plainText>%3Cbtm_retail%3E%0D%0A++++%3CrequestType%3EorderItem%3C%2FrequestType%3E%0D%0A++++%3CcustomerNumber%3E5555%3C%2FcustomerNumber%3E%0D%0A++++%3CcustomerName%3EChocolateFan%3C%2FcustomerName%3E%0D%0A++++%3CitemNumber%3E1234-6789-1212%3C%2FitemNumber%3E%0D%0A++++%3CitemName%3EChocolate+chip+cookies%3C%2FitemName%3E%0D%0A++++%3Cflows%3E%3C%2Fflows%3E%0D%0A++++%3CrequestTime%3E%3C%2FrequestTime%3E%0D%0A++++%3CprocessTime%3E%3C%2FprocessTime%3E%0D%0A++++%3CresponseTime%3E%3C%2FresponseTime%3E%0D%0A%3C%2Fbtm_retail%3E%0D%0A</plainText>
+        <MessageHeader backoutCount="0" characterSet="0" encoding="0" expiry="-1" feedback="0" messageFlags="0" messageType="8" messageSequenceNumber="1" offset="0" originalLength="-1" persistence="2" priority="-1" putApplicationType="0" report="0"/>
+    </MQInputMessage>
+    <MQInputMessage timestamp="1446849330732" nodeId="FCMComposite_1_1" name="Tea Order" id="1446849330732-540">
+        <plainText>%3Cbtm_retail%3E%0D%0A++++%3CrequestType%3EorderItem%3C%2FrequestType%3E%0D%0A++++%3CcustomerNumber%3E4785%3C%2FcustomerNumber%3E%0D%0A++++%3CcustomerName%3ETeaFan%3C%2FcustomerName%3E%0D%0A++++%3CitemNumber%3E9876-5342-3847%3C%2FitemNumber%3E%0D%0A++++%3CitemName%3ECeylonBlackTea%3C%2FitemName%3E%0D%0A++++%3Cflows%3E%3C%2Fflows%3E%0D%0A++++%3CrequestTime%3E%3C%2FrequestTime%3E%0D%0A++++%3CprocessTime%3E%3C%2FprocessTime%3E%0D%0A++++%3CresponseTime%3E%3C%2FresponseTime%3E%0D%0A%3C%2Fbtm_retail%3E%0D%0A</plainText>
+        <MessageHeader backoutCount="0" characterSet="0" encoding="0" expiry="-1" feedback="0" messageFlags="0" messageType="8" messageSequenceNumber="1" offset="0" originalLength="-1" persistence="2" priority="-1" putApplicationType="0" report="0"/>
+    </MQInputMessage>
+    <MQInputMessage timestamp="1446848550982" nodeId="FCMComposite_1_1" name="Coffee Order" id="1446848550982-352">
+        <plainText>%3Cbtm_retail%3E%0D%0A++++%3CrequestType%3EorderItem%3C%2FrequestType%3E%0D%0A++++%3CcustomerNumber%3E5670%3C%2FcustomerNumber%3E%0D%0A++++%3CcustomerName%3ECoffeeFan%3C%2FcustomerName%3E%0D%0A++++%3CitemNumber%3E3529-9999-1937%3C%2FitemNumber%3E%0D%0A++++%3CitemName%3EColumbianSupreme%3C%2FitemName%3E%0D%0A++++%3Cflows%3E%3C%2Fflows%3E%0D%0A++++%3CrequestTime%3E%3C%2FrequestTime%3E%0D%0A++++%3CprocessTime%3E%3C%2FprocessTime%3E%0D%0A++++%3CresponseTime%3E%3C%2FresponseTime%3E%0D%0A%3C%2Fbtm_retail%3E%0D%0A</plainText>
+        <MessageHeader backoutCount="0" characterSet="0" encoding="0" expiry="-1" feedback="0" messageFlags="0" messageType="8" messageSequenceNumber="1" offset="0" originalLength="-1" persistence="2" priority="-1" putApplicationType="0" report="0"/>
+    </MQInputMessage>
+</MessagePool>

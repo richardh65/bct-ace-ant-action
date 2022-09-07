@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmJMSClientInput.msgnode="ComIbmJMSClientInput.msgnode" xmlns:ComIbmJMSClientOutput.msgnode="ComIbmJMSClientOutput.msgnode" xmlns:ComIbmJMSHeader.msgnode="ComIbmJMSHeader.msgnode" xmlns:ComIbmJMSMQTransform.msgnode="ComIbmJMSMQTransform.msgnode" xmlns:ComIbmRoute.msgnode="ComIbmRoute.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode"
+    xmlns:ComIbmThrow.msgnode="ComIbmThrow.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ComIbmXslMqsi.msgnode="ComIbmXslMqsi.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_OrderServices_OrderServices.msgflow="gen/OrderServices_OrderServices.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="OrderServices.msgflow"
+    nsPrefix="OrderServices.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="OrderServices" bundleName="OrderServices" pluginId="WCToSSFSMediationModule"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WCToSSFSMediationModule/icons/full/obj16/OrderServices.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WCToSSFSMediationModule/icons/full/obj30/OrderServices.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="711,496">
+        <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRoute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="468,91">
+        <outTerminals terminalNodeID="Match" dynamic="true" label="Match"/>
+        <translation xmi:type="utility:ConstantString" string="ActionCodeFilter"/>
+        <filterTable filterPattern="$Root/XMLNSC/_ord:ProcessOrder/_ord:DataArea/Mes:Process/Mes:ActionCriteria/Mes:ActionExpression/@actionCode='TransferOrder'" routingOutputTerminal="Match"/>
+        <nsMappingTable nsPrefix="Mes" namespace="http://www.openapplications.org/oagis/9"/>
+        <nsMappingTable nsPrefix="_ord" namespace="http://www.ibm.com/xmlns/prod/commerce/9/order"/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="526,151" stylesheetName="xslt/custom/ProcessOrderToCreateOrderInput.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="ProcessOrderToCreateOrder_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSHeader.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="215,114" jmsHeaderOptions="Add header" jmsDeliveryMode="Non_Persistent" jmsExpiration="0" jmsPriority="4">
+        <translation xmi:type="utility:ConstantString" string="CreateOrder_SetFunctionName"/>
+        <longDescription xmi:type="utility:ConstantString" string="Add message selector (Application Properties Tab) which is used by the backend OMS (Sterling) to differentiate different request."/>
+        <application_Property name="TargetFunctionName" value="createOrder"/>
+        <nsMappingTable nsPrefix="BOD" namespace="http://www.openapplications.org/oagis/9"/>
+        <nsMappingTable nsPrefix="_ord" namespace="http://www.ibm.com/xmlns/prod/commerce/9/order"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSClientOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="777,131" destinationQueueName="SSFSAPIsImport_SEND_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageType="jms_text">
+        <translation xmi:type="utility:ConstantString" string="JMS Output"/>
+        <longDescription xmi:type="utility:ConstantString" string="Send the request with xml message to the queue which will then be picked up by the backend OMS (Sterling)"/>
+      </nodes>
+      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="829,22" messageText="BadActionCode">
+        <translation xmi:type="utility:ConstantString" string="BadActionCode"/>
+        <shortDescription xmi:type="utility:ConstantString" string="BadActionCode"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="17,117" wsdlFileName="WCToSSFSMediationMessageSet/com/ibm/www/xmlns/prod/commerce/_9/order/OrderServices.wsdl" selectedPortType="OrderServicesPortType" selectedBinding="OrderServices" selectedPort="OrderServices" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" useHTTPTransport="true" urlSelector="/webapp/wcs/component/order/services/OrderServices" messageSetProperty="WCToSSFSMediationMessageSet"
+          parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
+        <longDescription xmi:type="utility:ConstantString" string="Soap over http(s). Node created from wsdl file in the MessageSet project. Listen for request (see Http Transport tab)."/>
+      </nodes>
+      <nodes xmi:type="gen_OrderServices_OrderServices.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_10" location="109,115">
+        <translation xmi:type="utility:ConstantString" string="OrderServices"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Extracts message body from the SOAP message"/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow extracts the body out of the SOAP message, has one output node per operation. This was generated by a WSDL file drag and drop operation."/>
+      </nodes>
+      <nodes xmi:type="ComIbmXslMqsi.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="24,454" stylesheetName="xslt/custom/CreateOrderOutputToAcknowledgeOrder.xsl" stylesheetCache="0" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" outputCharSet="1208">
+        <translation xmi:type="utility:ConstantString" string="CreateOrderToAcknowledgeOrder_Transformation"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSClientInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="21,408" sourceQueueName="SSFSAPIsImport_RECEIVE_D" locationJndiBindings="file:/opt/mqm/filebinding/" connectionFactoryName="SSFSAPIsImport_QCF" messageDomainProperty="XMLNSC" messageSetProperty="WCToSSFSMediationMessageSet" propertySelector="SubFlowName='WC_createOrder'">
+        <translation xmi:type="utility:ConstantString" string="JMS Input"/>
+        <longDescription xmi:type="utility:ConstantString" string="Retreives message from queue. Message selector used to filter message"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="348,136" computeExpression="esql://routine/#SSFSAPIsUtil_SetSOAPReplyIdToJMSCorrelId.Main">
+        <translation xmi:type="utility:ConstantString" string="SetSOAPReplyIdToJMSCorrelId"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="289,494" computeExpression="esql://routine/#SSFSAPIsUtil_SetJMSMsgIdToJMSCorrelId.Main">
+        <translation xmi:type="utility:ConstantString" string="SetJMSMsgIdToJMSCorrelId"/>
+      </nodes>
+      <nodes xmi:type="ComIbmJMSMQTransform.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="459,495">
+        <translation xmi:type="utility:ConstantString" string="JMS MQ Transform"/>
+        <longDescription xmi:type="utility:ConstantString" string="Convert MsgId to correct format"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="588,495" computeExpression="esql://routine/#SSFSAPIsUtil_PutSOAPReplyId.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="PutSOAPReplyId"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="847,254" pattern="JMS Output Failure&#xD;&#xA;&#xD;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="JMSOutput_Trace"/>
+      </nodes>
+      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="968,195">
+        <translation xmi:type="utility:ConstantString" string="InputThrow"/>
+      </nodes>
+      <nodes xmi:type="ComIbmThrow.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="953,425">
+        <translation xmi:type="utility:ConstantString" string="Throw1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="806,366" destination="localError" pattern="==== Exception caught ====== &#xD;&#xA;LocalEnvironment is: ${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;SOAP Body is:  ${Body}&#xD;&#xA;&#xD;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="LogException"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_19" location="624,21" pattern="Bad Action Code&#xD;&#xA;&#xD;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="BadActionCode_Trace"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_20" location="87,218" pattern="Orderservices_Failure&#xA;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="Orderservices_Failure"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_21" location="248,237" pattern="CreateOrder_SetFunctionName&#xA;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="CreateOrder_SetFunctionName_Failure"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_22" location="469,258" pattern="SetSOAPReplyIdToJMSCorrelId&#xA;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}">
+        <translation xmi:type="utility:ConstantString" string="SetSOAPReplyIdToJMSCorrelId_Failure"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_4" sourceTerminalName="Match" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.ProcessOrder" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_18" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.default" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_20" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_20" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_24" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_20" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_21" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_26" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_21" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_27" targetNode="FCMComposite_1_22" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_28" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_22" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

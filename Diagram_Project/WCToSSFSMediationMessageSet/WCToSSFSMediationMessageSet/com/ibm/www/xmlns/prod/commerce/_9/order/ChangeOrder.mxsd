@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!--********************************************************************--><!--  Licensed Materials - Property of IBM                              --><!--                                                                    --><!--  WebSphere Commerce                                                --><!--                                                                    --><!--  (c) Copyright IBM Corp. 2006                                      --><!--                                                                    --><!--  US Government Users Restricted Rights - Use, duplication or       --><!--  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. --><!--                                                                    --><!--********************************************************************--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_ord" ecore:package="com.ibm.commerce.order.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_ord="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+ This order XML schema file defines the ChangeOrder BOD which is used to change 
+ an order, or to change a list of orders. By default, the following actions are 
+ defined: Add, Update, and Delete. The XPath can be one of the following: 
+ /Order/OrderItem,/Order/OrderItem/OrderItemShippingInfo, 
+ /Order/OrderPaymentInfo/PaymentInstruction. You can add additional XPath 
+ queries.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../../../../org/openapplications/www/oagis/_9/Meta.mxsd"/>
+
+	<xsd:include schemaLocation="Order.mxsd"/>
+
+	<xsd:element name="ChangeOrder" type="_ord:ChangeOrderType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the ChangeOrder BOD.
+			</xsd:documentation>
+		<xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/ChangeOrder;XSDElementDeclaration$MRObject" schemaObject="/0/ChangeOrder;XSDElementDeclaration"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="ChangeOrderType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Type definition of the ChangeOrder BOD.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="oa:BusinessObjectDocumentType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="_ord:ChangeOrderDataAreaType">
+						<xsd:annotation>
+							<xsd:documentation>Data area of the ChangeOrder BOD.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ChangeOrderDataAreaType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the ChangeOrder BOD's data area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="oa:Change">
+				<xsd:annotation>
+					<xsd:documentation>The Change verb.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" ref="_ord:Order">
+				<xsd:annotation>
+					<xsd:documentation>The Order noun.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

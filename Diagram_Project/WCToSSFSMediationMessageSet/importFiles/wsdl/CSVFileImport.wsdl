@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="CSVFileImport.wsdl" targetNamespace="http://WCToSSFSMediationModule/CSVFileImport" xmlns:bons1="http://www.ibm.com/xmlns/prod/websphere/j2ca/flatfile/inventoryavailabilitycsvtypewrapper" xmlns:tns="http://WCToSSFSMediationModule/CSVFileImport" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://WCToSSFSMediationModule/CSVFileImport">
+      <xsd:import namespace="http://www.ibm.com/xmlns/prod/websphere/j2ca/flatfile/inventoryavailabilitycsvtypewrapper" schemaLocation="InventoryAvailabilityCSVTypeWrapper.xsd"/>
+      <xsd:element name="create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createInput" type="bons1:InventoryAvailabilityCSVTypeWrapper"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="append">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="appendInput" type="bons1:InventoryAvailabilityCSVTypeWrapper"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createRequestMsg">
+    <wsdl:part element="tns:create" name="createParameters"/>
+  </wsdl:message>
+  <wsdl:message name="appendRequestMsg">
+    <wsdl:part element="tns:append" name="appendParameters"/>
+  </wsdl:message>
+  <wsdl:portType name="CSVFileImport">
+    <wsdl:operation name="create">
+      <wsdl:input message="tns:createRequestMsg" name="createRequest"/>
+    </wsdl:operation>
+    <wsdl:operation name="append">
+      <wsdl:input message="tns:appendRequestMsg" name="appendRequest"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

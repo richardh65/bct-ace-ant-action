@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.sterlingcommerce.com/documentation/YCP/multiApi/output"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:yfc="http://www.sterlingcommerce.com/documentation/YCP/multiApi/output" xmlns:yfctype="http://www.sterlingcommerce.com/documentation/types">
+    <xsd:annotation yfc:fileName="YCP_multiApi_output.xsd" yfc:rootElement="MultiApi">
+        <xsd:appinfo source="yfc:structure">
+            <MultiApi>
+                <API hasAttributes="Y">
+                    <Output/>
+                </API>
+            </MultiApi>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:import
+        namespace="http://www.sterlingcommerce.com/documentation/types" schemaLocation="datatypes.xsd"/>
+    <xsd:element name="MultiApi" type="yfc:MultiApiXSDType"/>
+    <xsd:complexType name="MultiApiXSDType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" ref="yfc:API"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="API">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element maxOccurs="1" minOccurs="0" ref="yfc:Output"/>
+            </xsd:all>
+            <xsd:attribute name="Name" type="yfctype:Text-100" use="required">
+                <xsd:annotation>
+                    <xsd:documentation>Name of the API to call.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Output">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:any maxOccurs="unbounded" minOccurs="0" processContents="skip"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

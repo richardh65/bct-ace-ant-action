@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="WCInventoryServicesExport_InventoryServicesPortTypeHttp_Service" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory/Binding" xmlns:Port_0="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:this="http://www.ibm.com/xmlns/prod/commerce/9/inventory/Binding" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import location="InventoryServices.wsdl" namespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory"/>
+  <wsdl:binding name="WCInventoryServicesExport_InventoryServicesPortTypeHttpBinding" type="Port_0:InventoryServicesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetInventoryAvailability">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetInventoryAvailability">
+        <soap:body parts="GetInventoryAvailability" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ShowInventoryAvailability">
+        <soap:body parts="ShowInventoryAvailability" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeInventoryAvailability">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ChangeInventoryAvailability">
+        <soap:body parts="ChangeInventoryAvailability" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RespondInventoryAvailability">
+        <soap:body parts="RespondInventoryAvailability" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncInventoryAvailability">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SyncInventoryAvailability">
+        <soap:body parts="SyncInventoryAvailability" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ConfirmInventoryAvailabilityBOD">
+        <soap:body parts="ConfirmBOD" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessInventoryRequirement">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="ProcessInventoryRequirement">
+        <soap:body parts="ProcessInventoryRequirement" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AcknowledgeInventoryRequirement">
+        <soap:body parts="AcknowledgeInventoryRequirement" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WCInventoryServicesExport_InventoryServicesPortTypeHttpService">
+    <wsdl:port binding="this:WCInventoryServicesExport_InventoryServicesPortTypeHttpBinding" name="WCInventoryServicesExport_InventoryServicesPortTypeHttpPort">
+      <soap:address location="http://localhost:9080/WCToSSFSMediationModuleWeb/sca/WCInventoryServicesExport"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

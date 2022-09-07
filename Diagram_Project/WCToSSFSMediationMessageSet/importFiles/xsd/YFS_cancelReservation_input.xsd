@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.sterlingcommerce.com/documentation/YFS/cancelReservation/input"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:yfc="http://www.sterlingcommerce.com/documentation/YFS/cancelReservation/input" xmlns:yfctype="http://www.sterlingcommerce.com/documentation/types"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="">
+    <xsd:annotation yfc:fileName="YFS_cancelReservation_input.xsd" yfc:rootElement="CancelReservation">
+        <xsd:appinfo source="yfc:structure">
+            <CancelReservation hasAttributes="Y"/>
+        </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:import
+        namespace="http://www.sterlingcommerce.com/documentation/types" schemaLocation="datatypes.xsd"/>
+    <xsd:element name="CancelReservation" type="yfc:CancelReservationXSDType">
+        <xsd:annotation yfc:tableName="YFS_INVENTORY_RESERVATION">
+            <xsd:documentation>This table stores reservation information about an item.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="CancelReservationXSDType">
+        <xsd:attribute name="DemandType" type="yfctype:Text-40" use="optional">
+            <xsd:annotation yfc:columnName="DEMAND_TYPE" yfc:tableName="YFS_INVENTORY_DEMAND">
+                <xsd:documentation>
+                    <div>
+                        <code>DemandType</code> is used in finding the reservation to be cancelled.  It is also used in finding the inventory demand with matching <code>DemandType</code> to reduced quantity from. 
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ItemID" type="yfctype:ItemID" use="required">
+            <xsd:annotation yfc:columnName="ITEM_ID" yfc:tableName="YFS_INVENTORY_ITEM">
+                <xsd:documentation>
+                    <div>
+						The item ID associated with the reservation.
+					</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ItemOrganizationCode"
+            type="yfctype:OrgCode" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+						Organization code associated with the item.
+					</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="MinShipByDate" use="optional">
+            <xsd:annotation yfc:columnName="MIN_SHIP_BY_DATE" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                <xsd:documentation>The minimum ship by date of the demand of the reservation.  The demand can only consume from supplies with ship by dates, which are greater than or equal to its minimum ship by date.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:union>
+                    <xsd:simpleType>
+                        <xsd:restriction base="yfctype:Date"/>
+                    </xsd:simpleType>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value=""/>
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:union>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="OrganizationCode" type="yfctype:OrgCode" use="required">
+            <xsd:annotation yfc:columnName="ORGANIZATION_CODE" yfc:tableName="YFS_INVENTORY_ITEM">
+                <xsd:documentation>
+                    <div>
+					Inventory Organization code.
+				<Validation>
+                            <Condition> Must be an existing <code>OrganizationCode</code>. </Condition>
+                            <Error
+                                Description="Invalid organization code." ErrorCode="YFS10395"/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ProductClass" type="yfctype:ProductClass" use="optional">
+            <xsd:annotation yfc:columnName="PRODUCT_CLASS" yfc:tableName="YFS_INVENTORY_ITEM">
+                <xsd:documentation>
+                    <div>
+						Product class of the item.
+					</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="QtyToBeCancelled" type="yfctype:Quantity" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+				Quantity to be cancelled.
+				<Validation>
+                            <Condition> Must be a positive number. 	</Condition>
+                            <Error
+                                Description="Invalid Qty To Be Cancelled" ErrorCode="YFS10102"/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ReservationID" type="yfctype:Text-100" use="required">
+            <xsd:annotation yfc:columnName="RESERVATION_ID" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                <xsd:documentation>
+                    <div>
+				Identification of a reservation.  
+				<Validation>
+                            <Condition> Must be an existing <code>ReservationId</code>. 	</Condition>
+                            <Error Description="Blank reservation id." ErrorCode="YFS10262"/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ReservationPool" type="yfctype:Text-40" use="optional">
+            <xsd:annotation>
+                <xsd:documentation>
+                    <div>
+                        <code>ReservationPool</code> is for future use.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ShipDate" type="yfctype:Date" use="optional">
+            <xsd:annotation yfc:columnName="SHIP_DATE" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                <xsd:documentation>
+                    <div>
+                        <code>ShipDate</code> is used in finding the reservation to be cancelled.  It is also used in finding the inventory demand with matching <code>DemandShipDate</code> to reduced quantity from.
+				</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ShipNode" type="yfctype:Key" use="required">
+            <xsd:annotation yfc:columnName="SHIPNODE_KEY" yfc:tableName="YFS_INVENTORY_RESERVATION">
+                <xsd:documentation>
+					The ship node for the inventory items.
+				<div>
+                        <code>ShipNode</code> is not validated when the reservation is cancelled. The <code>ShipNode</code> is validated at the time of reservation. If an invalid <code>ShipNode</code> is passed, no reservation will be cancelled. 
+				<Validation>
+                            <Condition> Must pass a <code>ShipNode</code>.</Condition>
+                            <Error Description="YFS:Void Ship Node" ErrorCode="YFS10049"/>
+                        </Validation>
+                    </div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="UnitOfMeasure" type="yfctype:UOM" use="optional">
+            <xsd:annotation yfc:columnName="UOM" yfc:tableName="YFS_INVENTORY_ITEM">
+                <xsd:documentation>
+                    <div>
+						Unit of measure of the item.
+					</div>
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+</xsd:schema>

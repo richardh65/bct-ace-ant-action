@@ -1,0 +1,51 @@
+ --=================================================================
+  --Licensed Materials - Property of IBM
+
+  --WebSphere Commerce
+
+  --(C) Copyright IBM Corp. 2011 All Rights Reserved.
+
+  --US Government Users Restricted Rights - Use, duplication or
+  --disclosure restricted by GSA ADP Schedule Contract with
+  --IBM Corp.
+ --=================================================================
+
+-- Message payload is wiped out after the first xslt. The Expression is needed in the return flow but 
+-- the message from the return flow does not contain the Expression. We are storing this in a local MQ queue.
+CREATE COMPUTE MODULE InventoryServices_SetExpressionToLocalEnviornment
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	CALL CopyEntireMessage();
+	-- inventory namespace from message is _inv. Starting an identifier with '_' is not permitted in ESQL
+	
+	DECLARE oa NAMESPACE 'http://www.openapplications.org/oagis/9';
+	CREATE LASTCHILD OF InputLocalEnvironment NAME 'Expression' 
+							VALUE InputRoot.XMLNSC.{'http://www.ibm.com/xmlns/prod/commerce/9/inventory'}:GetInventoryAvailability.{'http://www.ibm.com/xmlns/prod/commerce/9/inventory'}:DataArea.oa:Get.oa:Expression;
+	
+		RETURN TRUE;
+	END;
+
+	
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END; 
+END MODULE;
+
+
+-- Setting the MQMD message id as key and storing the expression in MQ queue
+CREATE COMPUTE MODULE InventoryServices_SetMQProperties
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC'; -- Does not matter if FIRSTCHILD or LAST.
+		SET OutputRoot.XMLNSC.Expression = InputLocalEnvironment.Expression;
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;
+
+
+
+

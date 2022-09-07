@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2009 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_ord" ecore:package="com.ibm.commerce.order.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:_ord="http://www.ibm.com/xmlns/prod/commerce/9/order" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This Quote XML schema file defines the AcknowledgeQuote BOD which is used to acknowledge
+			the ProcessQuote BOD.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../../../../org/openapplications/www/oagis/_9/Meta.mxsd"/>
+
+	<xsd:include schemaLocation="Quote.mxsd"/>
+
+	<xsd:element name="RespondQuote" type="_ord:RespondQuoteType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the AcknowledgeQuote BOD.
+			</xsd:documentation>
+		<xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/RespondQuote;XSDElementDeclaration$MRObject" schemaObject="/0/RespondQuote;XSDElementDeclaration"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="RespondQuoteType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Type definition of the AcknowledgeQuote BOD.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="oa:BusinessObjectDocumentType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="_ord:RespondQuoteDataAreaType">
+						<xsd:annotation>
+							<xsd:documentation>Data area of the AcknowledgeQuote BOD.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="RespondQuoteDataAreaType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the AcknowledgeQuote BOD's data area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="oa:Respond">
+				<xsd:annotation>
+					<xsd:documentation>The Acknowledge verb.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" ref="_ord:Quote">
+				<xsd:annotation>
+					<xsd:documentation>The Quote noun.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

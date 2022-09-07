@@ -1,0 +1,10 @@
+define qlocal(BTM_RETAIL_INQ) replace
+define qlocal(BTM_RETAIL_OUTQ) replace
+
+define qlocal(BTM_RETAIL_FAILUREQ) replace
+define qlocal(BTM_RETAIL_UNKNOWN_ORDER_OUTQ) replace
+
+define qlocal(BTM_RETAIL_ORDER_ITEM_INQ) replace
+define qlocal(BTM_RETAIL_ORDER_ITEM_OUTQ) replace
+define qlocal(BTM_RETAIL_ORDER_ITEM_DESPATCH_INQ) replace
+define qlocal(BTM_RETAIL_ORDER_ITEM_DESPATCH_OUTQ) replace

@@ -1,0 +1,1666 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ =================================================================
+  Licensed Materials - Property of IBM
+
+  WebSphere Commerce
+
+  (C) Copyright IBM Corp. 2006, 2011 All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or
+  disclosure restricted by GSA ADP Schedule Contract with
+  IBM Corp.
+ =================================================================
+--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_wcf" ecore:package="com.ibm.commerce.foundation.common.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:_wcf="http://www.ibm.com/xmlns/prod/commerce/9/foundation" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			This XML schema file defines the common elements and types shared by the
+			entire schema.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="CommerceFoundation.mxsd"/>
+	<xsd:include schemaLocation="IdentifierTypes.mxsd"/>
+	<xsd:include schemaLocation="BaseTypes.mxsd"/>
+	
+<!-- 
+	member common types
+-->
+
+	<xsd:complexType name="PersonNameType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a person's name.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PersonTitle" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Title of the person, for example, Dr., Mr., Mrs. and Ms.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BusinessTitle" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Business title of the person, for example, Manager or Chief Executive Officer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" name="LastName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Last name of the person.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="FirstName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>First name of the person.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MiddleName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Middle name or initials of the person.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="ContactName" type="_wcf:PersonNameType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of the contact's name.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+		
+	<xsd:simpleType name="AddressUsageEnumerationType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>Indicates how usage of the address:
+					Shipping:  Shipping address
+					Billing:  Billing address
+					ShippingAndBilling: Shipping and Billing address
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+	            <xsd:enumeration value="Shipping"/>
+	            <xsd:enumeration value="Billing"/>
+	            <xsd:enumeration value="ShippingAndBilling"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="AddressUsageType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>Allows extension to the default address usage types.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_wcf:AddressUsageEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+
+	<xsd:complexType name="AddressType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an address.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="3" minOccurs="0" name="AddressLine" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>An address line.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="InternalOfficeAddress" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The internal office address, for example the internal designation
+					for an employee's desk location.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="City" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The city.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="StateOrProvinceName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The state or province.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Country" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The country or region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PostalCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The ZIP code or postal code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="_wcf:AddressUsageType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The type of the address:
+					Shipping:			Shipping
+					Billing:  			Billing
+					ShippingAndBilling: ShippingAndBilling
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="primary" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation> A person or organization can have multiple addresses of the same type. This 
+						allows one address of each type to be marked as primary.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:element name="Address" type="_wcf:AddressType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of an address.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+
+	<xsd:complexType name="TelephoneType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a phone number.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The phone number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="_wcf:TelephoneLocationType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The type of phone number:
+					Home1:		Primary home phone number.
+					Home2:  	Secondary home phone number.
+					Work1:	    Primary work phone number.
+					Work2:	  	Secondary work phone number.
+					Mobile1:	Primary mobile phone number.
+					Mobile2:	Secondary mobile phone number.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="publish" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Specifies whether or not the phone number is listed.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:element name="Telephone" type="_wcf:TelephoneType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of a phone number.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="FaxType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a fax number.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The phone number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="Fax" type="_wcf:FaxType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of a fax number.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:complexType name="MobilePhoneType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a mobile phone number.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The phone number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Country" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The country or region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="MobilePhone" type="_wcf:MobilePhoneType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of a mobile phone number.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:complexType name="EmailAddressType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an email address.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="Value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The email address.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="EmailAddress" type="_wcf:EmailAddressType">
+		<xsd:annotation>
+			<xsd:documentation>The element definition of an email address.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+
+	<xsd:simpleType name="BestCallingTimeEnumerationType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>The best time of the day to call:
+					Daytime - During the day.
+					Evening - During the evening.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+	            <xsd:enumeration value="Daytime"/>
+	            <xsd:enumeration value="Evening"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="BestCallingTimeType">
+		<xsd:annotation>
+        		<xsd:documentation>Allows extension to the default calling times.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_wcf:BestCallingTimeEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	
+	<xsd:element name="BestCallingTime" type="_wcf:BestCallingTimeType">
+		<xsd:annotation>
+			<xsd:documentation>The best time to call.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:simpleType name="TelephoneLocationEnumerationType">
+	    	<xsd:annotation>
+	        	<xsd:documentation>The location of the telephone:
+					Home1:		Primary home phone number.
+					Home2:  	Secondary home phone number.
+					Work1:	    Primary work phone number.
+					Work2:	  	Secondary work phone number.
+					Mobile1:	Primary mobile phone number.
+					Mobile2:	Secondary mobile phone number.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+	            <xsd:enumeration value="Home1"/>
+	            <xsd:enumeration value="Home2"/>
+	            <xsd:enumeration value="Work1"/>
+	            <xsd:enumeration value="Work2"/>            
+	           	<xsd:enumeration value="Mobile1"/>
+	           	<xsd:enumeration value="Mobile2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="TelephoneLocationType">
+		<xsd:annotation>
+        		<xsd:documentation>Allows extension to the default telephone locations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="_wcf:TelephoneLocationEnumerationType _wcf:EnumerationExtensionType"/>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="ContactInfoType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of a contact information entry.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ContactInfoIdentifier" type="_wcf:ContactInfoIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the contact information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:ContactName">
+				<xsd:annotation>
+					<xsd:documentation>The name of the contact.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:Address">
+				<xsd:annotation>
+					<xsd:documentation>The address of the contact.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Telephone1" type="_wcf:TelephoneType">
+				<xsd:annotation>
+					<xsd:documentation>The primary phone number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Telephone2" type="_wcf:TelephoneType">
+				<xsd:annotation>
+					<xsd:documentation>The secondary phone number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:BestCallingTime">
+				<xsd:annotation>
+					<xsd:documentation>The best time of the day to call.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="EmailAddress1" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>The primary e-mail addresses.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="EmailAddress2" type="_wcf:EmailAddressType">
+				<xsd:annotation>
+					<xsd:documentation>The secondary e-mail addresses.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element maxOccurs="1" minOccurs="0" name="Fax1" type="_wcf:FaxType">
+				<xsd:annotation>
+					<xsd:documentation>The primary fax number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Fax2" type="_wcf:FaxType">
+				<xsd:annotation>
+					<xsd:documentation>The secondary fax number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MobilePhone1" type="_wcf:MobilePhoneType">
+				<xsd:annotation>
+					<xsd:documentation>The primary mobile phone number.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>				
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrganizationName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The organization that the person represents. This may be different than
+					the parent organization.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrganizationUnitName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The organization unit that the person represents. This may be different
+					than the parent organization.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" name="GeographicalShippingCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Shipping code based on geographical region. 
+						This is used for integration with tax services. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="GeographicalTaxCode" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation> Tax code based on geographical region. 
+					This is used for integration with tax services. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Attributes" type="_wcf:NameValuePairType">
+				<xsd:annotation>
+					<xsd:documentation>Additional attributes of the contact information:
+					
+						addressField1: 		Customizable field.
+						addressField2: 		Customizable field.
+						addressField3: 		Customizable field.
+						billingCode:		Code to identify the shipping or billing information
+						billingCodeType:	Code designating the system or method of code structure used for billing. 
+						packageSuppression:	Specifies whether or not to include package inserts. Valid values are 1 (include) or 0 (do not include). 
+				
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>					
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="language" type="_wcf:LanguageType" use="optional"/>
+	</xsd:complexType>
+
+<!-- 
+	price common types
+-->	
+	<xsd:complexType name="OfferPriceType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type definition of a offer price used by catalog entry.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Price" type="_wcf:UnitPriceType">
+				<xsd:annotation>
+					<xsd:documentation>The prices of this offer price. The prices can be in different currencies</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType">	
+				<xsd:annotation>
+					<xsd:documentation>
+						The description of the offer price
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>				
+			<xsd:element maxOccurs="1" minOccurs="0" name="Qualifier" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+							A number that uniquely identifies the offer along with the catalog entry id and the price list id.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ContractIdentifier" type="_wcf:ContractIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The contract identifier the price is associated
+						with.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="startDate" type="xsd:dateTime" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The start date.</xsd:documentation>
+					</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="endDate" type="xsd:dateTime" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The end date.</xsd:documentation>
+					</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="lastUpdate" type="xsd:dateTime" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The last update.</xsd:documentation>
+					</xsd:annotation>
+		</xsd:attribute>		
+		<xsd:attribute name="minimumQuantity" type="xsd:double" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The minimum quantity.</xsd:documentation>
+					</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="maximumQuantity" type="xsd:double" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The maximum quantity.</xsd:documentation>
+					</xsd:annotation>
+		</xsd:attribute>
+        <xsd:attribute name="quantityUnit" type="xsd:normalizedString" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>	The unit of measure for minimumQuantity and maximumQuantity.</xsd:documentation>
+					</xsd:annotation> 
+		</xsd:attribute>			          
+        <xsd:attribute name="precedence" type="xsd:double" use="optional">  
+					<xsd:annotation>
+						<xsd:documentation> The precedence of offer. When more than one Offer is effective at a particular time, the one with the highest precedence is used.</xsd:documentation>
+					</xsd:annotation> 
+		</xsd:attribute>             		
+	</xsd:complexType>
+
+	<xsd:complexType name="PriceInfoType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The general price type which contain standard price,
+				contract prices and floor price
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element maxOccurs="1" minOccurs="0" name="StandardPrice" type="_wcf:OfferPriceType">
+				<xsd:annotation>
+					<xsd:documentation>The Standard price.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ContractPrice" type="_wcf:OfferPriceType">
+				<xsd:annotation>
+					<xsd:documentation>The contract prices.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="FloorPrice" type="_wcf:OfferPriceType">
+				<xsd:annotation>
+					<xsd:documentation>The floorPrice.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- Order common types
+	 -->
+	<xsd:element name="TotalTaxByTaxCategory" type="_wcf:TaxByTaxCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the total tax amount for a tax category.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="TaxByTaxCategory" type="_wcf:TaxByTaxCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of the tax amount for a tax category.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="TaxByTaxCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the tax amount for a tax category.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="_wcf:MonetaryAmountType">
+				<xsd:attribute name="taxCategoryCode" type="xsd:string" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The tax category code.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	 		 
+   <xsd:simpleType name="DisplayLevelType">
+   <xsd:annotation>
+			<xsd:documentation>The type definition of an adjustment's display level.</xsd:documentation>
+		</xsd:annotation>
+      	<xsd:union memberTypes="_wcf:DisplayLevelEnumerationType _wcf:EnumerationExtensionType"/>
+   </xsd:simpleType>
+  
+   <xsd:simpleType name="DisplayLevelEnumerationType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition of an adjustment's display level.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:normalizedString">
+			<xsd:enumeration value="Order">
+				<xsd:annotation>
+					<xsd:documentation>The adjustment should be displayed at the order level.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OrderItem">
+				<xsd:annotation>
+					<xsd:documentation>The adjustment should be displayed at the order item level.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	 
+	<xsd:element name="Adjustment" type="_wcf:AdjustmentType">
+		<xsd:annotation>
+			<xsd:documentation>Element definition of an adjustment.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="AdjustmentType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of an adjustment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Usage" type="xsd:string"/>
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="Code" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The adjustment code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType">
+				<xsd:annotation>
+					<xsd:documentation>The description.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Amount" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The amount.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="DisplayLevel" type="_wcf:DisplayLevelType">
+				<xsd:annotation>
+					<xsd:documentation>The display level.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	 
+	<xsd:complexType name="OrderItemChargesType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order item's charges.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UnitPrice" type="_wcf:UnitPriceType">
+				<xsd:annotation>
+					<xsd:documentation>Unit price of the product.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="OrderItemPrice" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Price of the order item (i.e. unit price multiplied by quantity).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TotalAdjustment" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Total adjustment of the order item.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:Adjustment">
+				<xsd:annotation>
+					<xsd:documentation>The adjustments.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="GenericTotal" type="_wcf:GenericTotalType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Generic total of the order item (i.e. unit price multiplied by quantity).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingCharge" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The shipping charge.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="SalesTax" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The sales tax.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingTax" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The shipping tax.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:TaxByTaxCategory">
+				<xsd:annotation>
+					<xsd:documentation>The tax amount for each tax category.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="priceOverride" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The Price Override</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="freeGift" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Whether the order item is a free gift</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+        <xsd:complexType name="GenericTotalType">
+            <xsd:simpleContent>
+                <xsd:extension base="_wcf:MonetaryAmountType">
+				<xsd:attribute name="name" type="xsd:string" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>The name of the generic total</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension> 
+           </xsd:simpleContent>
+        </xsd:complexType>
+	<xsd:complexType name="OrderChargesType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the order's charges.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		    <xsd:element maxOccurs="1" minOccurs="0" name="GrandTotal" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The grand total.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TotalProductPrice" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The total product price.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TotalAdjustment" type="_wcf:MonetaryAmountType">
+			    <xsd:annotation>
+					<xsd:documentation>The order total adjustment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="GenericTotal" type="_wcf:GenericTotalType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Generic total of the order  (i.e. unit price multiplied by quantity).
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Adjustment" type="_wcf:AdjustmentType">
+				<xsd:annotation>
+					<xsd:documentation>The order adjustment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TotalShippingCharge" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The total shipping charge.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TotalSalesTax" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The total sales tax.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TotalShippingTax" type="_wcf:MonetaryAmountType">
+				<xsd:annotation>
+					<xsd:documentation>The total shipping tax.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:TotalTaxByTaxCategory">
+				<xsd:annotation>
+					<xsd:documentation>The total tax amount for each tax category.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentMethodType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a payment method.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentMethodName" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PaymentInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the CheckoutProfile's payment information.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="BillingAddress" type="_wcf:ContactInfoType"/>
+		    <xsd:element maxOccurs="1" minOccurs="0" name="PaymentMethod" type="_wcf:PaymentMethodType"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ProtocolData" type="_wcf:ProtocolDataType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	 <xsd:complexType name="ShippingModeType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the shipping mode.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingModeIdentifier" type="_wcf:ShippingModeIdentifierType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="_wcf:DescriptionType"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="trackingURL" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ShippingInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of shipping information of the CheckoutProfile.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingAddress" type="_wcf:ContactInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The shipping address.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ShippingMode" type="_wcf:ShippingModeType">
+				<xsd:annotation>
+					<xsd:documentation>The shipping mode.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+	
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProtocolDataType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of a protocol data entry.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+<!-- 
+	Attachment common types
+-->	
+	<xsd:element name="AttachmentDescription" type="_wcf:AttachmentDescriptionType">
+		<xsd:annotation>
+			<xsd:documentation>Language or locale specific description of an attachment.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AttachmentUsageDescription" type="_wcf:AttachmentDescriptionType">
+		<xsd:annotation>
+			<xsd:documentation>Language or locale specific description of the usage of an attachment.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="AttachmentReferenceDescription" type="_wcf:AttachmentDescriptionType">
+		<xsd:annotation>
+		<xsd:documentation>Language or locale specific description of the attachment relation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AttachmentDescriptionType">
+		<xsd:annotation>
+		<xsd:documentation>The type definition for description of an attachment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Name of the attachment reference.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ShortDescription" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>A short description for the attachment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="LongDescription" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>A long description for the attachment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- simple name value pair for extension -->
+			<xsd:element minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="language" type="_wcf:LanguageType"/>					
+	</xsd:complexType>	
+
+	<xsd:element name="AttachmentAsset" type="_wcf:AttachmentAssetType">
+		<xsd:annotation>
+		<xsd:documentation>Definition of an attachment asset.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AttachmentAssetType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition for an attachment asset.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AttachmentAssetIdentifier" type="_wcf:AttachmentAssetIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the attachment asset.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="0" name="StoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The identifier of the store that owns this attachment asset.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element minOccurs="1" name="AttachmentAssetPath" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique indentifier of the Attachment Asset.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="RootDirectory" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The root directory for the attachment asset. For example, ConsumerDirect.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DirectoryPath" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The directory path to the Attachment Asset.  If the Asset Path is /A/B/C/D.gif,
+						then the DirectoryPath is /A/B/C.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MimeType" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The mime type of the Attachment Asset.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="language" type="_wcf:LanguageType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The supported languages of an Attachment Asset. Each attachment may support 0 to many languages.
+						In the case of multiple supported languages, there will be multiple AttachmentAsset elements in the
+						Attachment.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- simple name value pair for extension -->
+			<xsd:element minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="localAsset" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The attribute to indicate whether it is a local attachment asset.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>	
+
+	<xsd:complexType name="AttachmentAssetIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID of the Attachment Asset.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="AttachmentUsage" type="_wcf:AttachmentUsageType">
+		<xsd:annotation>
+			<xsd:documentation>Definition of usage type in an attachment relation.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AttachmentUsageType">
+		<xsd:annotation>
+			<xsd:documentation>The type definition for an attachment relation usage.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="UsageName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The name of the Attachment Usage.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="Image" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Image path to the attachment relation usage.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DisplaySequence" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Sequence of the attachment relation usage.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- optional attachment relation usage description -->
+			<xsd:element minOccurs="0" ref="_wcf:AttachmentUsageDescription">
+				<xsd:annotation>
+					<xsd:documentation>
+						Description for the attachment relation usage.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+
+	<xsd:element name="AttachmentReference" type="_wcf:AttachmentReferenceType">
+		<xsd:annotation>
+			<xsd:documentation>
+				An attachment relation or reference to a supported Commerce business objects.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+	<xsd:complexType name="AttachmentReferenceType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AttachmentReferenceIdentifier" type="_wcf:AttachmentReferenceIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the Attachment Reference.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="AttachmentIdentifier" type="_wcf:AttachmentIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Identifier for the Attachment.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:AttachmentAsset">
+				<xsd:annotation>
+					<xsd:documentation>
+						The Attachment Assets that belongs to that Attachment which is associated to the business object in this relation.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:AttachmentUsage">
+				<xsd:annotation>
+					<xsd:documentation>
+						The usage of the attachment that is associated with the business object.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="DisplaySequence" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Sequence of the attachment relation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>		
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:AttachmentDescription">
+				<xsd:annotation>
+					<xsd:documentation>
+						The description of the attachment.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_wcf:AttachmentReferenceDescription">
+				<xsd:annotation>
+					<xsd:documentation>
+						The description of the relation between the business object and the attachment.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>The user data area.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AttachmentReferenceIdentifierType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						A unique ID of the Attachment Reference.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FlowElementType">
+		<xsd:annotation>
+			<xsd:documentation>Flow elements could be path, condition, equation, branch, coordinator which function together to determine the flow.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ElementIdentifier" type="_wcf:FlowElementIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The identifier of the flow element.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Description" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The description of the flow element.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentElementIdentifier" type="_wcf:FlowElementIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The parent identifier of the price element. Every price element has only one direct parent, but the root price element has no parent.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ElementSequence" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The sequence of the element under the same parent. Each flow has root path which other elements are placed on. The sequence specify the execution order of the elements on the path.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ElementAttribute" type="_wcf:FlowElementAttributeType">
+				<xsd:annotation>
+					<xsd:documentation>The attribute name and value associated with a flow element.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>User Data.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FlowElementIdentifierType">
+		<xsd:annotation>
+			<xsd:documentation>The identifier of the flow element.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the flow element.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the flow element.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FlowElementAttributeType">
+		<xsd:annotation>
+			<xsd:documentation>The attribute name and value associated with a flow element.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The attribute name of a flow element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The attribute value of a flow element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Properties" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>Other information related to the flow element attribute.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+            <xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>User Data.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="CreatedTime" type="xsd:dateTime">
+		<xsd:annotation>
+			<xsd:documentation>
+				The create time..
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="LastUpdateTime" type="xsd:dateTime">
+		<xsd:annotation>
+			<xsd:documentation>
+				The last update time.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:complexType name="FormulaType">
+		<xsd:annotation>
+			<xsd:documentation>Formula is an expression for calculation. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="FormulaIdentifier" type="_wcf:FormulaIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the formula.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+            <xsd:element maxOccurs="1" minOccurs="0" name="Description" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The description of the formula.
+					</xsd:documentation>
+				</xsd:annotation>
+            </xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" name="Value" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The string value of the formula. It is an arithmetic expression supporting addition, subtraction, multiplication and 
+						division. The operands can include numbers and some keywords defined the components. The keywords and their accompanying IDs or 
+						names in the expression are used by the components to get the actual value. For example, the expression can be PriceListID (10001) * 0.8.
+						The Price component will get the price by the given price list ID 10001 and the context information including the store ID, catalog entry ID and quantity etc.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+            <xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:CreatedTime">
+				<xsd:annotation>
+					<xsd:documentation>The create time of the formula.	</xsd:documentation>
+				</xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:LastUpdateTime">
+				<xsd:annotation>
+					<xsd:documentation>The last update time of the formula.
+					</xsd:documentation>
+				</xsd:annotation>
+            </xsd:element>
+
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData">
+				<xsd:annotation>
+					<xsd:documentation>User Data.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+
+
+	<xsd:element name="SubscriptionInfo" type="_wcf:SubscriptionInfoType"/>
+
+	<xsd:complexType name="SubscriptionInfoType">
+        <xsd:annotation>
+        	<xsd:documentation>The subscription information type encapsulates the payment information for a subscription along with the fulfillment schedule and payment schedule.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="PaymentInfo" type="_wcf:SubscriptionPaymentInfoType">
+                <xsd:annotation>
+                	<xsd:documentation>The payment information element which captures the payment made for a subscription.</xsd:documentation>
+                </xsd:annotation>
+			</xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="FulfillmentSchedule" type="_wcf:ScheduleInfoType">
+                <xsd:annotation>
+                	<xsd:documentation>The fulfillment schedule information.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="PaymentSchedule" type="_wcf:ScheduleInfoType">
+            	<xsd:annotation>
+            		<xsd:documentation>The payment schedule information.</xsd:documentation>
+            	</xsd:annotation>
+      </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType">
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+    <xsd:complexType name="SubscriptionPaymentInfoType">
+        <xsd:annotation>
+        	<xsd:documentation>The payment information type which encapsulates the payment details for the subscription.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="AmountToCharge" type="_wcf:MonetaryAmountType">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					The amount to be charged during the next payment
+    					or fulfillment cycle.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="TotalCost" type="_wcf:MonetaryAmountType">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					The total cost for the subscription.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="AmountPaid" type="_wcf:MonetaryAmountType">
+    			<xsd:annotation>
+    				<xsd:documentation>
+    					The amount paid so far for the subscription.
+    				</xsd:documentation>
+    			</xsd:annotation>
+    		</xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ScheduleInfoType">
+        <xsd:annotation>
+        	<xsd:documentation>The type encapsulates the scheduling information for the subscription.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="StartInfo" type="_wcf:ScheduleStartInfoType">
+                <xsd:annotation>
+                	<xsd:documentation>The schedule start information.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="FrequencyInfo" type="_wcf:ScheduleFrequencyInfoType">
+                <xsd:annotation>
+                	<xsd:documentation>The schedule frequency information.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="EndInfo" type="_wcf:ScheduleEndInfoType">
+    			<xsd:annotation>
+    				<xsd:documentation>The schedule end information.</xsd:documentation>
+    			</xsd:annotation>
+      </xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ScheduleEndInfoType">
+        <xsd:annotation>
+        	<xsd:documentation>This type encapsulates the schedule end criteria.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="EndDate" type="xsd:dateTime">
+    			<xsd:annotation>
+    				<xsd:documentation>The schedule end date.</xsd:documentation>
+    			</xsd:annotation>
+      </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="Duration" type="_wcf:QuantityType">
+            	<xsd:annotation>
+            		<xsd:documentation>The duration of the schedule. The duration again has two part to it. The magnitude of the duration and its unit of measurement in terms of days, weeks, months and so on.</xsd:documentation>
+            	</xsd:annotation>
+      </xsd:element>
+            <xsd:element maxOccurs="1" minOccurs="0" name="TotalOccurrences" type="xsd:integer">
+            	<xsd:annotation>
+            		<xsd:documentation>The total number of iterations which the schedule must run.</xsd:documentation>
+            	</xsd:annotation>
+      </xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ScheduleStartInfoType">
+        <xsd:annotation>
+        	<xsd:documentation>This type encapsulates the schedule start criteria.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="StartDate" type="xsd:dateTime">
+    			<xsd:annotation>
+    				<xsd:documentation>The start date for the schedule.</xsd:documentation>
+    			</xsd:annotation>
+      </xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ScheduleFrequencyInfoType">
+        <xsd:annotation>
+        	<xsd:documentation>This type encapsulates the repeat frequency of the schedule.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="Frequency" type="_wcf:QuantityType">
+                <xsd:annotation>
+                	<xsd:documentation>The frequency of the schedule. The frequency has two parts to it. The magnitude of the frequency and its unit of measurement in terms of days, months, weeks and so on.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="NextOccurence" type="xsd:dateTime">
+                <xsd:annotation>
+                	<xsd:documentation>The next occurrence of the schedule.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="RemainingOccurrences" type="xsd:integer">
+                <xsd:annotation>
+                	<xsd:documentation>The number of iterations remaining for the schedule.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="CompletedOccurrences" type="xsd:integer">
+                <xsd:annotation>
+                	<xsd:documentation>The number of iterations completed.</xsd:documentation>
+                </xsd:annotation>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="ScheduleInfo" type="_wcf:ScheduleInfoType"/>
+    
+    <xsd:element name="SEOConfiguredURL" type="_wcf:SEOConfiguredURLType"/>
+    
+    <xsd:complexType name="SEOConfiguredURLType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentStoreIdentifier" type="_wcf:StoreIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The parent store identifier to which this static URL information belongs to.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentCatalogIdentifier" type="_wcf:CatalogIdentifierType">
+				<xsd:annotation>
+					<xsd:documentation>The parent catalog identifier to which this static URL information belongs to.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="URLPrefix" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The URL prefix.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="URLPrefixMobile" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The URL prefix for mobile.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Usage" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The usage of the static URL (Ex:Privacy,Home,Help etc).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+            <xsd:element maxOccurs="1" minOccurs="0" name="Static" type="xsd:boolean">
+            	<xsd:annotation>
+					<xsd:documentation>Flag to indicate that the URL is static.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="URLKeywordInfo" type="_wcf:SEOURLKeywordInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The keyword information pertaining to the URL.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="SiteMapInfo" type="_wcf:SEOSiteMapInfoType">
+				<xsd:annotation>
+					<xsd:documentation>The sitemap information pertaining to the URL.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType">
+				<xsd:annotation>
+					<xsd:documentation>The store configured static URL customization information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+			<xsd:attribute name="languageID" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	
+	<xsd:element name="SEOURLKeyword" type="_wcf:SEOURLKeywordInfoType"/>
+	
+	<!--  SEO URL keyword information is held in this type -->
+	<xsd:complexType name="SEOURLKeywordInfoType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UniqueID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The unique identifier of the URL keyword.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="URLKeyword" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The SEO URL keyword.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MobileURLKeyword" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The SEO URL keyword for mobile.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ParentURLKeywordID" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The parent SEO URL keyword identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TokenName" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name of the token associated with the URL keyword(Ex: PrivacyToken,HomeToken,ProductToken,CategoryToken).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="TokenValue" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The token value for the SEO URL keyword.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Status" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The status of the SEO URL keyword. Possible values are INACTIVE,ACTIVE,EXPIRED.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType">
+				<xsd:annotation>
+					<xsd:documentation>The keyword customization information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="SEOSiteMapInfo" type="_wcf:SEOSiteMapInfoType"/>
+	
+	<!-- SEO site map information is held in this type -->
+	<xsd:complexType name="SEOSiteMapInfoType">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="Priority" type="xsd:double">
+				<xsd:annotation>
+					<xsd:documentation>The relative importance of the URL amongst all URLs in the same store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="ChangeFrequency" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The frequency of change of the content at a particular URL.
+						Possible values are: always,hourly,daily,weekly,monthly,yearly,never.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MobilePriority" type="xsd:double">
+				<xsd:annotation>
+					<xsd:documentation>The relative importance of the URL amongst all URLs in the same mobile store.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="MobileChangeFrequency" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						The frequency of change of the content at a particular URL in mobile store.
+						Possible values are: always,hourly,daily,weekly,monthly,yearly,never.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="UserData" type="_wcf:UserDataType">
+				<xsd:annotation>
+					<xsd:documentation>The sitemap customization information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	<xsd:element name="SEOProperties" type="_wcf:SEOPropertiesType">
+		<xsd:annotation>
+		<xsd:documentation>Language/locale specific seo properties of a catalog entity (e.g.catalog,catalog group or catalog entry.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	
+	
+	<!-- SEO Properties are held in this language sensitive type -->
+	<xsd:complexType name="SEOPropertiesType">
+		<xsd:annotation>
+		<xsd:documentation>The type definition for SEOProperties object of a catalog entity.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>  
+			<xsd:element minOccurs="0" name="Title" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Title for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MetaDescription" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Meta description for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="MetaKeyword" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Meta keyword for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element minOccurs="0" name="ImageAltDescription" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Image alternate description for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element minOccurs="0" name="TemplateTitle" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Template title for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TemplateMetaDescription" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Template meta description for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="TemplateMetaKeyword" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Template meta keyword for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<xsd:element minOccurs="0" name="TemplateImageAltDescription" type="xsd:string">
+				<xsd:annotation>
+				<xsd:documentation>Template iImage alternate description for the SEOProperties object.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="URL" type="_wcf:SEOConfiguredURLType">
+				<xsd:annotation>
+					<xsd:documentation>
+						The list of static configured URLs for this store.
+					</xsd:documentation>
+				</xsd:annotation>
+			 </xsd:element>
+		
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ExtendedData" type="_wcf:NameValuePairType">
+				<xsd:annotation>
+					<xsd:documentation>
+						Additional attributes for the SEOProperties object. Can also be used for customer extension.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" ref="_wcf:UserData"/>
+			
+			
+			
+		</xsd:sequence>
+		<xsd:attribute name="language" type="_wcf:LanguageType"/>
+		<xsd:attribute name="usage" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Determine the usage of this SEOProperties object.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="revertToTemplate" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Determine whether or not to revert to the template SEOProperties and discard this object
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>	
+		<xsd:attribute name="applyToChild" type="xsd:boolean" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Determine whether to apply the settings in this object to children.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>					
+	</xsd:complexType>	
+</xsd:schema>

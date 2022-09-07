@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!--********************************************************************--><!--  Licensed Materials - Property of IBM                              --><!--                                                                    --><!--  WebSphere Commerce                                                --><!--                                                                    --><!--  (c) Copyright IBM Corp. 2008                                      --><!--                                                                    --><!--  US Government Users Restricted Rights - Use, duplication or       --><!--  disclosure restricted by GSA ADP Schedule Contract with IBM Corp. --><!--                                                                    --><!--********************************************************************--><xsd:schema attributeFormDefault="unqualified" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" ecore:nsPrefix="_inv" ecore:package="com.ibm.commerce.inventory.facade.datatypes" elementFormDefault="qualified" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:_inv="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<![CDATA[
+				<Service name="SyncInventoryAvailability">
+					<ActionCode></ActionCode>
+					<ActionExpression></ActionExpression>
+					<Description>
+							Sync the InventoryAvailability nouns
+					</Description>
+				</Service>
+			]]>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../../../../../org/openapplications/www/oagis/_9/Meta.mxsd"/>
+
+	<xsd:include schemaLocation="InventoryAvailability.mxsd"/>
+
+	<xsd:element name="SyncInventoryAvailability" type="_inv:SyncInventoryAvailabilityType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Element definition of the SyncInventoryAvailability BOD.
+			</xsd:documentation>
+		<xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/SyncInventoryAvailability;XSDElementDeclaration$MRObject" schemaObject="/0/SyncInventoryAvailability;XSDElementDeclaration"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="SyncInventoryAvailabilityType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Type definition of the SyncInventoryAvailability BOD.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="oa:BusinessObjectDocumentType">
+				<xsd:sequence>
+					<xsd:element name="DataArea" type="_inv:SyncInventoryAvailabilityDataAreaType">
+						<xsd:annotation>
+							<xsd:documentation>Data area of the SyncInventoryAvailability BOD.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SyncInventoryAvailabilityDataAreaType">
+		<xsd:annotation>
+			<xsd:documentation>Type definition of the SyncInventoryAvailability BOD's data area.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="oa:Sync">
+				<xsd:annotation>
+					<xsd:documentation>The Sync verb.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="_inv:InventoryAvailability">
+				<xsd:annotation>
+					<xsd:documentation>The InventoryAvailability noun.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

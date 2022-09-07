@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="InventoryServices" targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:_inv="http://www.ibm.com/xmlns/prod/commerce/9/inventory" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="InventoryServices_InlineSchema1.mxsd"/>
+        <generatedMXSD location="..\..\..\..\..\..\..\..\org\openapplications\www\oagis\_9\InventoryServices_InlineSchema2.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="InventoryServices" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+
+	<wsdl:types>
+
+		<xsd:schema targetNamespace="http://www.ibm.com/xmlns/prod/commerce/9/inventory">
+			<xsd:include schemaLocation="InventoryServices_InlineSchema1.mxsd"/>
+    </xsd:schema>
+				
+		<xsd:schema targetNamespace="http://www.openapplications.org/oagis/9">
+			<xsd:include schemaLocation="../../../../../../../../org/openapplications/www/oagis/_9/InventoryServices_InlineSchema2.mxsd"/>
+    </xsd:schema>
+		
+	</wsdl:types>
+
+	<wsdl:message name="GetInventoryAvailability">
+		<wsdl:part element="_inv:GetInventoryAvailability" name="GetInventoryAvailability"/>
+	</wsdl:message>
+	<wsdl:message name="ShowInventoryAvailability">
+		<wsdl:part element="_inv:ShowInventoryAvailability" name="ShowInventoryAvailability"/>
+	</wsdl:message>
+	<wsdl:message name="ChangeInventoryAvailability">
+		<wsdl:part element="_inv:ChangeInventoryAvailability" name="ChangeInventoryAvailability"/>
+	</wsdl:message>
+	<wsdl:message name="RespondInventoryAvailability">
+		<wsdl:part element="_inv:RespondInventoryAvailability" name="RespondInventoryAvailability"/>
+	</wsdl:message>
+	<wsdl:message name="SyncInventoryAvailability">
+		<wsdl:part element="_inv:SyncInventoryAvailability" name="SyncInventoryAvailability"/>
+	</wsdl:message>
+	<wsdl:message name="ProcessInventoryRequirement">
+		<wsdl:part element="_inv:ProcessInventoryRequirement" name="ProcessInventoryRequirement"/>
+	</wsdl:message>
+	<wsdl:message name="AcknowledgeInventoryRequirement">
+		<wsdl:part element="_inv:AcknowledgeInventoryRequirement" name="AcknowledgeInventoryRequirement"/>
+	</wsdl:message>
+	<wsdl:message name="ConfirmBOD">
+		<wsdl:part element="oa:ConfirmBOD" name="ConfirmBOD"/>
+	</wsdl:message>
+
+	<wsdl:portType name="InventoryServicesPortType">
+
+		<wsdl:operation name="GetInventoryAvailability">
+			<wsdl:input message="_inv:GetInventoryAvailability" name="GetInventoryAvailability"/>
+			<wsdl:output message="_inv:ShowInventoryAvailability" name="ShowInventoryAvailability"/>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeInventoryAvailability">
+			<wsdl:input message="_inv:ChangeInventoryAvailability" name="ChangeInventoryAvailability"/>
+			<wsdl:output message="_inv:RespondInventoryAvailability" name="RespondInventoryAvailability"/>
+		</wsdl:operation>
+		<wsdl:operation name="SyncInventoryAvailability">
+			<wsdl:input message="_inv:SyncInventoryAvailability" name="SyncInventoryAvailability"/>
+			<wsdl:output message="_inv:ConfirmBOD" name="ConfirmInventoryAvailabilityBOD"/>
+		</wsdl:operation>
+		<wsdl:operation name="ProcessInventoryRequirement">
+			<wsdl:input message="_inv:ProcessInventoryRequirement" name="ProcessInventoryRequirement"/>
+			<wsdl:output message="_inv:AcknowledgeInventoryRequirement" name="AcknowledgeInventoryRequirement"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="InventoryServices" type="_inv:InventoryServicesPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<wsdl:operation name="GetInventoryAvailability">
+			<soap:operation soapAction="http://localhost/services/InventoryServices.wsdl"/>
+			<wsdl:input name="GetInventoryAvailability">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ShowInventoryAvailability">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeInventoryAvailability">
+			<soap:operation soapAction="http://localhost/services/InventoryServices.wsdl"/>
+			<wsdl:input name="ChangeInventoryAvailability">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RespondInventoryAvailability">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SyncInventoryAvailability">
+			<soap:operation soapAction="http://localhost/services/InventoryServices.wsdl"/>
+			<wsdl:input name="SyncInventoryAvailability">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ConfirmInventoryAvailabilityBOD">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ProcessInventoryRequirement">
+			<soap:operation soapAction="http://localhost/services/InventoryServices.wsdl"/>
+			<wsdl:input name="ProcessInventoryRequirement">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="AcknowledgeInventoryRequirement">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+
+	<wsdl:service name="InventoryServices">
+		<wsdl:port binding="_inv:InventoryServices" name="InventoryServices">
+			<soap:address location="http://localhost/webapp/wcs/component/inventory/services/InventoryServices"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>
