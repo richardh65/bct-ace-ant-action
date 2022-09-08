@@ -58,10 +58,13 @@ jobs:
             ls -la
             cd code            
             ls -la *.prop*
-            cat sonar-project-diagram.properties
+            cat sonar-project-diagram.properties grep sonar.mb.flow.diagram.output
+            cat sonar-project-diagram.properties grep sonar.projectName
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-diagram.properties
             ls -la
+            echo ======= Github_diagrams ======
             ls -la Github_diagrams
+            echo ======= Github_diagrams/other-diagram-1 ======
             ls -la Github_diagrams/other-diagram-1
 
       - name: wiki changes
