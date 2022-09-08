@@ -62,22 +62,23 @@ jobs:
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-diagram.properties
             ls -la
             ls -la Github_diagrams
+            ls -la Github_diagrams/other-diagram-1
 
       - name: wiki changes
         run: |
           cd wiki
           ls -la
+          echo ===== making dir
           mkdir diagrams | true
+          echo changing to diagrams
           cd diagrams
           ls -la
-          ls ../
-          ls ../../
-          ls ../../code
-          ls ../../code/Github_diagrams
-          cp ../../code/Github_diagrams/*.* Github_diagrams 
+          ls -la ../../code/Github_diagrams/other-diagram-1
+          echo === copying files====
+          cp -R ../../code/Github_diagrams/other-diagram-1/*.* diagrams 
           git config user.name testuser
           git config user.email tetsuser@bct.com
-          git add Github_diagrams | true
+          git add ../diagrams | true
           git add -u
           git commit -m "Updating diagrams"
           git push
