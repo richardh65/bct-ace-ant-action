@@ -56,15 +56,25 @@ jobs:
           run: |
             pwd
             ls -la
-            cd code
+            cd code            
+            ls -la *.prop*
+            cat sonar-project-diagram.properties
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-diagram.properties
+            ls -la
             ls -la Github_diagrams
 
       - name: wiki changes
         run: |
           cd wiki
-          mkdir diagrams
-          cp ../code/Github_diagrams/*.* Github_diagrams 
+          ls -la
+          mkdir diagrams | true
+          cd diagrams
+          ls -la
+          ls ../
+          ls ../../
+          ls ../../code
+          ls ../../code/Github_diagrams
+          cp ../../code/Github_diagrams/*.* Github_diagrams 
           git config user.name testuser
           git config user.email tetsuser@bct.com
           git add Github_diagrams | true
