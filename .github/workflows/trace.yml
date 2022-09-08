@@ -46,7 +46,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           # Path to SARIF file relative to the root of the repository
-          sarif_file: BCT_report.sarif
+          sarif_file: code/BCT_report.sarif
 
       - name: Generate diagrams
         uses: addnab/docker-run-action@v3
