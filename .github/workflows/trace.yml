@@ -28,7 +28,7 @@ jobs:
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
-          image: richardh65/bct-tools:v8
+          image: richardh65/bct-tools:v9
           options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
           run: |          
             pwd
@@ -51,7 +51,7 @@ jobs:
       - name: Generate diagrams
         uses: addnab/docker-run-action@v3
         with:
-          image: richardh65/bct-tools:v8
+          image: richardh65/bct-tools:v9
           options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
@@ -70,15 +70,16 @@ jobs:
       - name: wiki changes
         run: |
           cd wiki
+          pwd
           ls -la
-          echo ===== making dir
-          mkdir diagrams | true
-          echo changing to diagrams
-          cd diagrams
+          echo ===== making dir          
+          echo changing to diagrams          
           ls -la
           ls -la ../../code/Github_diagrams/other-diagram-1
           echo === copying files====
           cp -R ../../code/Github_diagrams/other-diagram-1/* .
+          echo === after copy ====
+          ls -la
           git config user.name testuser
           git config user.email tetsuser@bct.com
           git add . | true
