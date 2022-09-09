@@ -81,7 +81,7 @@ jobs:
           cp -R ../../code/Github_diagrams/other-diagram-1/* .
           git config user.name testuser
           git config user.email tetsuser@bct.com
-          git add ../diagrams | true
+          git add . | true
           git add -u
           git commit -m "Updating diagrams"
           git push
