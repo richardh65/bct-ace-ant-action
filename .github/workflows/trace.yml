@@ -65,7 +65,10 @@ jobs:
             echo ======= Github_diagrams ======
             ls -la Github_diagrams
             echo ======= Github_diagrams/other-diagram-1 ======
-            ls -la Github_diagrams/other-diagram-1
+            ls -la Github_diagrams/other-diagram-1            
+            echo ======= Github_diagrams/other-diagram-1/diagrams ======
+            
+            
 
       - name: wiki changes
         run: |
