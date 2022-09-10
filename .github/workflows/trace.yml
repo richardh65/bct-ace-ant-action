@@ -79,6 +79,7 @@ jobs:
           echo changing to diagrams          
           ls -la
           ls -la ../code/Github_diagrams/other-diagram-1
+          rm flowdiagram*.*
           echo === copying files====
           cp -R ../code/Github_diagrams/other-diagram-1/* .
           echo === after copy ====
