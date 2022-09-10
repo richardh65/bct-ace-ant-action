@@ -79,7 +79,8 @@ jobs:
           ls -la ../code/Github_diagrams/other-diagram-1
           ls -la diagrams
           echo ===== deleting old diagrams
-          rm diagrams/flowdiagram*.*
+          ls flowdiagram*.* 
+          rm flowdiagram*.* | true
           echo === copying files====
           cp -R ../code/Github_diagrams/other-diagram-1/* .
           echo === after copy ====
