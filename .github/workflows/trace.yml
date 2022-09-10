@@ -77,8 +77,9 @@ jobs:
           ls -la
           echo ===== diagrams in ../code/Github_diagrams/other-diagram-1/bct_markdown
           ls -la ../code/Github_diagrams/other-diagram-1/bct_markdown
+          echo ===== old diagrams v1
+          ls -la flowdiagram*.* | true
           echo ===== deleting old diagrams
-          ls flowdiagram*.* | true
           rm flowdiagram*.* | true
           echo === copying files====
           cp -R ../code/Github_diagrams/other-diagram-1/bct_markdown/*.md .
