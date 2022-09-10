@@ -75,11 +75,11 @@ jobs:
           cd wiki
           pwd
           ls -la
-          echo ===== making dir          
-          echo changing to diagrams          
-          ls -la
+          echo ===== diagrams in ../code/Github_diagrams/other-diagram-1
           ls -la ../code/Github_diagrams/other-diagram-1
-          rm flowdiagram*.*
+          ls -la diagrams
+          echo ===== deleting old diagrams
+          rm diagrams/flowdiagram*.*
           echo === copying files====
           cp -R ../code/Github_diagrams/other-diagram-1/* .
           echo === after copy ====
