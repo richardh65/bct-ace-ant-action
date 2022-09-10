@@ -76,8 +76,7 @@ jobs:
           pwd
           ls -la
           echo ===== diagrams in ../code/Github_diagrams/other-diagram-1
-          ls -la ../code/Github_diagrams/other-diagram-1
-          ls -la diagrams
+          ls -la ../code/Github_diagrams/other-diagram-1          
           echo ===== deleting old diagrams
           ls flowdiagram*.* 
           rm flowdiagram*.* | true
