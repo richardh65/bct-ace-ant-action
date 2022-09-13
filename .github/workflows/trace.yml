@@ -81,6 +81,7 @@ jobs:
           ls -la flowdiagram*.* | true
           echo ===== deleting old diagrams
           rm flowdiagram*.* | true
+          rm esqlcode*.* | true
           echo === copying files====
           cp -R ../code/Github_diagrams/other-diagram-1/bct_markdown/*.md .
           cp -R ../code/Github_diagrams/other-diagram-1/bct_markdown/*.svg .
