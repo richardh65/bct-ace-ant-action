@@ -44,6 +44,9 @@ jobs:
             ls -la 
             cat BCT_report.sarif
             
+      - name: debug report
+        run: |
+          ls -la code
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
@@ -55,7 +58,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: richardh65/bct-tools:v9
-          options: --env LICENSE=accept -v ${{ github.workspace }}:/tmp/work/other/code -w /tmp/work/other/code
+          options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
             ls -la
