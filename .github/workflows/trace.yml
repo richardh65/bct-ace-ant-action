@@ -56,6 +56,7 @@ jobs:
           run: |
             pwd
             ls -la
+            ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java
             cd code            
             ls -la *.prop*
             cat sonar-project-diagram.properties grep sonar.mb.flow.diagram.output
