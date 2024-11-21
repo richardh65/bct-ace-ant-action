@@ -28,12 +28,11 @@ jobs:
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
-          image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v2
+          image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v3
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |          
             pwd
-            whoami            
-            apt-get install -y fontconfig ttf-dejavu   
+            whoami
             cd code
             find / -name mqsipackagebar            
             ls -la /opt/ibm/ace-12.0.8.0/server
@@ -42,7 +41,7 @@ jobs:
             ls -la /tmp/work/other
             ls -la /tmp/work/other/code
             ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java            
-            . /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile            
+            . /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml            
             ls -la /tmp/work/other/code/coveragetemp
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties
