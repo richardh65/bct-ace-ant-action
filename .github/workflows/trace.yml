@@ -33,19 +33,19 @@ jobs:
           run: |          
             pwd
             whoami
-            cd code
-            find / -name mqsipackagebar            
+            ls -la /tmp/work/other
+            cd /tmp/work/other/code
+            find / -name mqsipackagebar
             ls -la /opt/ibm/ace-12.0.8.0/server
             ls -la /opt/ibm/ace-12.0.8.0/server/bin
             ls -la /opt/ibm/ace-12.0.8.0/common
-            ls -la /tmp/work/other
-            ls -la /tmp/work/other/code
-            ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java            
+            echo checking profile
+            cat /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile
             . /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile
-            /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml            
+            /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
             ls -la /tmp/work/other/code/coveragetemp
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties
-            ls -la 
+            ls -la
             cat BCT_report.sarif
             
       - name: debug report
@@ -67,7 +67,7 @@ jobs:
             pwd
             ls -la
             ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java
-            cd code            
+            cd /tmp/work/other/code
             ls -la *.prop*
             cat sonar-project-diagram.properties grep sonar.mb.flow.diagram.output
             cat sonar-project-diagram.properties grep sonar.projectName
