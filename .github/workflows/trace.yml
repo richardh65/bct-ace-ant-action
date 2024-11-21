@@ -59,7 +59,7 @@ jobs:
       - name: Generate diagrams
         uses: addnab/docker-run-action@v3
         with:
-          image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v2
+          image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v3
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
@@ -72,9 +72,9 @@ jobs:
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-diagram.properties
             ls -la
             echo ======= Github_diagrams ======
-            ls -la Github_diagrams
+            ls -la /tmp/Github_diagrams
             echo ======= Github_diagrams/other-diagram-1 ======
-            ls -la Github_diagrams/other-diagram-1            
+            ls -la /tmp/Github_diagrams/other-diagram-1            
             echo ======= Github_diagrams/other-diagram-1/diagrams ======
             
             
@@ -85,15 +85,15 @@ jobs:
           pwd
           ls -la
           echo ===== diagrams in ../code/Github_diagrams/other-diagram-1/bct_markdown
-          ls -la ../code/Github_diagrams/other-diagram-1/bct_markdown
+          ls -la /tmp/Github_diagrams/other-diagram-1/bct_markdown
           echo ===== old diagrams v1
           ls -la flowdiagram*.* | true
           echo ===== deleting old diagrams
           rm flowdiagram*.* | true
           rm esqlcode*.* | true
           echo === copying files====
-          cp -R ../code/Github_diagrams/other-diagram-1/bct_markdown/*.md .
-          cp -R ../code/Github_diagrams/other-diagram-1/bct_markdown/*.svg .
+          cp -R /tmp/Github_diagrams/other-diagram-1/bct_markdown/*.md .
+          cp -R /tmp/Github_diagrams/other-diagram-1/bct_markdown/*.svg .
           echo === after copy ====
           ls -la
           git config user.name testuser
