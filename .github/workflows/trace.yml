@@ -33,17 +33,14 @@ jobs:
           run: |          
             pwd
             cd code
-            find / -name mqsipackagebar
-            ls -la /opt
-            ls -la /opt/ibm
-            ls -la /opt/ibm/ace-12.0.8.0
+            find / -name mqsipackagebar            
             ls -la /opt/ibm/ace-12.0.8.0/server
             ls -la /opt/ibm/ace-12.0.8.0/server/bin
+            ls -la /opt/ibm/ace-12.0.8.0/common
             ls -la /tmp/work/other
             ls -la /tmp/work/other/code
-            ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java
-            ls -la /opt/ibm/ace-12/server/bin/mqsipackagebar
-            . /opt/ibm/ace-12/server/bin/mqsiprofile            
+            ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java            
+            . /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile            
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml            
             ls -la /tmp/work/other/code/coveragetemp
             /usr/local/sonar-scanner/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dproject.settings=./sonar-project-tracing.properties
