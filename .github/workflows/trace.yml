@@ -36,9 +36,9 @@ jobs:
             find / -name mqsipackagebar
             ls -la /opt
             ls -la /opt/ibm
-            ls -la /opt/ibm/ace-12
-            ls -la /opt/ibm/ace-12/server
-            ls -la /opt/ibm/ace-12/server/bin
+            ls -la /opt/ibm/ace-12.0.8.0
+            ls -la /opt/ibm/ace-12.0.8.0/server
+            ls -la /opt/ibm/ace-12.0.8.0/server/bin
             ls -la /tmp/work/other
             ls -la /tmp/work/other/code
             ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java
