@@ -28,7 +28,7 @@ jobs:
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
-          image: richardh65/bct-tools:v9
+          image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v1
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |          
             pwd
@@ -57,7 +57,7 @@ jobs:
       - name: Generate diagrams
         uses: addnab/docker-run-action@v3
         with:
-          image: richardh65/bct-tools:v9
+          image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v1
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |
             pwd
