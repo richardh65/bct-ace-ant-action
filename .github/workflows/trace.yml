@@ -33,6 +33,7 @@ jobs:
           image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v3
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |
+            #!/bin/bash
             pwd
             whoami
             ls -la /tmp/work/other
