@@ -83,10 +83,10 @@
 			destdir="/tmp/work/other/code/build/classes" >
 		<classpath>
   			<!--pathelement path="${classpath}"/ -->
-  			<pathelement location="/opt/ibm/ace-12/common/classes/IntegrationTest.jar"/>
-			<pathelement location="/opt/ibm/ace-12/common/classes/hamcrest-2.2.jar"/>
-			<pathelement location="/opt/ibm/ace-12/common/classes/hamcrest-core-2.2.jar"/>
-			<pathelement location="/opt/ibm/ace-12/server/classes/junit-platform-console-standalone-1.7.0.jar"/>
+  			<pathelement location="/opt/ibm/ace-12.0.8.0/common/classes/IntegrationTest.jar"/>
+			<pathelement location="/opt/ibm/ace-12.0.8.0/common/classes/hamcrest-2.2.jar"/>
+			<pathelement location="/opt/ibm/ace-12.0.8.0/common/classes/hamcrest-core-2.2.jar"/>
+			<pathelement location="/opt/ibm/ace-12.0.8.0/server/classes/junit-platform-console-standalone-1.7.0.jar"/>
 		</classpath>
 	</javac>
     
@@ -118,7 +118,7 @@
 	
 		
 	<!-- step 2 packages 2 projects -->			
-	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsipackagebar" failonerror="true" >	
+	<exec dir="/opt/ibm/ace-12.0.8.0/server/bin" executable="mqsipackagebar" failonerror="true" >	
 			<arg value="-w"/>
 			<arg value="/tmp/work/other/code"/>
 			<arg value="-a"/>
@@ -138,7 +138,7 @@
 	<echo message="==============================================" />
 	<echo message="create work dir" />
 	<echo message="==============================================" />	
-	<exec dir="/opt/ibm/ace-12/server/bin" executable="mqsicreateworkdir" failonerror="true" >		
+	<exec dir="/opt/ibm/ace-12.0.8.0/server/bin" executable="mqsicreateworkdir" failonerror="true" >		
 		<arg value="/tmp/work/other/code/test_work_dir"/>
 	
 	</exec>	
@@ -186,7 +186,7 @@
 	<echo message="Running tests" />
 	<echo message="================================" />
 				
-	<exec executable="IntegrationServer" dir="/opt/ibm/ace-12/server/bin" failonerror="true" >		
+	<exec executable="IntegrationServer" dir="/opt/ibm/ace-12.0.8.0/server/bin" failonerror="true" >		
 			<arg value="--default-application-name"/>
 			<arg value="TestSimple_Project_UnitTestsApp"/>
 				
