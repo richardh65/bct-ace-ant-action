@@ -32,8 +32,8 @@ jobs:
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
           run: |          
             pwd
-            whoami
-            apk-get install -y fontconfig ttf-dejavu 
+            whoami            
+            apt-get install -y fontconfig ttf-dejavu   
             cd code
             find / -name mqsipackagebar            
             ls -la /opt/ibm/ace-12.0.8.0/server
