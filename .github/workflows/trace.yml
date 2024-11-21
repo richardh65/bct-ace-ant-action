@@ -1,3 +1,7 @@
+defaults:
+  run:
+    shell: bash
+    
 name: Workflow to trigger ACE unit tests
 on:
   workflow_dispatch:
@@ -6,8 +10,6 @@ on:
   pull_request:
     branches: [ "mainx" ]
   
-
-# richardh65/bct-tools:latest
 
 jobs:
   build:
@@ -30,18 +32,12 @@ jobs:
         with:
           image: registry-1.docker.io/richardh65/bct-tools-ubuntu:v3
           options: --env LICENSE=accept -v ${{ github.workspace }}/code:/tmp/work/other/code -w /tmp/work/other/code
-          run: |          
-            #!/bin/bash
+          run: |
             pwd
             whoami
             ls -la /tmp/work/other
-            cd /tmp/work/other/code
-            find / -name mqsipackagebar
-            ls -la /opt/ibm/ace-12.0.8.0/server
-            ls -la /opt/ibm/ace-12.0.8.0/server/bin
-            ls -la /opt/ibm/ace-12.0.8.0/common
-            echo checking profile
-            cat /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile
+            cd /tmp/work/other/code            
+            echo checking profile            
             . /opt/ibm/ace-12.0.8.0/server/bin/mqsiprofile
             /usr/local/ant/apache-ant-1.10.12/bin/ant -f trace_build.xml
             ls -la /tmp/work/other/code/coveragetemp
