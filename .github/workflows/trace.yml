@@ -33,6 +33,7 @@ jobs:
           run: |          
             pwd
             cd code
+            find / -name mqsipackagebar
             ls -la /opt
             ls -la /opt/ibm
             ls -la /opt/ibm/ace-12
