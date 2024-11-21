@@ -66,6 +66,8 @@ jobs:
             ls -la
             ls -la /tmp/work/other/code/TestSimple_Project_Test/src/main/java
             cd /tmp/work/other/code
+            mkdir -p /tmp/Github_diagrams/other-diagram-1
+            ls -la /tmp/Github_diagrams/other-diagram-1
             ls -la *.prop*
             cat sonar-project-diagram.properties | grep sonar.mb.flow.diagram.output
             cat sonar-project-diagram.properties | grep sonar.projectName
